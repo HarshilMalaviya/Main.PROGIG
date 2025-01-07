@@ -33,8 +33,5 @@ public class Proposals {
 
     private Integer review;
 
-    @OneToMany
-    private Proposals proposals;
-
 
 }
