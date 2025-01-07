@@ -12,10 +12,6 @@ public class ProgigsApplication {
 		return new ModelMapper();
 	}
 
-	@Bean
-	public ModelMapper modelMapper(){
-		return new ModelMapper();
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProgigsApplication.class, args);
