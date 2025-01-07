@@ -9,50 +9,51 @@ import com.Ntra.PROGIGS.Service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 @Service
-
-
 public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private ProfileRepo profileRepo;
-    @Autowired(required = true)
+    @Autowired
     private ProfileMapper profileMapper;
     @Override
-    public Profile saveProfile(Profile profile) {
-        ProfileDto profileDto1=this.profileMapper.MapptoProfileDto(Optional.ofNullable(profile));
-        return this.profileMapper.MapptoProfile(profileDto1);
+    public Profile saveProfile(ProfileDto profile) {
+//        ProfileDto profileDto=this.profileMapper.MapptoProfileDto(profile);
+        return profileRepo.save(profileMapper.MapptoProfile(profile));
     }
 
     @Override
-    public Profile getProfile(int profileId) {
-       return null;
+    public List<ProfileDto> getProfile() {
+        List<ProfileDto> profileList= this.profileRepo.findAll().stream().map(profileMapper::MapptoProfileDto).toList();
+       return profileList;
 
     }
 
     @Override
     public Profile editProfile(ProfileDto profile) {
-        Optional<Profile> exsistingProfile= null;
+        Profile exsistingProfile= null;
         try {
-            exsistingProfile = profileRepo.findById(profile.getProfileId());
+            exsistingProfile = profileRepo.findById(profile.getId()).orElseThrow(()->new RuntimeException("NO_SUCH_Profile"));
         } catch (NoContentException e) {
             throw new NoContentException("NO_SUCH_JOB");
         }
         ProfileDto profileDto=this.profileMapper.MapptoProfileDto(exsistingProfile);
-        profileDto.setProfileId(profileDto.getProfileId());
-        profileDto.setAddress(profileDto.getAddress());
-        profileDto.setZipCode(profileDto.getZipCode());
-        profileDto.setCity(profileDto.getCity());
-        profileDto.setState(profileDto.getState());
-        profileDto.setCountry(profileDto.getCountry());
-        profileDto.setCompanyName(profileDto.getCompanyName());
-        profileDto.setLocation(profileDto.getLocation());
-        profileDto.setExperience(profileDto.getExperience());
-        profileDto.setEducation(profileDto.getEducation());
-        profileDto.setArticles(profileDto.getArticles());
-        profileDto.setCertification(profileDto.getCertification());
-        profileDto.setReview(profileDto.getReview());
-        profileDto.setPortfolio(profileDto.getPortfolio());
-        return this.profileMapper.MapptoProfile(profileDto);
+//        profileDto.setAddress(profileDto.getAddress());
+        profileDto.setZipCode(profile.getZipCode());
+        profileDto.setCity(profile.getCity());
+        profileDto.setState(profile.getState());
+        profileDto.setCountry(profile.getCountry());
+        profileDto.setCompanyName(profile.getCompanyName());
+        profileDto.setLocation(profile.getLocation());
+        profileDto.setExperience(profile.getExperience());
+        profileDto.setEducation(profile.getEducation());
+        profileDto.setArticles(profile.getArticles());
+        profileDto.setCertification(profile.getCertification());
+//        profileDto.setReview(profileDto.getReview());
+//        profileDto.setPortfolio(profileDto.getPortfolio());
+        return profileRepo.save(profileMapper.MapptoProfile(profileDto));
+
     }
+
 }

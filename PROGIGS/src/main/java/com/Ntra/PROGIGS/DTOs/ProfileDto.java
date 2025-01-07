@@ -8,9 +8,9 @@ import java.util.List;
 
 @Data
 public class ProfileDto {
-    private int profileId;
+    private Integer id;
     //  freelancer + client basic profile
-    private String Address;
+//    private String Address;
     private String zipCode;
     private String city;
     private String State;
@@ -24,8 +24,8 @@ public class ProfileDto {
     private String Articles;
     private String Certification;
     //    Aditional Section
-    private List<Review> review;
-    private Portfolio portfolio;
+//    private List<Review> review;
+//    private Portfolio portfolio;
 
 
 }

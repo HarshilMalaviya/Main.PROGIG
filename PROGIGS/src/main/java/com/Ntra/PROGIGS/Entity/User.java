@@ -32,9 +32,9 @@ public class User{
     private List<String> skills;
 
     private String description;
-
-    @OneToOne
-    private Profile profile;
+//
+//    @OneToOne
+//    private Profile profile;
 
     @Enumerated(value = EnumType.STRING)
     private List<UserRole> role;

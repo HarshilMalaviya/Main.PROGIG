@@ -15,13 +15,13 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
                 name = "Authenticstion"
         )
 )
-//@SecurityScheme(
-//        name = "Authenticstion",
-//        in = SecuritySchemeIn.HEADER,
-//        type = SecuritySchemeType.HTTP,
-//        bearerFormat = "JWT",
-//        scheme = "bearer"
-//)
+@SecurityScheme(
+        name = "Authenticstion",
+        in = SecuritySchemeIn.HEADER,
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 //public class OpenAPIconfig {
 //
 //}

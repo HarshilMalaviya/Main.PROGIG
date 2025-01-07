@@ -12,7 +12,7 @@ import java.util.Optional;
 public class ProfileMapper {
     @Autowired
     private ModelMapper modelMapper;
-    public ProfileDto MapptoProfileDto(Optional<Profile> profile) {
+    public ProfileDto MapptoProfileDto(Profile profile) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDto profileDto = new ProfileDto();
         profileDto = new ModelMapper().map(profile, ProfileDto.class);
