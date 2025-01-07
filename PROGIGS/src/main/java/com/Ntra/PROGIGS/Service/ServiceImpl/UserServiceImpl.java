@@ -6,8 +6,8 @@ import com.Ntra.PROGIGS.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 @Service
+
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     @Autowired

@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 @Entity
 @Data
-@Table(name = "jobs")
+@Table(name = "job")
 public class Jobs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

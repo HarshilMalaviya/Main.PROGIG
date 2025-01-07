@@ -7,17 +7,20 @@ import com.Ntra.PROGIGS.Mapper.ProfileMapper;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
 import com.Ntra.PROGIGS.Service.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+@Service
+
 
 public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private ProfileRepo profileRepo;
-    @Autowired
+    @Autowired(required = true)
     private ProfileMapper profileMapper;
     @Override
     public Profile saveProfile(Profile profile) {
-        ProfileDto profileDto1=this.profileMapper.MapptoProfileDto(profile);
+        ProfileDto profileDto1=this.profileMapper.MapptoProfileDto(Optional.ofNullable(profile));
         return this.profileMapper.MapptoProfile(profileDto1);
     }
 
@@ -28,14 +31,14 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile editProfile(ProfileDto profileDto) {
+    public Profile editProfile(ProfileDto profile) {
         Optional<Profile> exsistingProfile= null;
         try {
-            exsistingProfile = profileRepo.findById(profileDto.getProfileId());
+            exsistingProfile = profileRepo.findById(profile.getProfileId());
         } catch (NoContentException e) {
             throw new NoContentException("NO_SUCH_JOB");
         }
-        ProfileDto profileDto=this.profileMapper.MapptoProfileDto(exsistingProfile);\
+        ProfileDto profileDto=this.profileMapper.MapptoProfileDto(exsistingProfile);
         profileDto.setProfileId(profileDto.getProfileId());
         profileDto.setAddress(profileDto.getAddress());
         profileDto.setZipCode(profileDto.getZipCode());

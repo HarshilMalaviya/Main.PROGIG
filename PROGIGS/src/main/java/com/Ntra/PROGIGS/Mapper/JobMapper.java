@@ -1,11 +1,14 @@
 package com.Ntra.PROGIGS.Mapper;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
+
 import com.Ntra.PROGIGS.Entity.Jobs;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JobMapper {
 
     @Autowired
