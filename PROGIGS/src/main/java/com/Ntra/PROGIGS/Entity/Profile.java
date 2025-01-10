@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int profileId;
+    private int Id;
 //  freelancer + client basic profile
     private String Address;
     private String zipCode;
