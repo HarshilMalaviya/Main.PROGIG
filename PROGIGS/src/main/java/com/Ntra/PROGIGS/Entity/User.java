@@ -1,19 +1,22 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.Ntra.PROGIGS.DTOs.LoginDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "User")
-public class User{
+public class User extends LoginDTO implements UserDetails {
     @Id
     @Column(name = "Id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,15 +36,32 @@ public class User{
 
     private String description;
 
-    @OneToOne
-    private Profile profile;
-
     @Enumerated(value = EnumType.STRING)
-    private List<UserRole> role;
+    private UserRole role;
 
     private String status;
 
     private String whyRejected;
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
+}
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
 }
