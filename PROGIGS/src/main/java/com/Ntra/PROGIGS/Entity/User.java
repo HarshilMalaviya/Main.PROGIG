@@ -33,9 +33,6 @@ public class User{
 
     private String description;
 
-    @OneToOne
-    private Profile profile;
-
     @Enumerated(value = EnumType.STRING)
     private List<UserRole> role;
 
