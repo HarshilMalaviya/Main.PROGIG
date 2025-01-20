@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 @RequiredArgsConstructor
 @Service
+
 public class UserImpl implements UserDetailsService {
     private final UserRepo userRepo;
 
