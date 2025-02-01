@@ -43,6 +43,9 @@ public class User extends LoginDTO implements UserDetails {
 
     private String whyRejected;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Profile profile;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
