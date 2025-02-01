@@ -1,7 +1,8 @@
 package com.Ntra.PROGIGS.Configration;
 
 import com.Ntra.PROGIGS.Filter.JwtAuthenticationFilter;
-import com.Ntra.PROGIGS.Service.UserImpl;
+
+import com.Ntra.PROGIGS.Service.ServiceImpl.UserImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+
 public class SecurityConfig {
     private final UserImpl userDetailsImp;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    public SecurityConfig(UserImpl userDetailsImp, JwtAuthenticationFilter jwtAuthenticationFilter) {
+        this.userDetailsImp = userDetailsImp;
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

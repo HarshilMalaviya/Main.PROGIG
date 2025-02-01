@@ -10,8 +10,7 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "Review")
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
