@@ -4,10 +4,13 @@ import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Entity.Review;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ProfileDto {
+    private Integer id;
     //  freelancer + client basic profile
-    private String Address;
+//    private String Address;
     private String zipCode;
     private String city;
     private String State;
@@ -21,6 +24,8 @@ public class ProfileDto {
     private String Articles;
     private String Certification;
     //    Aditional Section
-    private Review review;
-    private Portfolio portfolio;
+//    private List<Review> review;
+//    private Portfolio portfolio;
+
+
 }

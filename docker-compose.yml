@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: progigs
+
+    volumes:
+      - ./data:/var/lib/mysql
+
+  springboot:
+    build: .
+    container_name: PROGIGS_APP
+    environment:
+      mysql_url: jdbc:mysql://mysql:3306/progigs
+      mysql_username: root
+      mysql_password: harshil
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql

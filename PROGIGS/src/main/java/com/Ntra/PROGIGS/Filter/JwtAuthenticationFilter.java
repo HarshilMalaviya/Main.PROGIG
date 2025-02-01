@@ -1,7 +1,7 @@
 package com.Ntra.PROGIGS.Filter;
 
 import com.Ntra.PROGIGS.Service.JwtService;
-import com.Ntra.PROGIGS.Service.UserImpl;
+import com.Ntra.PROGIGS.Service.ServiceImpl.UserImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

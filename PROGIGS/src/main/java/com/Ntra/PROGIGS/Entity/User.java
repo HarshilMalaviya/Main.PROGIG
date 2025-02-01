@@ -35,6 +35,9 @@ public class User extends LoginDTO implements UserDetails {
     private List<String> skills;
 
     private String description;
+//
+//    @OneToOne
+//    private Profile profile;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
