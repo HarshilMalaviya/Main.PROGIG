@@ -17,6 +17,6 @@ public class UserDtoAuth {
 
     private String password;
 
-    private List<UserRole> role;
+    private UserRole role;
 
 }
