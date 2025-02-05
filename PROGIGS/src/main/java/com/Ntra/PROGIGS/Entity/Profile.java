@@ -36,11 +36,7 @@ public class Profile {
     private String Articles;
 
     private String Certification;
-    @OneToOne
-    @JoinColumn(name = "bank_id")
-    private BankDetails bank;
 
-    private BankDetails bankDetails;
 //    Aditional Section
 //    @Nullable
 //    private Review review;
