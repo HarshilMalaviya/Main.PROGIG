@@ -36,11 +36,10 @@ public class Profile {
     private String Articles;
 
     private String Certification;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_id")
     private BankDetails bank;
 
-    private BankDetails bankDetails;
 //    Aditional Section
 //    @Nullable
 //    private Review review;
