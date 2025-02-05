@@ -22,11 +22,11 @@ public class User extends LoginDTO implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
 
-    private String lastName;
 
     private String email;
+
+    private long phone;
 
     private String username;
 
@@ -34,17 +34,16 @@ public class User extends LoginDTO implements UserDetails {
 
     private List<String> skills;
 
-    private String description;
-//
-//    @OneToOne
-//    private Profile profile;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
-    private String status;
 
-    private String whyRejected;
 
 
     @Override

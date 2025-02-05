@@ -14,7 +14,11 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-//  freelancer + client basic profile
+    private String firstName;
+    private String lastName;
+    private String description;
+    private String status;
+    private String whyRejected;
 
 //    private String Address;
 
@@ -36,15 +40,16 @@ public class Profile {
     private String Articles;
 
     private String Certification;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_id")
     private BankDetails bank;
+    @OneToOne(mappedBy = "profile")
+    private User user;
 
-    private BankDetails bankDetails;
 //    Aditional Section
-//    @Nullable
-//    private Review review;
-//    @Nullable
-//    private Portfolio portfolio;
+    @OneToMany()
+    private Review review;
+    @OneToMany
+    private Portfolio portfolio;
 
 }

@@ -22,7 +22,6 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
     public AuthenticationResponse authenticate(LoginDTO request){
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
