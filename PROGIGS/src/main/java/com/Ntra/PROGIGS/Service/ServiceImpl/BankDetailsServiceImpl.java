@@ -7,9 +7,10 @@ import com.Ntra.PROGIGS.Repository.BankDetailsRepo;
 import com.Ntra.PROGIGS.Service.BankDetailService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 @AllArgsConstructor
 public class BankDetailsServiceImpl implements BankDetailService {
     @Autowired

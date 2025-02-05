@@ -36,6 +36,9 @@ public class Profile {
     private String Articles;
 
     private String Certification;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bank_id")
+    private BankDetails bank;
 
 //    Aditional Section
 //    @Nullable
