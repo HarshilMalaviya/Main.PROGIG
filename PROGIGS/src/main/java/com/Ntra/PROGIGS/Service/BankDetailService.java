@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface BankDetailService {
 
-    public BankDetails saveBankDetail(BankDetailsDTO bankDetailsDTO);
-//    public BankDetails getBankDetail(int id);
+    BankDetails saveBankDetail(BankDetailsDTO bankDetailsDTO);
 
-    public List<BankDetailsDTO> getBankDetail();
-    public BankDetails editBankDetail(BankDetails bankDetails);
-    public void deleteBankDetail(int id);
+    List<BankDetailsDTO> getBankDetail();
 
+    BankDetails editBankDetail(BankDetails bankDetails);
+
+    void deleteBankDetail(int id);
 }

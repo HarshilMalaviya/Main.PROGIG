@@ -41,8 +41,6 @@ public class AuthenticationService {
             throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
         }
         User user=new User();
-        user.setFirstName(request.getFirstName());
-        user.setLastName(request.getLastName());
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setRole(request.getRole());
