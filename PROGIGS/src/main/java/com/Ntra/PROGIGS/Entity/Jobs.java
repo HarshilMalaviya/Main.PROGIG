@@ -11,6 +11,7 @@ import java.util.List;
 public class Jobs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Job_ID")
     private int id;
     private String title;
     private String description;
@@ -21,7 +22,7 @@ public class Jobs {
     private Pay0ut_Methods payout_methods;
     private String providers_name;
     private String providers_email;
-
-
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_job_id", referencedColumnName = "Job_ID")
+    private List<Proposals> proposals;
 }
