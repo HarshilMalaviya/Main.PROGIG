@@ -1,7 +1,11 @@
 package com.Ntra.PROGIGS.DTOs;
 
+import com.Ntra.PROGIGS.Entity.BankDetails;
 import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Entity.Review;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 import java.util.List;
@@ -23,6 +27,10 @@ public class ProfileDto {
     private String Education;
     private String Articles;
     private String Certification;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_id")
+    private BankDetails bank;
     //    Aditional Section
 //    private List<Review> review;
 //    private Portfolio portfolio;
