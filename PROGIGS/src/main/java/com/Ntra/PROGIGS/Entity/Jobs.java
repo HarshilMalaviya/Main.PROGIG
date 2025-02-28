@@ -23,6 +23,11 @@ public class Jobs {
     private String providers_name;
     private String providers_email;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_job_id", referencedColumnName = "Job_ID")
+    @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
     private List<Proposals> proposals;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
+    private List<Review> reviews ;
+
 }

@@ -22,8 +22,6 @@ public class User extends LoginDTO implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-
     private String email;
 
     private long phone;
@@ -35,13 +33,27 @@ public class User extends LoginDTO implements UserDetails {
     private List<String> skills;
 
 
+    @Enumerated(value = EnumType.STRING)
+    private UserRole role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
-    @Enumerated(value = EnumType.STRING)
-    private UserRole role;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "freelancer_id", referencedColumnName = "Id")
+    private List<Proposals> proposals;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id", referencedColumnName = "Id")
+    private List<Jobs> jobs;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "Id")
+    private List<Review> reviews; ;
+
+
 
 
 

@@ -46,10 +46,10 @@ public class Profile {
     @OneToOne(mappedBy = "profile")
     private User user;
 
-//    Aditional Section
-    @OneToMany()
-    private Review review;
-    @OneToMany
-    private Portfolio portfolio;
+////    Aditional Section
+//    @OneToMany()
+//    private Review review;
+//    @OneToMany
+//    private Portfolio portfolio;
 
 }
