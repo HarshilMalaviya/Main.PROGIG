@@ -51,11 +51,13 @@ public class User extends LoginDTO implements UserDetails {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "Id")
-    private List<Review> reviews; ;
+    private List<Review> reviews;
 
 
-
-
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "freelancer_id", referencedColumnName = "Id")
+//    @JoinColumn(name = "client_id", referencedColumnName = "Id")
+//    private List<Contract> contracts;
 
 
     @Override

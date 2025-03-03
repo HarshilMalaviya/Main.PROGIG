@@ -18,5 +18,11 @@ public class Review implements Serializable {
     private String reviewerName;
     private String review;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id")
+    private Jobs jobs;
+
+
+
 
 }
