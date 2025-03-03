@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,8 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-
-@AllArgsConstructor
 @Data
 @Table(name = "invoice")
 public class Invoice {
@@ -21,8 +20,11 @@ public class Invoice {
     private String freelancerName;
     private long portalFee;
     private Date date;
+
     @OneToOne(mappedBy = "invoice")
+    @JsonIgnore // Prevents circular reference
     private Milestone milestone;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;

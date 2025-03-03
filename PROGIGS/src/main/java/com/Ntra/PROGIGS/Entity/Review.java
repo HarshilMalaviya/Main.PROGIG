@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,19 +11,16 @@ import java.io.Serializable;
 @Entity
 @Data
 @Table(name = "Review")
-
-public class Review implements Serializable {
+public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int reviewId;
+    private Integer reviewId;
+
     private String reviewerName;
     private String review;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id")
+    @JsonIgnore // Prevents infinite recursion
     private Jobs jobs;
-
-
-
-
 }

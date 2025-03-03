@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,16 +19,18 @@ public class Contract {
     private Date endDate;
     private String amount;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "job_id")
+    @JsonIgnore // Prevents infinite loop
     private Jobs jobs;
+
     @ManyToOne
     @JoinColumn(name = "freelancer_id", nullable = false)
-    private User freelancer; // References User as Freelancer
+    @JsonIgnore // Prevents deep nesting
+    private User freelancer;
 
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
-    private User client; // References User as Client
-
-
+    @JsonIgnore // Prevents deep nesting
+    private User client;
 }

@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,24 +16,28 @@ public class Jobs {
     private int id;
     private String title;
     private String description;
+
     @ElementCollection
     private List<String> skillsRequired;
+
     private String duration;
     private int amount;
     private Pay0ut_Methods payout_methods;
-    private String providers_name;
-    private String providers_email;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
+
+    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @JsonIgnore  // Prevents circular reference
     private List<Proposals> proposals;
 
     @OneToOne(mappedBy = "jobs")
-    private Review reviews ;
+    @JsonIgnore
+    private Review reviews;
 
     @OneToOne(mappedBy = "jobs")
-    private Contract contracts ;
+    @JsonIgnore
+    private Contract contracts;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
-    private List<Milestone> milestones ;
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
+    @JsonIgnore
+    private List<Milestone> milestones;
 }

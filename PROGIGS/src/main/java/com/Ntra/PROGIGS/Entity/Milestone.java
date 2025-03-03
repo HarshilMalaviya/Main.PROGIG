@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,11 @@ public class Milestone {
     private String description;
     private long amount;
     private String status;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id")
+    @JsonIgnore // Prevents infinite loop
     private Invoice invoice;
+
+
 }
