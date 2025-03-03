@@ -12,13 +12,11 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String clientName;
     private String freelancerName;
     private String amount;

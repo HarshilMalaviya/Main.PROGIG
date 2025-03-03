@@ -11,13 +11,11 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String clientCompanyName;
     private String clientName;
     private String freelancerName;

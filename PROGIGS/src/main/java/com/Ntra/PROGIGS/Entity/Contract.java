@@ -9,16 +9,25 @@ import lombok.RequiredArgsConstructor;
 import java.util.Date;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private Date startDate;
     private Date endDate;
     private String amount;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id")
+    private Jobs jobs;
+    @ManyToOne
+    @JoinColumn(name = "freelancer_id", nullable = false)
+    private User freelancer; // References User as Freelancer
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", nullable = false)
+    private User client; // References User as Client
 
 
 }

@@ -9,13 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
 public class Milestone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String title;
     private String description;
     private long amount;
