@@ -26,8 +26,13 @@ public class Jobs {
     @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
     private List<Proposals> proposals;
 
+    @OneToOne(mappedBy = "jobs")
+    private Review reviews ;
+
+    @OneToOne(mappedBy = "jobs")
+    private Contract contracts ;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id", referencedColumnName = "Job_ID")
-    private List<Review> reviews ;
-
+    private List<Milestone> milestones ;
 }
