@@ -1,9 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "transaction")
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +23,6 @@ public class Transaction {
     private LocalDate transactionDate;
     private String jobTitle;
     private String jobDescription;
+    @OneToOne(mappedBy = "transaction")
+    private Invoice invoice;
 }
