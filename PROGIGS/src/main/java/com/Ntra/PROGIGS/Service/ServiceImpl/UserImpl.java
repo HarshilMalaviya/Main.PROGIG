@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +12,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @Service
 
 public class UserImpl implements UserDetailsService {
+    @Autowired
     private final UserRepo userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("user not found"));
+        return (UserDetails) userRepo.findByUsername(username);
     }
 }
