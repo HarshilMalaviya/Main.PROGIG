@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.DTOs;
 
 import com.Ntra.PROGIGS.Entity.*;
+import com.Ntra.PROGIGS.Entity.Module;
 import jakarta.persistence.ElementCollection;
 import lombok.Data;
 
@@ -17,11 +18,7 @@ public class JobDto {
     private String duration;
     private int amount;
     private Pay0ut_Methods payout_methods;
-    private String providers_name;
-    private String providers_email;
-
-    private Review reviews ;
-    private List<Proposals> proposals;
-
+    private List<Module> modules;
+    private User user;
 
 }

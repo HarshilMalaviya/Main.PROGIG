@@ -46,6 +46,19 @@ public class JobServiceImpl implements JobService {
         List<JobDto> jobDtos = jobs.stream().map(jobMapper::MapToDto).toList();
         return jobDtos;
     }
+
+    @Override
+    public JobDto editeJob(JobDto jobs, int id) {
+        Jobs jobs1=jobRepo.findById(id);
+        jobs1.setTitle(jobs.getTitle());
+        jobs1.setDescription(jobs.getDescription());
+        jobs1.setSkillsRequired(jobs.getSkillsRequired());
+        jobs1.setDuration(jobs.getDuration());
+        jobs1.setAmount(jobs.getAmount());
+        jobs1.setPayout_methods(jobs.getPayout_methods());
+        jobs1.setModules(jobs.getModules());
+        return jobMapper.MapToDto(jobRepo.save(jobs1));
+    }
     public void deletebyid(int id) {
         jobRepo.deleteById(id);
     }

@@ -29,9 +29,6 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore // Prevent exposing password in API responses
     private String password;
 
-    @ElementCollection
-    private List<String> skills;
-
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 
@@ -46,14 +43,13 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private List<Proposals> proposals;
 
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id",referencedColumnName = "Id")
+    @OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL)
     @OrderBy("id DESC") // Newest jobs first
     @JsonIgnore
     private List<Jobs> jobs;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",referencedColumnName = "Id")
+
     @OrderBy("id DESC") // Newest reviews first
     @JsonIgnore
     private List<Review> reviews;

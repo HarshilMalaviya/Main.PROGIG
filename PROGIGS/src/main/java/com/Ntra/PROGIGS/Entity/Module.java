@@ -2,14 +2,12 @@ package com.Ntra.PROGIGS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "milestone")
-public class Milestone {
+@Table(name = "module")
+public class Module {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

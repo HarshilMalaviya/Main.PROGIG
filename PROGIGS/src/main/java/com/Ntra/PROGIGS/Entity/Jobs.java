@@ -24,20 +24,25 @@ public class Jobs {
     private int amount;
     private Pay0ut_Methods payout_methods;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
-    @JsonIgnore  // Prevents circular reference
-    private List<Proposals> proposals;
-
-    @OneToOne(mappedBy = "jobs")
-    @JsonIgnore
-    private Review reviews;
-
-    @OneToOne(mappedBy = "jobs")
-    @JsonIgnore
-    private Contract contracts;
-
     @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
     @JsonIgnore
-    private List<Milestone> milestones;
+    private List<Module> modules;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private User user;
+//
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
+//    @JsonIgnore  // Prevents circular reference
+//    private List<Proposals> proposals;
+//
+//    @OneToOne(mappedBy = "jobs")
+//    @JsonIgnore
+//    private Review reviews;
+//
+//    @OneToOne(mappedBy = "jobs")
+//    @JsonIgnore
+//    private Contract contracts;
 }
