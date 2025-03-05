@@ -17,11 +17,6 @@ public class JobDto {
     private String duration;
     private int amount;
     private Pay0ut_Methods payout_methods;
-    private String providers_name;
-    private String providers_email;
-
-    private Review reviews ;
-    private List<Proposals> proposals;
 
 
 }

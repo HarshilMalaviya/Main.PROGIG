@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,5 +20,5 @@ public class Portfolio implements Serializable {
 //    Skills that used to build the project
    @Column(name = "Skills")
 
-    private String Skills;
+    private List<String> Skills;
 }
