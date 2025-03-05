@@ -24,7 +24,8 @@ public class Jobs {
     private int amount;
     private Pay0ut_Methods payout_methods;
 
-    @OneToMany(mappedBy = "job", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
     @JsonIgnore  // Prevents circular reference
     private List<Proposals> proposals;
 

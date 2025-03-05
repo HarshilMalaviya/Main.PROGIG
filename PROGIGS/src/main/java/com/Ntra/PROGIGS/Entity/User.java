@@ -29,9 +29,6 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore // Prevent exposing password in API responses
     private String password;
 
-    @ElementCollection
-    private List<String> skills;
-
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
 

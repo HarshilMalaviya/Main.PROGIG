@@ -7,9 +7,6 @@ import java.util.List;
 @Data
 public class UserDtoAuth {
 
-    private String firstName;
-
-    private String lastName;
 
     private String email;
 
