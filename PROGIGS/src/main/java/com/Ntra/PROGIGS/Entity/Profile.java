@@ -1,10 +1,9 @@
 package com.Ntra.PROGIGS.Entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +18,9 @@ public class Profile {
     private String description;
     private String status;
     private String whyRejected;
+    private String imageUrl;
+    @ElementCollection
+    private List<String> skills;
 
 //    private String Address;
 
@@ -49,6 +51,7 @@ public class Profile {
 ////    Aditional Section
 //    @OneToMany()
 //    private Review review;
+    // portfolio mapping is not done
 //    @OneToMany
 //    private Portfolio portfolio;
 

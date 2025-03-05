@@ -31,6 +31,7 @@ public class ProfileDto {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_id")
     private BankDetails bank;
+    private String imageUrl;
     //    Aditional Section
 //    private List<Review> review;
 //    private Portfolio portfolio;

@@ -1,9 +1,12 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
+import com.Ntra.PROGIGS.DTOs.PortfolioDto;
 import com.Ntra.PROGIGS.Entity.Portfolio;
+import com.Ntra.PROGIGS.Mapper.PortfolioMapper;
 import com.Ntra.PROGIGS.Repository.PortfolioRepo;
 import com.Ntra.PROGIGS.Service.PortfolioService;
 import com.cloudinary.Cloudinary;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,9 +15,12 @@ import java.io.IOException;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class PortfolioServiceImpl implements PortfolioService {
     @Autowired
     private PortfolioRepo portfolioRepo;
+    @Autowired
+    private PortfolioMapper mapper;
     @Autowired
    private Cloudinary cloudinary;
     @Override
@@ -23,14 +29,15 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public Portfolio editePortfolio(MultipartFile file,Portfolio portfolio,int id) {
+    public Portfolio editePortfolio(Portfolio portfolio,int id) {
         Portfolio portfolio1 = portfolioRepo.findById(id).get();
         portfolio1.setPortfolioTitle(portfolio.getPortfolioTitle());
         portfolio1.setSkills(portfolio.getSkills());
         portfolio1.setDescription(portfolio.getDescription());
-//        portfolio1.setPortfolioImage(savePortfolioImage(file).get("url").toString());
+
         return portfolioRepo.save(portfolio1);
     }
+
 
 
     @Override
@@ -52,4 +59,6 @@ public class PortfolioServiceImpl implements PortfolioService {
             throw new RuntimeException("Failed to upload image");
         }
     }
+
+
 }
