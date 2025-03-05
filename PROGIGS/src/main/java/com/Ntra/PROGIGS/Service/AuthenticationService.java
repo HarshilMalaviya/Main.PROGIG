@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -29,22 +31,23 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        Optional<User> user=userRepo.findByUsername(request.getUsername());
+        User user=userRepo.findByUsername(request.getUsername());
 
-        String token = jwtService.generateToken(user.orElse(null));
+        String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
     }
 
     public AuthenticationResponse register(UserDtoAuth request) throws UserAlreadyExistsException {
-        Optional<User> existingUser = userRepo.findByUsername(request.getUsername());
-        if(existingUser.isPresent()){
+        User existingUser = userRepo.findByUsername(request.getUsername());
+        if(existingUser!=null){
             throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
         }
         User user=new User();
         user.setUsername(request.getUsername());
-        user.setEmail(request.getEmail());
+        user.setProfile(request.getProfile());
         user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setJoiningDate(LocalDate.now());
         user = userRepo.save(user);
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);

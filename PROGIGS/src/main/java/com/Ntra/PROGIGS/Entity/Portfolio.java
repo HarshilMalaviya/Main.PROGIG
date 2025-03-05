@@ -15,10 +15,16 @@ public class Portfolio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int portfolioId;
-    @Column(name = "PortfolioName")
-    private String portfolioName;
-//    Skills that used to build the project
+    @Column(name = "PortfolioTitle")
+    private String portfolioTitle;
    @Column(name = "Skills")
+   private List<String> skills;
+   @Column(name = "Description")
+   private String description;
+   @Column(name = "PortfolioImage")
+    private String portfolioImage;
 
-    private List<String> Skills;
+   @ManyToOne
+   @JoinColumn(name = "profile_id")
+    private Profile profile;
 }

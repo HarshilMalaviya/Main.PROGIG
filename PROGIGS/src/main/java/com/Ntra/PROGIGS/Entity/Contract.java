@@ -14,7 +14,7 @@ import java.util.Date;
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
     private Date startDate;
     private Date endDate;
     private String amount;
