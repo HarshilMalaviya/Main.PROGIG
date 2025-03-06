@@ -16,7 +16,7 @@ public class Proposals {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
-    private Integer id;
+    private int id;
 
     private String clientName;
     private String jobTitle;
