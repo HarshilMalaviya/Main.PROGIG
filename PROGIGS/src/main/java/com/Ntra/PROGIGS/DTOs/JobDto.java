@@ -18,7 +18,6 @@ public class JobDto {
     private String duration;
     private int amount;
     private Pay0ut_Methods payout_methods;
+    private Status status;
     private List<Module> modules;
-    private User user;
-
 }
