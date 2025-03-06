@@ -23,6 +23,8 @@ public class Jobs {
     private String duration;
     private int amount;
     private Pay0ut_Methods payout_methods;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
