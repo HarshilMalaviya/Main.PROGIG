@@ -22,10 +22,6 @@ public class BankDetailsServiceImpl implements BankDetailService {
         return bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
     }
 
-    @Override
-    public List<BankDetailsDTO> getBankDetail() {
-        return bankDetailsRepo.findAll().stream().map(bankDetailsMapper::bankDetailsToDTO).toList();
-    }
 
     @Override
     public BankDetails editBankDetail(BankDetails bankDetails) {

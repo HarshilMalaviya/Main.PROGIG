@@ -9,8 +9,6 @@ public interface BankDetailService {
 
     BankDetails saveBankDetail(BankDetailsDTO bankDetailsDTO);
 
-    List<BankDetailsDTO> getBankDetail();
-
     BankDetails editBankDetail(BankDetails bankDetails);
 
     void deleteBankDetail(int id);

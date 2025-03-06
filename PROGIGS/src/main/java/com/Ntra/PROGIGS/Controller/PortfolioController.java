@@ -3,9 +3,6 @@ package com.Ntra.PROGIGS.Controller;
 import com.Ntra.PROGIGS.DTOs.PortfolioDto;
 import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Service.PortfolioService;
-import com.Ntra.PROGIGS.Service.ServiceImpl.PortfolioServiceImpl;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,7 @@ public class PortfolioController {
     private final PortfolioService portfolioService;
 
     @PostMapping
-    public Portfolio addPortfolio(@RequestBody Portfolio portfolio) {
+    public PortfolioDto addPortfolio(@RequestBody PortfolioDto portfolio) {
         return portfolioService.addPortfolio(portfolio);
     }
     @PostMapping("/upload/{id}")
@@ -29,7 +26,7 @@ public class PortfolioController {
         return data;
     }
     @PutMapping("/{id}")
-    public Portfolio editePortfolio(@RequestBody Portfolio portfolio,@PathVariable int id){
+    public PortfolioDto editePortfolio(@RequestBody PortfolioDto portfolio,@PathVariable int id){
          return portfolioService.editePortfolio(portfolio,id);
     }
     @PutMapping("/editeImage/{id}")
@@ -40,4 +37,5 @@ public class PortfolioController {
     public void deletePortfolio(@PathVariable int id){
         portfolioService.deletePortfolio(id);
     }
+
 }
