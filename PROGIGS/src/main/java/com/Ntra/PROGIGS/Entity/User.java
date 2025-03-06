@@ -49,8 +49,7 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private List<Jobs> jobs;
 
-    @OneToMany(cascade = CascadeType.ALL)
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @OrderBy("id DESC") // Newest reviews first
     @JsonIgnore
     private List<Review> reviews;

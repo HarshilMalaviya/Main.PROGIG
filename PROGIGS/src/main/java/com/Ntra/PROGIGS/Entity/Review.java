@@ -23,4 +23,9 @@ public class Review {
     @JoinColumn(name = "job_id")
     @JsonIgnore // Prevents infinite recursion
     private Jobs jobs;
+
+    @ManyToOne
+    @JoinColumn(name = "freelancer_id")
+    @JsonIgnore // Prevents deep nesting
+    private User user;
 }
