@@ -26,9 +26,14 @@ public class Proposals {
     private Long bid;
     private Date finishingTime;
 
-//    @ManyToOne
-//    @JoinColumn(name = "job_id", nullable = false)
-//    @JsonIgnore // Prevents nested Jobs inside Proposals
-//    private Jobs job;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "job_id", nullable = false)
+    @JsonIgnore // Prevents nested Jobs inside Proposals
+    private Jobs job;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "freelancer_id", nullable = false)
+    @JsonIgnore // Prevents nested Freelancer inside Proposals
+    private User user;
 }
 

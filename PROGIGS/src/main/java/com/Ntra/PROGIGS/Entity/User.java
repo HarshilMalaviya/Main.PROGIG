@@ -38,8 +38,8 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private Profile profile;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "freelancer_id",referencedColumnName = "Id")
+    @OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL)
+
     @OrderBy("id DESC") // Newest proposals first
     @JsonIgnore
     private List<Proposals> proposals;

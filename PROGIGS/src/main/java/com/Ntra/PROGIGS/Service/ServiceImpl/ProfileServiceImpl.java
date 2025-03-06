@@ -40,8 +40,8 @@ public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private ProfileMapper profileMapper;
 
-    @Autowired
-    private ReviewRepo reviewRepo;
+//    @Autowired
+//    private ReviewRepo reviewRepo;
 
     @Override
     public Map uploadImage(MultipartFile file, int profileId) {
@@ -78,33 +78,33 @@ public class ProfileServiceImpl implements ProfileService {
         return profile2;
     }
 
-    @Transactional
-    public LocalVariable updateUserSuccessRate() {
-        User user = getAuthenticatedUser();
-
-        int totalJobs = user.getJobs().size();
-        int completedJobs = (int) user.getJobs().stream()
-                .filter(job -> "COMPLETED".equalsIgnoreCase(String.valueOf(job.getStatus())))
-                .count();
-        List<Review> reviews = reviewRepo.findByUser(user);
-
-        if (reviews.isEmpty()) {
-            throw new RuntimeException("No reviews found for the user.");  // No reviews → 0% success rate
-        }
-
-        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
-        int totalReviews = reviews.size();
-
-
-        LocalVariable localVariable = new LocalVariable();
-        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ( completedJobs / totalJobs) * 100);
-        localVariable.setCompletedProject(completedJobs);
-        localVariable.setReviewCount(user.getReviews().size());
-        localVariable.setRating((totalRating / (totalReviews * 5)) * 100);
-        userRepo.save(user);
-
-        return localVariable;
-    }
+//    @Transactional
+//    public LocalVariable updateUserSuccessRate() {
+//        User user = getAuthenticatedUser();
+//
+//        int totalJobs = user.getJobs().size();
+//        int completedJobs = (int) user.getJobs().stream()
+//                .filter(job -> "COMPLETED".equalsIgnoreCase(String.valueOf(job.getStatus())))
+//                .count();
+//        List<Review> reviews = reviewRepo.findByUser(user);
+//
+//        if (reviews.isEmpty()) {
+//            throw new RuntimeException("No reviews found for the user.");  // No reviews → 0% success rate
+//        }
+//
+//        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+//        int totalReviews = reviews.size();
+//
+//
+//        LocalVariable localVariable = new LocalVariable();
+//        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ( completedJobs / totalJobs) * 100);
+//        localVariable.setCompletedProject(completedJobs);
+//        localVariable.setReviewCount(user.getReviews().size());
+//        localVariable.setRating((totalRating / (totalReviews * 5)) * 100);
+//        userRepo.save(user);
+//
+//        return localVariable;
+//    }
 
     private User getAuthenticatedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
