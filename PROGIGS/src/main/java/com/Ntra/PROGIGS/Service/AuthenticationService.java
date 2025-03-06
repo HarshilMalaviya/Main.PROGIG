@@ -4,6 +4,7 @@ import com.Ntra.PROGIGS.DTOs.LoginDTO;
 import com.Ntra.PROGIGS.DTOs.UserDto;
 import com.Ntra.PROGIGS.DTOs.UserDtoAuth;
 import com.Ntra.PROGIGS.Entity.AuthenticationResponse;
+import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Exception.UserAlreadyExistsException;
 import com.Ntra.PROGIGS.Repository.UserRepo;
@@ -44,10 +45,21 @@ public class AuthenticationService {
         }
         User user=new User();
         user.setUsername(request.getUsername());
-        user.setProfile(request.getProfile());
+//        user.setProfile(request.getProfile());
         user.setRole(request.getRole());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setJoiningDate(LocalDate.now());
+
+        if (request.getProfile() == null) {
+            request.setProfile(new Profile()); // Avoid NullPointerException
+        }
+        Profile profile = request.getProfile();
+
+        // Ensure mandatory fields have values
+        if (profile.getPhone() == null) {
+            profile.setPhone(""); // Default value for phone
+        }
+        user.setProfile(profile);
         user = userRepo.save(user);
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);

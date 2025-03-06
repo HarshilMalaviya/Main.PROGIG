@@ -1,13 +1,17 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
+import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
+import com.Ntra.PROGIGS.Entity.Review;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Mapper.ProfileMapper;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
+import com.Ntra.PROGIGS.Repository.ReviewRepo;
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.ProfileService;
 import com.cloudinary.Cloudinary;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -34,6 +39,9 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Autowired
     private ProfileMapper profileMapper;
+
+    @Autowired
+    private ReviewRepo reviewRepo;
 
     @Override
     public Map uploadImage(MultipartFile file, int profileId) {
@@ -68,6 +76,34 @@ public class ProfileServiceImpl implements ProfileService {
         profile2.setArticles(profile.getArticles());
         repo.save(profile2);
         return profile2;
+    }
+
+    @Transactional
+    public LocalVariable updateUserSuccessRate() {
+        User user = getAuthenticatedUser();
+
+        int totalJobs = user.getJobs().size();
+        int completedJobs = (int) user.getJobs().stream()
+                .filter(job -> "COMPLETED".equalsIgnoreCase(String.valueOf(job.getStatus())))
+                .count();
+        List<Review> reviews = reviewRepo.findByUser(user);
+
+        if (reviews.isEmpty()) {
+            throw new RuntimeException("No reviews found for the user.");  // No reviews → 0% success rate
+        }
+
+        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+        int totalReviews = reviews.size();
+
+
+        LocalVariable localVariable = new LocalVariable();
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ( completedJobs / totalJobs) * 100);
+        localVariable.setCompletedProject(completedJobs);
+        localVariable.setReviewCount(user.getReviews().size());
+        localVariable.setRating((totalRating / (totalReviews * 5)) * 100);
+        userRepo.save(user);
+
+        return localVariable;
     }
 
     private User getAuthenticatedUser() {
