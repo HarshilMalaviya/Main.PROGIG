@@ -8,8 +8,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,16 +23,15 @@ public class User extends LoginDTO implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Integer id;
-
-    private String email;
-    private long phone;
     private String username;
-
+    private LocalDate joiningDate;
     @JsonIgnore // Prevent exposing password in API responses
     private String password;
-
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+
+
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")

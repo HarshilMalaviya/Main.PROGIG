@@ -23,4 +23,8 @@ public class Portfolio implements Serializable {
    private String description;
    @Column(name = "PortfolioImage")
     private String portfolioImage;
+
+   @ManyToOne
+   @JoinColumn(name = "profile_id")
+    private Profile profile;
 }
