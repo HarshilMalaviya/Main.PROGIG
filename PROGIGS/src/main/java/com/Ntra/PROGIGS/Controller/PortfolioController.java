@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Controller;
 
+import com.Ntra.PROGIGS.DTOs.PortfolioDto;
 import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Service.PortfolioService;
 import com.Ntra.PROGIGS.Service.ServiceImpl.PortfolioServiceImpl;
@@ -26,5 +27,17 @@ public class PortfolioController {
     public Map uploadPortfolioImage(@RequestParam("file") MultipartFile file, @PathVariable int id) {
         final Map data = portfolioService.savePortfolioImage(file, id);
         return data;
+    }
+    @PutMapping("/{id}")
+    public Portfolio editePortfolio(@RequestBody Portfolio portfolio,@PathVariable int id){
+         return portfolioService.editePortfolio(portfolio,id);
+    }
+    @PutMapping("/editeImage/{id}")
+    public Map editePortfolio(@RequestParam("file")MultipartFile file,@PathVariable int id){
+        return portfolioService.savePortfolioImage(file,id);
+    }
+    @DeleteMapping("/{id}")
+    public void deletePortfolio(@PathVariable int id){
+        portfolioService.deletePortfolio(id);
     }
 }

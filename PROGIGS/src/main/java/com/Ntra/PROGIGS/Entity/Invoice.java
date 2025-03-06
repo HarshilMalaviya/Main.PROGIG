@@ -2,9 +2,7 @@ package com.Ntra.PROGIGS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -23,7 +21,7 @@ public class Invoice {
 
     @OneToOne(mappedBy = "invoice")
     @JsonIgnore // Prevents circular reference
-    private Milestone milestone;
+    private Module module;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "transaction_id")
