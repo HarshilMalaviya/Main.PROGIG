@@ -44,14 +44,13 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private List<Proposals> proposals;
 
-    @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "client_id",referencedColumnName = "Id")
+    @OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL)
     @OrderBy("id DESC") // Newest jobs first
     @JsonIgnore
     private List<Jobs> jobs;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",referencedColumnName = "Id")
+
     @OrderBy("id DESC") // Newest reviews first
     @JsonIgnore
     private List<Review> reviews;

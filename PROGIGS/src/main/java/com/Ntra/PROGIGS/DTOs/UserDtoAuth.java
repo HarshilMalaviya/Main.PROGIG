@@ -2,13 +2,13 @@ package com.Ntra.PROGIGS.DTOs;
 
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)  // ✅ Ignores unknown fields
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDtoAuth {
     private LocalDate joiningDate;
     private String username;

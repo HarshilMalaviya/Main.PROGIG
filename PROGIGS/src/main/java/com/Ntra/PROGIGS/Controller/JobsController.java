@@ -17,11 +17,11 @@ import java.util.Optional;
 public class JobsController {
     private final JobService jobService;
 
-    @PostMapping("/addjobs")
+    @PostMapping
     public Jobs addjobs(@RequestBody JobDto jobs){
         return   jobService.saveJob(jobs);
     }
-    @GetMapping("/Jobs")
+    @GetMapping
     public ResponseEntity<List<JobDto>> getAllJobs()
     {   List<JobDto> list = jobService.getAllJobs();
         if(list.isEmpty()){
@@ -31,7 +31,7 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(list));
         }
     }
-    @GetMapping("/job_id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<JobDto> findbyJobId(@PathVariable int id) {
         JobDto jobDto=jobService.getJobBYID(id);
         if(jobDto==null){
@@ -41,7 +41,7 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobDto));
         }
     }
-    @GetMapping("/job/skill/{skill}")
+    @GetMapping("/jobbyskill/{skill}")
     public ResponseEntity<List<JobDto>> findJobbySkills(@PathVariable String skill) {
         List<JobDto> jobs=jobService.getJobByskillRequired(skill);
         if(jobs==null){
@@ -51,7 +51,7 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobs));
         }
     }
-    @GetMapping("/job/skills")
+    @GetMapping("/jobbyskills")
     public ResponseEntity<List<JobDto>> findJobBySkills(@RequestParam(value = "skill") List<String> skill) {
         List<JobDto> jobs=jobService.getJobBySkillsRequired(skill);
         if(jobs==null){
@@ -61,8 +61,12 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobs));
         }
     }
+    @PutMapping("/{id}")
+    public ResponseEntity<JobDto> updateJobs(@RequestBody JobDto jobs,@PathVariable int id){
+    return ResponseEntity.of(Optional.of(jobService.editeJob(jobs,id)));
+    }
 
-    @DeleteMapping("/deleteJob/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteJobs(@PathVariable int id){
         jobService.deletebyid(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

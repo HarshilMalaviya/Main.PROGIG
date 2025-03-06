@@ -25,6 +25,4 @@ public class ProposalsDto {
 
     private Integer review;
 
-    @OneToMany
-    private Proposals proposals;
 }

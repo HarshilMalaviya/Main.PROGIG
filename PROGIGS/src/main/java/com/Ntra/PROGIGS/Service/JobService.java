@@ -9,10 +9,11 @@ public interface JobService {
     public Jobs saveJob(JobDto jobs);
     public List<JobDto> getAllJobs ();
     public JobDto getJobBYID(int id);
-
     List<JobDto> getJobBySkillsRequired(List<String> skill);
 
     List<JobDto> getJobByskillRequired(String skill);
+
+    public JobDto editeJob(JobDto jobs,int id);
 
     public void deletebyid(int id);
 }
