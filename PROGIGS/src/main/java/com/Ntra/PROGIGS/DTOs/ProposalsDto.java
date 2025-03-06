@@ -8,23 +8,14 @@ import java.util.Date;
 
 @Data
 public class ProposalsDto {
-
     private Integer id;
-
-    private String clientName;
-
     private String jobTitle;
-
+    private String clientName;
     private String freelancerName;
-
     private String freelancerEmail;
-
+    private String description;
     private Long bid;
-
     private Date finishingTime;
 
-    private Integer review;
 
-    @OneToMany
-    private Proposals proposals;
 }

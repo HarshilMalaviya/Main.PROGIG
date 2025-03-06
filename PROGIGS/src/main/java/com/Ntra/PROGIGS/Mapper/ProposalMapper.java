@@ -15,14 +15,14 @@ public class ProposalMapper {
     @Autowired
     public ModelMapper modelMapper;
 
-    private Proposals MapToDto(Proposals proposals){
+    public Proposals MapToDto(Proposals proposals){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProposalsDto proposalDto = new ProposalsDto();
         proposals = new ModelMapper().map(proposals, Proposals.class);
         return proposals;
     }
 
-    private Proposals MapToProposal(ProposalsDto proposalsDto){
+    public Proposals MapToProposal(ProposalsDto proposalsDto){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         Proposals proposals = new Proposals();
         proposals = new ModelMapper().map(proposalsDto,Proposals.class);
