@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
+import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Service.ProfileService;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +24,17 @@ public class ProfileController {
     public Map uploadImage(@RequestParam("file")MultipartFile file,@PathVariable int profileId){
         Map data = this.profileService.uploadImage(file, profileId);
         return data;
-    };
+    }
 
     @PutMapping("/edite/{id}")
     public Profile editeProfile(@RequestBody ProfileDto profile, @PathVariable int id){
         Profile profile1 = this.profileService.editeProfile(profile, id);
         return profile1;
-    };
+    }
+    @GetMapping("/success-rate")
+    public ResponseEntity<LocalVariable> getUserSuccessRate() {
+        LocalVariable successData = profileService.updateUserSuccessRate();
+        return ResponseEntity.ok(successData);
+    }
+
 }
