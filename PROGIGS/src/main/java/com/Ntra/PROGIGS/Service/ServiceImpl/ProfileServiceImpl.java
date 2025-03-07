@@ -75,7 +75,6 @@ public class ProfileServiceImpl implements ProfileService {
             profile2.setCompanyName(profile.getCompanyName());
             profile2.setLocation(profile.getLocation());
             profile2.setHourlyRate(profile.getHourlyRate());
-            profile2.setEducation(profile.getEducation());
 //            profile2.setArticles(profile.getArticles());
             repo.save(profile2);
             return profile2;

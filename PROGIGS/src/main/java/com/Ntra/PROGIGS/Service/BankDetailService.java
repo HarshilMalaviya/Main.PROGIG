@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface BankDetailService {
 
-    BankDetails saveBankDetail(BankDetailsDTO bankDetailsDTO);
+    BankDetailsDTO saveBankDetail(BankDetailsDTO bankDetailsDTO);
 
-    BankDetails editBankDetail(BankDetails bankDetails);
+    BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails);
 
     void deleteBankDetail(int id);
 }
