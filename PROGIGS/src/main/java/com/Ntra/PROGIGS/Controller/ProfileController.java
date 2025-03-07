@@ -22,9 +22,9 @@ public class ProfileController {
     private final ProfileService profileService;
 
 
-    @PostMapping("/image/{profileId}")
-    public Map uploadImage(@RequestParam("file")MultipartFile file,@PathVariable int profileId){
-        Map data = this.profileService.uploadImage(file, profileId);
+    @PostMapping("/image")
+    public Map uploadImage(@RequestParam("file")MultipartFile file){
+        Map data = this.profileService.uploadImage(file);
         return data;
     }
 
