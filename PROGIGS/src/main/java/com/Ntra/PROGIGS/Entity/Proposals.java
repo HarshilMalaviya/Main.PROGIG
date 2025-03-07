@@ -26,10 +26,10 @@ public class Proposals {
     private Long bid;
     private Date finishingTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)
     @JsonIgnore // Prevents nested Jobs inside Proposals
-    private Jobs job;
+    private Jobs jobs;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "freelancer_id", nullable = false)

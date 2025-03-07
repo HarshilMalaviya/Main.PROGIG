@@ -11,4 +11,5 @@ import java.util.List;
 public interface ReviewRepo extends JpaRepository<Review, Integer> {
 
 
+    List<Review> findByUser(User user);
 }
