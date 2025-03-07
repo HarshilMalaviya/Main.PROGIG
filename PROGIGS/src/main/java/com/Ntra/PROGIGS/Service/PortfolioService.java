@@ -7,13 +7,15 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 public interface PortfolioService {
-    public Portfolio addPortfolio(Portfolio portfolio);
+    public PortfolioDto addPortfolio(PortfolioDto portfolio);
 
 
-    Portfolio editePortfolio(Portfolio portfolio, int id);
+    public PortfolioDto editePortfolio(PortfolioDto portfolio, int id);
 
-    void deletePortfolio(int id);
+    public void deletePortfolio(int id);
 
     public Map savePortfolioImage(MultipartFile file,int id);
+
+
 
 }

@@ -2,8 +2,11 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.PortfolioDto;
 import com.Ntra.PROGIGS.Entity.Portfolio;
+import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.PortfolioMapper;
 import com.Ntra.PROGIGS.Repository.PortfolioRepo;
+import com.Ntra.PROGIGS.Repository.ProfileRepo;
 import com.Ntra.PROGIGS.Service.PortfolioService;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +25,50 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Autowired
     private PortfolioMapper mapper;
     @Autowired
+    private ProfileRepo profileRepo;
+    @Autowired
    private Cloudinary cloudinary;
+    @Autowired
+    private GetAuthenticatedUser getAuthenticatedUser;
     @Override
-    public Portfolio addPortfolio(Portfolio portfolio) {
-        return portfolioRepo.save(portfolio);
+    public PortfolioDto addPortfolio(PortfolioDto portfolio) {
+        try {
+            User user = getAuthenticatedUser.getAuthenticatedUser();
+
+            portfolio.setProfile(user.getProfile());
+            portfolioRepo.save(mapper.MaptoPortfolio(portfolio));
+            return portfolio;
+        }
+        catch (Exception e){
+            throw new RuntimeException("Failed to add portfolio");
+        }
     }
 
     @Override
-    public Portfolio editePortfolio(Portfolio portfolio,int id) {
-        Portfolio portfolio1 = portfolioRepo.findById(id).get();
-        portfolio1.setPortfolioTitle(portfolio.getPortfolioTitle());
-        portfolio1.setSkills(portfolio.getSkills());
-        portfolio1.setDescription(portfolio.getDescription());
-
-        return portfolioRepo.save(portfolio1);
+    public PortfolioDto editePortfolio(PortfolioDto portfolio,int id) {
+        try {
+            PortfolioDto portfolio1 = mapper.MaptoPortfolioDto(portfolioRepo.findById(id).get());
+            portfolio1.setPortfolioTitle(portfolio.getPortfolioTitle());
+            portfolio1.setSkills(portfolio.getSkills());
+            portfolio1.setDescription(portfolio.getDescription());
+            portfolioRepo.save(mapper.MaptoPortfolio(portfolio1));
+            return portfolio1;
+        }
+        catch (Exception e){
+            throw new RuntimeException("Failed to edite portfolio");
+        }
     }
 
 
 
     @Override
     public void deletePortfolio(int id) {
-        portfolioRepo.deleteById(id);
+        try {
+            portfolioRepo.deleteById(id);
+        }
+        catch (Exception e){
+            throw new RuntimeException("Failed to delete portfolio");
+        }
 
     }
 

@@ -1,17 +1,17 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.Review;
 import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.ProfileMapper;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
 import com.Ntra.PROGIGS.Repository.ReviewRepo;
-import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.ProfileService;
 import com.cloudinary.Cloudinary;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +34,7 @@ public class ProfileServiceImpl implements ProfileService {
     private ProfileRepo repo;
 
     @Autowired
-    private UserRepo userRepo;
+    private GetAuthenticatedUser getAuthenticatedUser;
 
     @Autowired
     private ProfileMapper profileMapper;
@@ -44,14 +43,14 @@ public class ProfileServiceImpl implements ProfileService {
     private ReviewRepo reviewRepo;
 
     @Override
-    public Map uploadImage(MultipartFile file, int profileId) {
+    public Map uploadImage(MultipartFile file) {
 
 
 
         try {
            final Map data = this.cloudinary.uploader().upload(file.getBytes(), Map.of());
-            User user = getAuthenticatedUser();
-            ProfileDto profile = profileMapper.MapptoProfileDto(this.repo.findById(profileId).get());
+           User user = getAuthenticatedUser.getAuthenticatedUser();
+            ProfileDto profile = profileMapper.MapptoProfileDto(user.getProfile());
             profile.setImageUrl(data.get("url").toString());
             repo.save(profileMapper.MapptoProfile(profile));
            return data;
@@ -61,25 +60,33 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile editeProfile(ProfileDto profile, int id) {
-        Profile profile2 = this.repo.findById(id).get();
-        profile2.setFirstName(profile.getFirstName());
-        profile2.setLastName(profile.getLastName());
-        profile2.setDescription(profile.getDescription());
-        profile2.setEmail(profile.getEmail());
-        profile2.setPhone(profile.getPhone());
-        profile2.setSkills(profile.getSkills());
-        profile2.setCompanyName(profile.getCompanyName());
-        profile2.setLocation(profile.getLocation());
-        profile2.setHourlyRate(profile.getHourlyRate());
-        profile2.setEducation(profile.getEducation());
-        profile2.setArticles(profile.getArticles());
-        repo.save(profile2);
-        return profile2;
+    public Profile editeProfile(ProfileDto profile) {
+        try {
+            User user = getAuthenticatedUser.getAuthenticatedUser();
+            int id = user.getProfile().getId();
+
+            Profile profile2 = this.repo.findById(id).get();
+            profile2.setFirstName(profile.getFirstName());
+            profile2.setLastName(profile.getLastName());
+            profile2.setDescription(profile.getDescription());
+            profile2.setEmail(profile.getEmail());
+            profile2.setPhone(profile.getPhone());
+            profile2.setSkills(profile.getSkills());
+            profile2.setCompanyName(profile.getCompanyName());
+            profile2.setLocation(profile.getLocation());
+            profile2.setHourlyRate(profile.getHourlyRate());
+            profile2.setEducation(profile.getEducation());
+//            profile2.setArticles(profile.getArticles());
+            repo.save(profile2);
+            return profile2;
+        }
+        catch(Exception e){
+            throw new RuntimeException("Profile Updation Failed !!");
+        }
     }
 
     public LocalVariable updateUserSuccessRate() {
-        User user = getAuthenticatedUser();
+        User user = getAuthenticatedUser.getAuthenticatedUser();
 
         int totalJobs = user.getJobs().size();
         long completedJobs = user.getJobs().stream()
@@ -105,13 +112,17 @@ public class ProfileServiceImpl implements ProfileService {
 
         return localVariable;
     }
-
-    private User getAuthenticatedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
-            return userRepo.findByUsername(username);
-        }
-        throw new RuntimeException("User is not authenticated");
+    @Override
+    public ProfileDtoForGet getProfile() {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+        ProfileDtoForGet profile = profileMapper.MapptoProfileDtoForGet(user.getProfile());
+        return profile;
     }
+    @Override
+    public List<ProfileDtoForGet> getUsersByCountry(String country) {
+        List<Profile> profiles = repo.findByCountry(country);
+        List<ProfileDtoForGet> profileDtoForGets = profiles.stream().map(profileMapper::MapptoProfileDtoForGet).toList();
+        return profileDtoForGets;
+    }
+
 }

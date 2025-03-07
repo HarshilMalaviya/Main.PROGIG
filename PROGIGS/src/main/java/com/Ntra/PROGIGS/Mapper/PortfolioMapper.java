@@ -13,13 +13,14 @@ import org.springframework.stereotype.Component;
 public class PortfolioMapper {
     @Autowired
     private ModelMapper modelMapper;
-    private PortfolioDto MaptoPortfolioDto(Portfolio portfolio) {
+
+    public PortfolioDto MaptoPortfolioDto(Portfolio portfolio) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         PortfolioDto portfolioDto = new PortfolioDto();
         portfolioDto = new ModelMapper().map(portfolio, PortfolioDto.class);
         return portfolioDto;
     }
-    private Portfolio MaptoPortfolio(PortfolioDto portfolioDto) {
+    public Portfolio MaptoPortfolio(PortfolioDto portfolioDto) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         Portfolio portfolio = new Portfolio();
         portfolio = new ModelMapper().map(portfolioDto, Portfolio.class);

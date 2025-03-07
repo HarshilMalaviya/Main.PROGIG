@@ -32,8 +32,10 @@ public class Profile {
     private String Location;
     //    Add ON Info
     private String hourlyRate;
-    private String Education;
-    private String Articles;
+    @ElementCollection
+    private List<String> Education;
+
+//    private String Articles;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Certificates> Certification;

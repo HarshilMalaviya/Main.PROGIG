@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Service.ProfileService;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,9 +28,9 @@ public class ProfileController {
         return data;
     }
 
-    @PutMapping("/edite/{id}")
-    public Profile editeProfile(@RequestBody ProfileDto profile, @PathVariable int id){
-        Profile profile1 = this.profileService.editeProfile(profile, id);
+    @PutMapping("/edite")
+    public Profile editeProfile(@RequestBody ProfileDto profile){
+        Profile profile1 = this.profileService.editeProfile(profile);
         return profile1;
     }
     @GetMapping("/success-rate")
@@ -37,4 +39,13 @@ public class ProfileController {
         return ResponseEntity.ok(successData);
     }
 
+    @GetMapping("/getProfile")
+    public ProfileDtoForGet getProfile() {
+        return profileService.getProfile();
+    }
+
+    @GetMapping("/by-country/{country}")
+    public List<ProfileDtoForGet> getUsersByCountry(@PathVariable String country) {
+        return profileService.getUsersByCountry(country);
+    }
 }
