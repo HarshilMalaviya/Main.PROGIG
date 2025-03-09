@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,5 +18,6 @@ public class Certificates {
 
     @ManyToOne
     @JoinColumn(name = "certificate_id")
+    @JsonIgnore
     private Profile profile;
 }

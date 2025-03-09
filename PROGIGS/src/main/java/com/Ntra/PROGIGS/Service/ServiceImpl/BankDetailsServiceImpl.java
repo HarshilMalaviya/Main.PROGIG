@@ -2,6 +2,9 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.BankDetailsDTO;
 import com.Ntra.PROGIGS.Entity.BankDetails;
+import com.Ntra.PROGIGS.Entity.Profile;
+import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.BankDetailsMapper;
 import com.Ntra.PROGIGS.Repository.BankDetailsRepo;
 import com.Ntra.PROGIGS.Service.BankDetailService;
@@ -17,22 +20,31 @@ public class BankDetailsServiceImpl implements BankDetailService {
     private BankDetailsRepo bankDetailsRepo;
     @Autowired
     private BankDetailsMapper bankDetailsMapper;
+    @Autowired
+    private GetAuthenticatedUser getAuthenticatedUser;
     @Override
-    public BankDetails saveBankDetail(BankDetailsDTO bankDetailsDTO) {
-        return bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+    public BankDetailsDTO saveBankDetail(BankDetailsDTO bankDetailsDTO) {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+        Profile profile = user.getProfile();
+        profile.setBank(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+        bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+        return bankDetailsDTO;
     }
 
 
     @Override
-    public BankDetails editBankDetail(BankDetails bankDetails) {
-      BankDetails bankDetails1= bankDetailsRepo.findById(bankDetails.getId()).get();
-      BankDetailsDTO bankDetailsDTO=bankDetailsMapper.bankDetailsToDTO(bankDetails1);
-      bankDetailsDTO.setBankName(bankDetails.getBankName());
-      bankDetailsDTO.setAccountHolderName(bankDetails.getAccountHolderName());
-      bankDetailsDTO.setAccountNumber(bankDetails.getAccountNumber());
-      bankDetailsDTO.setIfscCode(bankDetails.getIfscCode());
-      bankDetailsDTO.setBranch(bankDetails.getBranch());
-      return bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+    public BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails) {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+        int id = user.getProfile().getBank().getId();
+        BankDetails bankDetails1= bankDetailsRepo.findById(id).get();
+        BankDetailsDTO bankDetailsDTO=bankDetailsMapper.bankDetailsToDTO(bankDetails1);
+        bankDetailsDTO.setBankName(bankDetails.getBankName());
+        bankDetailsDTO.setAccountHolderName(bankDetails.getAccountHolderName());
+        bankDetailsDTO.setAccountNumber(bankDetails.getAccountNumber());
+        bankDetailsDTO.setIfscCode(bankDetails.getIfscCode());
+        bankDetailsDTO.setBranch(bankDetails.getBranch());
+        bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+        return bankDetailsDTO;
 
     }
     @Override

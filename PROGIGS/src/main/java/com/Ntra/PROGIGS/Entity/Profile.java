@@ -16,7 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -32,8 +32,9 @@ public class Profile {
     private String Location;
     //    Add ON Info
     private String hourlyRate;
-    @ElementCollection
-    private List<String> Education;
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Education> education;
 
 //    private String Articles;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)

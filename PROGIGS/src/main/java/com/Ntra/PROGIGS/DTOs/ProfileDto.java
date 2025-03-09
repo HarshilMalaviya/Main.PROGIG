@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.DTOs;
 
 import com.Ntra.PROGIGS.Entity.BankDetails;
+import com.Ntra.PROGIGS.Entity.Education;
 import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Entity.Review;
 import jakarta.persistence.*;
@@ -25,6 +26,5 @@ public class ProfileDto {
     private String Location;
     //    Add ON Info
     private String hourlyRate;
-    private List<String> Education;
 //    private String Articles;
 }

@@ -1,8 +1,6 @@
 package com.Ntra.PROGIGS.DTOs;
 
-import com.Ntra.PROGIGS.Entity.BankDetails;
-import com.Ntra.PROGIGS.Entity.Certificates;
-import com.Ntra.PROGIGS.Entity.Portfolio;
+import com.Ntra.PROGIGS.Entity.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -26,10 +24,11 @@ public class ProfileDtoForGet {
     private String Location;
     //    Add ON Info
     private String hourlyRate;
-    private List<String> Education;
+    private List<Education> Education;
 //    private String Articles;
     private List<Certificates> Certification;
     private BankDetails bank;
     private List<Portfolio> portfolio;
+    private User user;
 
 }

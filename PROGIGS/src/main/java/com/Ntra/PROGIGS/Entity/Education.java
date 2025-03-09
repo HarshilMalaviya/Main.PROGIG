@@ -6,18 +6,17 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "bank_details")
-
-public class BankDetails {
+@Table(name = "education")
+public class Education {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String bankName;
-    private String accountHolderName;
-    private String accountNumber;
-    private String ifscCode;
-    private String branch;
-    @OneToOne(mappedBy = "bank")
+    private String course;
+    private String institute;
+    private String year;
+
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
     @JsonIgnore
     private Profile profile;
 }
