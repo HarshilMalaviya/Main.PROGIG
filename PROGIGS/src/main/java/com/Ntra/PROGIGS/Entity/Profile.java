@@ -22,6 +22,7 @@ public class Profile {
     private String lastName;
     private String description;
     private String email;
+    private String fieldOfWork;
     @Column(nullable = true)
     private String phone ;
     private String imageUrl;
@@ -30,13 +31,15 @@ public class Profile {
     //  Client detail
     private String CompanyName;
     private String Location;
+    @Enumerated(value = EnumType.STRING)
+    private Profile_Status status;
     //    Add ON Info
     private String hourlyRate;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Education> education;
 
-//    private String Articles;
+    //    private String Articles;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Certificates> Certification;
@@ -50,7 +53,6 @@ public class Profile {
 
 
     //    this come from admin side Don't show in user site
-    private String status;
     private String whyRejected;
 
 

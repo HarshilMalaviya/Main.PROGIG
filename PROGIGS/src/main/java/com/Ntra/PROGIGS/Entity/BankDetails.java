@@ -20,4 +20,20 @@ public class BankDetails {
     @OneToOne(mappedBy = "bank")
     @JsonIgnore
     private Profile profile;
+
+    public void setAccountNumber(String accountNumber) {
+        if (accountNumber != null && accountNumber.matches("\\d{12}")) { // Ensures exactly 12 digits
+            this.accountNumber = accountNumber;
+        } else {
+            throw new IllegalArgumentException("Account number must be exactly 12 digits.");
+        }
+    }
+
+    // Getter to return the masked account number in API responses
+    public String getAccountNumber() {
+        if (this.accountNumber != null && this.accountNumber.length() == 12) {
+            return "********" + this.accountNumber.substring(8);
+        }
+        return null;
+    }
 }

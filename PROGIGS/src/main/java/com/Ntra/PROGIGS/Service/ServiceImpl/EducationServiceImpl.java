@@ -32,7 +32,7 @@ public class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public void editeEducation(EducationDto education, int id) {
+    public void editEducation(EducationDto education, int id) {
         Education education1 = educationRepo.findById(id).get();
         education1.setCourse(education.getCourse());
         education1.setInstitute(education.getInstitute());

@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Mapper;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.Entity.Profile;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -29,5 +30,12 @@ public class ProfileMapper {
         ProfileDtoForGet profileDtoForGet = new ProfileDtoForGet();
         profileDtoForGet = new ModelMapper().map(profile, ProfileDtoForGet.class);
         return profileDtoForGet;
+    }
+
+    public ProfileDtoForViewCard MapptoProfileDtoForViewCard(Profile profile) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        ProfileDtoForViewCard profileDtoForViewCard = new ProfileDtoForViewCard();
+        profileDtoForViewCard = new ModelMapper().map(profile, ProfileDtoForViewCard.class);
+        return profileDtoForViewCard;
     }
 }
