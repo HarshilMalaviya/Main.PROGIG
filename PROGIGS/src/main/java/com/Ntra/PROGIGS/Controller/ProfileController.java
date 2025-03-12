@@ -28,7 +28,7 @@ public class ProfileController {
         return data;
     }
 
-    @PutMapping("/edite")
+    @PutMapping("/edit")
     public Profile editeProfile(@RequestBody ProfileDto profile){
         Profile profile1 = this.profileService.editeProfile(profile);
         return profile1;

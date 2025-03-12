@@ -20,7 +20,7 @@ public class BankDetailController {
         return bankDetailService.saveBankDetail(bankDetailsDTO);
     }
 
-    @PutMapping("/editeBankDetail")
+    @PutMapping("/editBankDetail")
     public BankDetailsDTO editeBankDetail(@RequestBody BankDetailsDTO bankDetailsDTO) {
         return bankDetailService.editBankDetail(bankDetailsDTO);
     }

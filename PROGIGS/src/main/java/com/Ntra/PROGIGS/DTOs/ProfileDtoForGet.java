@@ -22,6 +22,7 @@ public class ProfileDtoForGet {
     //  Client detail
     private String CompanyName;
     private String Location;
+    private Profile_Status status;
     //    Add ON Info
     private String hourlyRate;
     private List<Education> Education;

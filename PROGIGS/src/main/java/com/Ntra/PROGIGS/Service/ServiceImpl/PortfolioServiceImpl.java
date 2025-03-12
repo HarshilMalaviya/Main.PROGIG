@@ -45,7 +45,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     }
 
     @Override
-    public PortfolioDto editePortfolio(PortfolioDto portfolio,int id) {
+    public PortfolioDto editPortfolio(PortfolioDto portfolio, int id) {
         try {
             PortfolioDto portfolio1 = mapper.MaptoPortfolioDto(portfolioRepo.findById(id).get());
             portfolio1.setPortfolioTitle(portfolio.getPortfolioTitle());
