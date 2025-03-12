@@ -50,7 +50,8 @@ public class Profile {
 
 
     //    this come from admin side Don't show in user site
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private Profile_Status status;
     private String whyRejected;
 
 

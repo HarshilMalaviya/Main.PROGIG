@@ -1,7 +1,6 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.PortfolioDto;
-import com.Ntra.PROGIGS.Entity.Portfolio;
 import com.Ntra.PROGIGS.Service.PortfolioService;
 import lombok.RequiredArgsConstructor;
 import java.util.Map;
@@ -27,9 +26,9 @@ public class PortfolioController {
     }
     @PutMapping("/{id}")
     public PortfolioDto editePortfolio(@RequestBody PortfolioDto portfolio,@PathVariable int id){
-         return portfolioService.editePortfolio(portfolio,id);
+         return portfolioService.editPortfolio(portfolio,id);
     }
-    @PutMapping("/editeImage/{id}")
+    @PutMapping("/editImage/{id}")
     public Map editePortfolio(@RequestParam("file")MultipartFile file,@PathVariable int id){
         return portfolioService.savePortfolioImage(file,id);
     }
