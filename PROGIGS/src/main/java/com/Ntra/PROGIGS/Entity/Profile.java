@@ -40,17 +40,22 @@ public class Profile {
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Certificates> Certification;
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_id")
     @JsonIgnore
     private BankDetails bank;
+
+
     @OneToMany(mappedBy = "profile",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Portfolio> portfolio;
 
 
     //    this come from admin side Don't show in user site
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private Profile_Status status;
     private String whyRejected;
 
 
