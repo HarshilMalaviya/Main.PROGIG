@@ -25,6 +25,7 @@ public class ProfileDtoForGet {
     //    Add ON Info
     private String hourlyRate;
     private List<Education> Education;
+    private String status;
 //    private String Articles;
     private List<Certificates> Certification;
     private BankDetails bank;

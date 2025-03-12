@@ -38,7 +38,7 @@ public class Jobs {
     @OneToMany(mappedBy = "jobs",cascade = CascadeType.ALL)
     @JsonIgnore  // Prevents circular reference
     private List<Proposals> proposals;
-//
+
 //    @OneToOne(mappedBy = "jobs")
 //    @JsonIgnore
 //    private Review reviews;

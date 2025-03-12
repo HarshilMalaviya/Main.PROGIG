@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bankDetail")
+@RequestMapping("/profile/bank")
 public class BankDetailController {
     @Autowired
     private BankDetailService bankDetailService;
 
-    @PostMapping("/addBankDetail")
+    @PostMapping
     public BankDetailsDTO addBankDetail(@RequestBody BankDetailsDTO bankDetailsDTO) {
         return bankDetailService.saveBankDetail(bankDetailsDTO);
     }
 
-    @PutMapping("/editeBankDetail")
+    @PutMapping
     public BankDetailsDTO editeBankDetail(@RequestBody BankDetailsDTO bankDetailsDTO) {
         return bankDetailService.editBankDetail(bankDetailsDTO);
     }
 
-    @DeleteMapping("/deleteBankDetail")
+    @DeleteMapping
     public void deleteBankDetail(@PathVariable int id) {
         bankDetailService.deleteBankDetail(id);
     }
