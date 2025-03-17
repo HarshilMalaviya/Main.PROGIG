@@ -34,11 +34,10 @@ public class Jobs {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User user;
-//
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
-//    @JsonIgnore  // Prevents circular reference
-//    private List<Proposals> proposals;
+
+    @OneToMany(mappedBy = "jobs",cascade = CascadeType.ALL)
+    @JsonIgnore  // Prevents circular reference
+    private List<Proposals> proposals;
 //
 //    @OneToOne(mappedBy = "jobs")
 //    @JsonIgnore

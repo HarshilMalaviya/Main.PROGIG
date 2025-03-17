@@ -26,6 +26,17 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig {
     private final UserImpl userDetailsImp;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOriginPattern("*");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
+    }
 
     @Bean
     public CorsFilter corsFilter() {

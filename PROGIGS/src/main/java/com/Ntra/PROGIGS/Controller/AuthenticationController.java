@@ -6,6 +6,7 @@ import com.Ntra.PROGIGS.Entity.AuthenticationResponse;
 import com.Ntra.PROGIGS.Exception.UserAlreadyExistsException;
 import com.Ntra.PROGIGS.Service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
