@@ -12,7 +12,7 @@ import java.util.Map;
 
 public interface ProfileService {
     public Map uploadImage(MultipartFile file);
-    public Profile editeProfile(ProfileDto profile);
+    public ProfileDto editeProfile(ProfileDto profile);
     public LocalVariable updateUserSuccessRate();
 
     public ProfileDtoForGet getProfile();

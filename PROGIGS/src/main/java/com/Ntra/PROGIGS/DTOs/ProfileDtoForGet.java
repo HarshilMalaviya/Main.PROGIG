@@ -10,8 +10,7 @@ import java.util.List;
 @Data
 public class ProfileDtoForGet {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String description;
     private String email;
     @Column(nullable = true)
@@ -33,5 +32,6 @@ public class ProfileDtoForGet {
     private BankDetails bank;
     private List<Portfolio> portfolio;
     private User user;
+
 
 }
