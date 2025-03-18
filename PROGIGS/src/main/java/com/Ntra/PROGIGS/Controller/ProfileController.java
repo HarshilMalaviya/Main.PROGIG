@@ -30,8 +30,8 @@ public class ProfileController {
     }
 
     @PutMapping("/edit")
-    public Profile editeProfile(@RequestBody ProfileDto profile){
-        Profile profile1 = this.profileService.editeProfile(profile);
+    public ProfileDto editeProfile(@RequestBody ProfileDto profile){
+        ProfileDto profile1 = this.profileService.editeProfile(profile);
         return profile1;
     }
     @GetMapping("/success-rate")

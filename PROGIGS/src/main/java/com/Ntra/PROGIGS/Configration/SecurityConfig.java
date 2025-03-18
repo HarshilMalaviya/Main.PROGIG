@@ -38,8 +38,6 @@ public class SecurityConfig {
         return new CorsFilter(source);
     }
 
-
-
     public SecurityConfig(UserImpl userDetailsImp, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.userDetailsImp = userDetailsImp;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
@@ -53,7 +51,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         Req->Req.requestMatchers("/login/**","/register/**","/v3/api-docs",
                                         "/v2/api-docs","/swagger-resources/**", "/swagger-ui/**",
-                                        "/webjars/**","/api-docs/**")
+                                        "/webjars/**","/api-docs/**","/portfolio/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
