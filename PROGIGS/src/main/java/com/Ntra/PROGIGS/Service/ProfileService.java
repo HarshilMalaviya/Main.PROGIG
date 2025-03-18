@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,4 +18,6 @@ public interface ProfileService {
     public ProfileDtoForGet getProfile();
 
     List<ProfileDtoForGet> getUsersByCountry(String country);
+
+    ProfileDtoForViewCard getProfileById(int id);
 }

@@ -23,6 +23,7 @@ public class ProfileDto {
     private List<String> skills;
     //  Client detail
     private String CompanyName;
+    private String fieldOfWork;
     private String Location;
     //    Add ON Info
     private String hourlyRate;
