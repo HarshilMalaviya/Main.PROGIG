@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.Review;
@@ -14,8 +15,6 @@ import com.Ntra.PROGIGS.Service.ProfileService;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -122,6 +121,12 @@ public class ProfileServiceImpl implements ProfileService {
         List<Profile> profiles = repo.findByCountry(country);
         List<ProfileDtoForGet> profileDtoForGets = profiles.stream().map(profileMapper::MapptoProfileDtoForGet).toList();
         return profileDtoForGets;
+    }
+    @Override
+    public ProfileDtoForViewCard getProfileById(int id) {
+        Profile profile = repo.findById(id).get();
+        ProfileDtoForViewCard profileDtoForGet = profileMapper.MapptoProfileDtoForViewCard(profile);
+        return profileDtoForGet;
     }
 
 }

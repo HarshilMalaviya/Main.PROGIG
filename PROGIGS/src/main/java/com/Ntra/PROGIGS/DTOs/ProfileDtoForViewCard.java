@@ -1,14 +1,16 @@
 package com.Ntra.PROGIGS.DTOs;
 
 import com.Ntra.PROGIGS.Entity.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class ProfileDtoForGet {
+public class ProfileDtoForViewCard {
     private int id;
     private String firstName;
     private String lastName;
@@ -27,11 +29,9 @@ public class ProfileDtoForGet {
     private Profile_Status status;
     //    Add ON Info
     private String hourlyRate;
-    private List<Education> Education;
-//    private String Articles;
+    private List<com.Ntra.PROGIGS.Entity.Education> Education;
+    //    private String Articles;
     private List<Certificates> Certification;
-    private BankDetails bank;
     private List<Portfolio> portfolio;
     private User user;
-
 }

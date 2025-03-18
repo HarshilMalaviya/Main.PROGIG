@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Service.ProfileService;
@@ -47,5 +48,10 @@ public class ProfileController {
     @GetMapping("/by-country/{country}")
     public List<ProfileDtoForGet> getUsersByCountry(@PathVariable String country) {
         return profileService.getUsersByCountry(country);
+    }
+
+    @GetMapping("/by-id/{id}")
+    public ProfileDtoForViewCard getProfileById(@PathVariable int id) {
+        return profileService.getProfileById(id);
     }
 }
