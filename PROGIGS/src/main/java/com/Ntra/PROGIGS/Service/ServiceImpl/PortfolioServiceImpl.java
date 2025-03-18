@@ -30,34 +30,48 @@ public class PortfolioServiceImpl implements PortfolioService {
    private Cloudinary cloudinary;
     @Autowired
     private GetAuthenticatedUser getAuthenticatedUser;
+//    @Override
+//    public PortfolioDto addPortfolio(MultipartFile file, PortfolioDto portfolio) {
+//        try {
+//
+//            User user = getAuthenticatedUser.getAuthenticatedUser();
+//
+//            portfolio.setProfile(user.getProfile());
+//            portfolioRepo.save(mapper.MaptoPortfolio(portfolio));
+//            return portfolio;
+//        }
+//        catch (Exception e){
+//            throw new RuntimeException("Failed to add portfolio");
+//        }
+//    }
+
     @Override
-    public PortfolioDto addPortfolio(PortfolioDto portfolio) {
+    public PortfolioDto addPortfolio(MultipartFile file, PortfolioDto portfolioDto) {
         try {
             User user = getAuthenticatedUser.getAuthenticatedUser();
-
+            Portfolio portfolio = mapper.MaptoPortfolio(portfolioDto);
             portfolio.setProfile(user.getProfile());
-            portfolioRepo.save(mapper.MaptoPortfolio(portfolio));
-            return portfolio;
-        }
-        catch (Exception e){
-            throw new RuntimeException("Failed to add portfolio");
+
+            // If file is provided, upload it
+            if (file != null && !file.isEmpty()) {
+                Map uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of());
+                portfolio.setPortfolioImage(uploadResult.get("url").toString());
+            }
+
+            // Save portfolio
+            Portfolio savedPortfolio = portfolioRepo.save(portfolio);
+
+            // Convert entity back to DTO
+            return mapper.MaptoPortfolioDto(savedPortfolio);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to upload image: " + e.getMessage());
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add portfolio: " + e.getMessage());
         }
     }
 
-    @Override
-    public PortfolioDto editPortfolio(PortfolioDto portfolio, int id) {
-        try {
-            PortfolioDto portfolio1 = mapper.MaptoPortfolioDto(portfolioRepo.findById(id).get());
-            portfolio1.setPortfolioTitle(portfolio.getPortfolioTitle());
-            portfolio1.setSkills(portfolio.getSkills());
-            portfolio1.setDescription(portfolio.getDescription());
-            portfolioRepo.save(mapper.MaptoPortfolio(portfolio1));
-            return portfolio1;
-        }
-        catch (Exception e){
-            throw new RuntimeException("Failed to edite portfolio");
-        }
-    }
+
 
 
 
@@ -70,20 +84,6 @@ public class PortfolioServiceImpl implements PortfolioService {
             throw new RuntimeException("Failed to delete portfolio");
         }
 
-    }
-
-    @Override
-    public Map savePortfolioImage(MultipartFile file,int id) {
-        try {
-            final Map data = this.cloudinary.uploader().upload(file.getBytes(), Map.of());
-            Portfolio portfolio = portfolioRepo.findById(id).get();
-            portfolio.setPortfolioImage(data.get("url").toString());
-            portfolioRepo.save(portfolio);
-            return data;
-
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to upload image");
-        }
     }
 
 

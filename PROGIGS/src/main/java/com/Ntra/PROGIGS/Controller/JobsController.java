@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Service.JobService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,8 @@ public class JobsController {
         return   jobService.saveJob(jobs);
     }
     @GetMapping
-    public ResponseEntity<List<JobDto>> getAllJobs()
-    {   List<JobDto> list = jobService.getAllJobs();
+    public ResponseEntity<List<JobDtoForCard>> getAllJobs()
+    {   List<JobDtoForCard> list = jobService.getAllJobs();
         if(list.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
