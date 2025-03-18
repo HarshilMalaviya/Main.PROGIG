@@ -44,8 +44,6 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public Map uploadImage(MultipartFile file) {
 
-
-
         try {
            final Map data = this.cloudinary.uploader().upload(file.getBytes(), Map.of());
            User user = getAuthenticatedUser.getAuthenticatedUser();
@@ -88,8 +86,8 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    public LocalVariable updateUserSuccessRate() {
-        User user = getAuthenticatedUser.getAuthenticatedUser();
+    public LocalVariable updateUserSuccessRate(int id) {
+        User user = repo.findById(id).get().getUser();
 
         int totalJobs = user.getJobs().size();
         long completedJobs = user.getJobs().stream()
@@ -98,14 +96,15 @@ public class ProfileServiceImpl implements ProfileService {
 
         List<Review> reviews = reviewRepo.findByUser(user);
 
-        if (reviews.isEmpty()) {
-            throw new RuntimeException("No reviews found for the user.");
-        }
-
         double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
         int totalReviews = reviews.size();
 
         LocalVariable localVariable = new LocalVariable();
+        if (reviews.isEmpty()) {
+            totalRating = 0.0;
+            totalReviews = 0;
+        }
+
 
         // Ensure floating-point division
         localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
@@ -132,6 +131,13 @@ public class ProfileServiceImpl implements ProfileService {
         Profile profile = repo.findById(id).get();
         ProfileDtoForViewCard profileDtoForGet = profileMapper.MapptoProfileDtoForViewCard(profile);
         return profileDtoForGet;
+    }
+
+    @Override
+    public String getProfileImage() {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+        String image = user.getProfile().getImageUrl();
+        return image;
     }
 
 }

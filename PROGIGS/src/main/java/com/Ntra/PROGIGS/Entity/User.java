@@ -54,9 +54,7 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "freelancer", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Contract> freelancerContracts;
+
 
 
     @Override

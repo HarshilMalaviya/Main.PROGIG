@@ -31,6 +31,7 @@ public class ProfileMapper {
         ProfileDtoForGet profileDtoForGet = new ProfileDtoForGet();
         profileDtoForGet = new ModelMapper().map(profile, ProfileDtoForGet.class);
         profileDtoForGet.setFullName(profile.getFirstName() + " " + profile.getLastName());
+        profileDtoForGet.setReview(profile.getUser().getReviews());
         return profileDtoForGet;
     }
 //    Entity To Dto for get mapping
@@ -38,6 +39,8 @@ public class ProfileMapper {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDtoForViewCard profileDtoForViewCard = new ProfileDtoForViewCard();
         profileDtoForViewCard = new ModelMapper().map(profile, ProfileDtoForViewCard.class);
+        profileDtoForViewCard.setFullName(profile.getFirstName() + " " + profile.getLastName());
+        profileDtoForViewCard.setReview(profile.getUser().getReviews());
         return profileDtoForViewCard;
     }
 

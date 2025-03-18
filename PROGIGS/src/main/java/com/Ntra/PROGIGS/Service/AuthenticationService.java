@@ -35,10 +35,11 @@ public class AuthenticationService {
         User user=userRepo.findByUsername(request.getUsername());
 
         String token = jwtService.generateToken(user);
+
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse register(UserDtoAuth request) throws UserAlreadyExistsException {
+    public String register(UserDtoAuth request) throws UserAlreadyExistsException {
         User existingUser = userRepo.findByUsername(request.getUsername());
         if(existingUser!=null){
             throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
@@ -62,7 +63,8 @@ public class AuthenticationService {
         user.setProfile(profile);
         user = userRepo.save(user);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token);
+
+        return "Register Successful";
     }
 
 

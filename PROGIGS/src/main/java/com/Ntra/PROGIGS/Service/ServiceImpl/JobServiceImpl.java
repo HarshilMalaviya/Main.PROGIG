@@ -1,16 +1,15 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Mapper.JobMapper;
 import com.Ntra.PROGIGS.Repository.JobRepo;
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.JobService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -35,23 +34,25 @@ public class JobServiceImpl implements JobService {
        job.setUser(user);
         return jobRepo.save(job);
     }
-    public List<JobDto> getAllJobs (){
+
+    @Override
+    public List<JobDtoForCard> getAllJobs (){
         List<Jobs> jobs = jobRepo.findAll();
-        return jobs.stream().map(jobMapper::MapToDto).toList();
+        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }
 
-
+    @Override
     public JobDto getJobBYID(int id){
 
         Jobs jobs =this.jobRepo.findById(id);
         return this.jobMapper.MapToDto(jobs);
     }
-
+    @Override
     public List<JobDto> getJobByskillRequired(String skills){
         List<Jobs> jobs = this.jobRepo.findBySkillsRequired(skills);
         return jobs.stream().map(jobMapper::MapToDto).toList();
     }
-
+    @Override
     public List<JobDto> getJobBySkillsRequired(List<String> skills){
         List<Jobs> jobs = this.jobRepo.findBySkillsRequiredIn(skills);
         List<JobDto> jobDtos = jobs.stream().map(jobMapper::MapToDto).toList();
@@ -70,8 +71,18 @@ public class JobServiceImpl implements JobService {
         jobs1.setModules(jobs.getModules());
         return jobMapper.MapToDto(jobRepo.save(jobs1));
     }
+
+    @Override
     public void deletebyid(int id) {
         jobRepo.deleteById(id);
+    }
+
+
+    @Override
+    public List<JobDto> myJobs() {
+        User user = getAuthenticatedUser();
+        List<Jobs> jobs = jobRepo.findByUser(user);
+        return jobs.stream().map(jobMapper::MapToDto).toList();
     }
 
     private User getAuthenticatedUser() {
@@ -82,6 +93,8 @@ public class JobServiceImpl implements JobService {
         }
         throw new RuntimeException("User is not authenticated");
     }
+
+
 
 
 }

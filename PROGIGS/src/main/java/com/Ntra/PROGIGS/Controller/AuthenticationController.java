@@ -19,7 +19,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody UserDtoAuth request) throws UserAlreadyExistsException {
+    public ResponseEntity<String> register(@RequestBody UserDtoAuth request) throws UserAlreadyExistsException {
         return ResponseEntity.ok(authenticationService.register(request));
     }
     @PostMapping("/login")

@@ -56,6 +56,8 @@ public class ProposalServiceImpl implements ProposalService {
     public List<Proposals> getProposalFromJob(int jobid) {
         return proposalsRepo.findAllProposalsByJobs(jobid);
     }
+
+
     private User getAuthenticatedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
