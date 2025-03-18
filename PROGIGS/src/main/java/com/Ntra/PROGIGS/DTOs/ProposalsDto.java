@@ -22,6 +22,7 @@ public class ProposalsDto {
     private String description;
     private Long bid;
     private Date finishingTime;
+    private String status;
 
 
     private User user;

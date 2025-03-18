@@ -7,6 +7,7 @@ import com.Ntra.PROGIGS.Entity.Proposals;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Mapper.ProposalMapper;
 import com.Ntra.PROGIGS.Repository.JobRepo;
+import com.Ntra.PROGIGS.Repository.ProfileRepo;
 import com.Ntra.PROGIGS.Repository.ProposalsRepo;
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.ProposalService;
@@ -23,6 +24,8 @@ public class ProposalServiceImpl implements ProposalService {
     private ProposalsRepo proposalsRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private ProfileRepo profileRepo;
     @Autowired
     private JobRepo jobRepo;
     @Autowired

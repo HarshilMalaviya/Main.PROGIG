@@ -43,10 +43,14 @@ public class Profile {
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Certificates> Certification;
+
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_id")
     @JsonIgnore
     private BankDetails bank;
+
+
     @OneToMany(mappedBy = "profile",cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Portfolio> portfolio;

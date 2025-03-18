@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/education")
+@RequestMapping("/profile/education")
 public class EducationController {
     @Autowired
     private EducationService educationService;
 
-    @PostMapping("/addEducation")
+    @PostMapping
     public void addEducation(@RequestBody EducationDto education) {
         educationService.addEducation(education);
     }
 
-    @PutMapping("/editEducation/{id}")
+    @PutMapping("/{id}")
     public void editEducation(@RequestBody EducationDto education,@PathVariable int id){
         educationService.editEducation(education,id);
     }

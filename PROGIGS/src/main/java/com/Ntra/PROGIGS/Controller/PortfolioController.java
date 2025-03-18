@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/portfolio")
+@RequestMapping("/profile/portfolio")
 @RequiredArgsConstructor
 public class PortfolioController {
     @Autowired

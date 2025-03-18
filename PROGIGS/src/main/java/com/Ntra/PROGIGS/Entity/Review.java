@@ -25,7 +25,7 @@ public class Review {
     private Jobs jobs;
 
     @ManyToOne
-    @JoinColumn(name = "freelancer_id")
+    @JoinColumn(name = "user_id")
     @JsonIgnore // Prevents deep nesting
     private User user;
 }
