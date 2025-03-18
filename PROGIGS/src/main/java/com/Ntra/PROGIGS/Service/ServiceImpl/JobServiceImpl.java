@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Mapper.JobMapper;
@@ -35,9 +36,9 @@ public class JobServiceImpl implements JobService {
        job.setUser(user);
         return jobRepo.save(job);
     }
-    public List<JobDto> getAllJobs (){
+    public List<JobDtoForCard> getAllJobs (){
         List<Jobs> jobs = jobRepo.findAll();
-        return jobs.stream().map(jobMapper::MapToDto).toList();
+        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }
 
 
