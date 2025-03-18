@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.CertificateDto;
+import com.Ntra.PROGIGS.Entity.Certificates;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
@@ -23,6 +24,16 @@ public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private GetAuthenticatedUser getAuthenticatedUser;
 
+
+    @Override
+    public CertificateDto editCertificate(CertificateDto certificate, int id) {
+        Certificates certificates=certificateRepo.findById(id).orElseThrow(()->new RuntimeException("Certificate not found"));
+        certificates.setCertificateIssuer(certificate.getCertificateIssuer());
+        certificates.setCertificateName(certificate.getCertificateName());
+        certificates.setIssuedDate(certificate.getIssuedDate());
+        certificateRepo.save(certificateMapper.MapToCertificates(certificate));
+        return certificate;
+    }
 
     @Override
     public CertificateDto addCertificate(CertificateDto certificate) {

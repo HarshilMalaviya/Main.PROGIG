@@ -11,7 +11,7 @@ import lombok.Data;
 public class BankDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String bankName;
     private String accountHolderName;
     private String accountNumber;

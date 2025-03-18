@@ -17,7 +17,9 @@ public class Contract {
     private int id;
     private Date startDate;
     private Date endDate;
-    private String amount;
+    private long amount;
+    @Enumerated(EnumType.STRING)
+    private ContractStatus status;
 
     @OneToOne
     @JoinColumn(name = "job_id")

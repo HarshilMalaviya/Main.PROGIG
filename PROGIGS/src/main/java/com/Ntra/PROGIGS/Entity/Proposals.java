@@ -25,6 +25,7 @@ public class Proposals {
     private String description;
     private Long bid;
     private Date finishingTime;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)

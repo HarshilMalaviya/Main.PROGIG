@@ -15,7 +15,7 @@ import java.util.List;
 public class Portfolio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int portfolioId;
+    private Integer portfolioId;
     @Column(name = "PortfolioTitle")
     private String portfolioTitle;
    @Column(name = "Skills")
