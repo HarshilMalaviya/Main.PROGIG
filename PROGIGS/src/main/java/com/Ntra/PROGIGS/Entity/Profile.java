@@ -16,7 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
     private String lastName;
@@ -33,6 +33,7 @@ public class Profile {
     private String Location;
     @Enumerated(value = EnumType.STRING)
     private Profile_Status status;
+    private boolean isVerified = false;
     //    Add ON Info
     private String hourlyRate;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)

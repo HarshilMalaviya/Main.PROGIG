@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Repository;
 
+import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Entity.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,6 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
     User findByUsername(String username);
     List<User> findAllByRole(UserRole role);
+
+    User findByProfile(Profile profile);
 }
