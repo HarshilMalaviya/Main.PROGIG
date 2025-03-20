@@ -29,6 +29,7 @@ public class User extends LoginDTO implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+    private String otp;
 
 
 

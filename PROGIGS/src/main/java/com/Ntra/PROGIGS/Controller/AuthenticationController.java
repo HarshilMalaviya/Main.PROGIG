@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,5 +26,14 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginDTO request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
+    }
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOTP(@RequestParam String otp,@RequestParam String email) {
+
+        try {
+            authenticationService.verifyOTP(email, otp);
+            return ResponseEntity.ok("OTP verified successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());}
     }
 }
