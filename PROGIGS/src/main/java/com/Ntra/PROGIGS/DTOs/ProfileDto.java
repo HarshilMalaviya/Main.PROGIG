@@ -12,8 +12,7 @@ import java.util.List;
 @Data
 public class ProfileDto {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String description;
     private String email;
     @Column(nullable = true)

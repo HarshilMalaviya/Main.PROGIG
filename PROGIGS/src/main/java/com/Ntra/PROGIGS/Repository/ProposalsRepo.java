@@ -18,4 +18,10 @@ public interface ProposalsRepo extends JpaRepository<Proposals , Integer> {
     @Query("SELECT p FROM Proposals p WHERE p.jobs.id = :jobId")
     List<Proposals> findAllProposalsByJobs(@Param("jobId") int jobId);
 
+    List<Proposals> findAllProposalsByFreelancerName(String freelancer);
+
+//    List<Proposals> findAllByFreelancer_UsernameAndStatus(String freelancer, String status);
+//@Query("SELECT p FROM Proposals p WHERE p.freelancer_name = :freelancer AND p.status = 'HIRED'")
+//List<Proposals> findHiredProposalsByFreelancerName(@Param("freelancer") String freelancer);
 }
+

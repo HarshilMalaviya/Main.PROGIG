@@ -59,24 +59,29 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile editeProfile(ProfileDto profile) {
+    public ProfileDto editeProfile(ProfileDto profileDto) {
         try {
             User user = getAuthenticatedUser.getAuthenticatedUser();
             int id = user.getProfile().getId();
 
-            Profile profile2 = this.repo.findById(id).get();
-            profile2.setFirstName(profile.getFirstName());
-            profile2.setLastName(profile.getLastName());
-            profile2.setDescription(profile.getDescription());
-            profile2.setEmail(profile.getEmail());
-            profile2.setPhone(profile.getPhone());
-            profile2.setSkills(profile.getSkills());
-            profile2.setCompanyName(profile.getCompanyName());
-            profile2.setLocation(profile.getLocation());
-            profile2.setHourlyRate(profile.getHourlyRate());
+            Profile existingProfile = this.repo.findById(id).get();
+
+            if (profileDto.getFullName() != null && !profileDto.getFullName().trim().isEmpty()) {
+                String[] nameParts = profileDto.getFullName().trim().split("\\s+", 2);
+                existingProfile.setFirstName(nameParts[0]);
+                existingProfile.setLastName(nameParts.length > 1 ? nameParts[1] : "");
+            }
+            existingProfile.setDescription(profileDto.getDescription());
+            existingProfile.setEmail(profileDto.getEmail());
+            existingProfile.setPhone(profileDto.getPhone());
+            existingProfile.setSkills(profileDto.getSkills());
+            existingProfile.setCompanyName(profileDto.getCompanyName());
+            existingProfile.setLocation(profileDto.getLocation());
+            existingProfile.setHourlyRate(profileDto.getHourlyRate());
+            existingProfile.setFieldOfWork(profileDto.getFieldOfWork());
 //            profile2.setArticles(profile.getArticles());
-            repo.save(profile2);
-            return profile2;
+            repo.save(existingProfile);
+            return profileMapper.MapptoProfileDto(existingProfile);
         }
         catch(Exception e){
             throw new RuntimeException("Profile Updation Failed !!");
