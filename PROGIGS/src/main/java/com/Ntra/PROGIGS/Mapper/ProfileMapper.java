@@ -13,29 +13,40 @@ import org.springframework.stereotype.Component;
 public class ProfileMapper {
     @Autowired
     private ModelMapper modelMapper;
+
+//    Entity To Dto
+
+
+//    Entity To Dto for post mapping
     public ProfileDto MapptoProfileDto(Profile profile) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDto profileDto = new ProfileDto();
         profileDto = new ModelMapper().map(profile, ProfileDto.class);
         return profileDto;
     }
-    public Profile MapptoProfile(ProfileDto profileDto) {
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        Profile profile = new Profile();
-        profile = new ModelMapper().map(profileDto, Profile.class);
-        return profile;
-    }
+
+//    Entity To Dto for get mapping
     public ProfileDtoForGet MapptoProfileDtoForGet(Profile profile) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDtoForGet profileDtoForGet = new ProfileDtoForGet();
         profileDtoForGet = new ModelMapper().map(profile, ProfileDtoForGet.class);
+        profileDtoForGet.setFullName(profile.getFirstName() + " " + profile.getLastName());
         return profileDtoForGet;
     }
-
+//    Entity To Dto for get mapping
     public ProfileDtoForViewCard MapptoProfileDtoForViewCard(Profile profile) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDtoForViewCard profileDtoForViewCard = new ProfileDtoForViewCard();
         profileDtoForViewCard = new ModelMapper().map(profile, ProfileDtoForViewCard.class);
         return profileDtoForViewCard;
+    }
+
+
+//    Dto To Entity for post mapping
+    public Profile MapptoProfile(ProfileDto profileDto) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        Profile profile = new Profile();
+        profile = new ModelMapper().map(profileDto, Profile.class);
+        return profile;
     }
 }
