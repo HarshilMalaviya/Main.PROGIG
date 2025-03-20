@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Mapper;
 
+import com.Ntra.PROGIGS.DTOs.ClientDetailsForJobDTO;
 import com.Ntra.PROGIGS.DTOs.JobDto;
 
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
@@ -24,9 +25,40 @@ public class JobMapper {
     public JobDto MapToDto(Jobs jobs){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         JobDto jobDto = new JobDto();
+
         jobDto = new ModelMapper().map(jobs,JobDto.class);
         return jobDto;
     }
+    public JobDto MapToDto1(Jobs jobs) {
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+
+        // Map Jobs to JobDto
+        JobDto jobDto = new ModelMapper().map(jobs, JobDto.class);
+
+        // Extract user details if the user is a client
+
+        if (jobs.getUser() != null) {
+            System.out.println("✅ User Found: " + jobs.getUser().getId() + ", Role: " + jobs.getUser().getRole());
+
+            // Only map if the user is a client
+            if ("CLIENT".equalsIgnoreCase(String.valueOf(jobs.getUser().getRole()))) {
+                ClientDetailsForJobDTO clientDetails = new ClientDetailsForJobDTO();
+                clientDetails.setId(jobs.getUser().getId());
+                clientDetails.setLocation(jobs.getUser().getProfile().getLocation());
+                clientDetails.setJoiningDate(jobs.getUser().getJoiningDate());
+
+                jobDto.setClient(clientDetails);
+                System.out.println("✅ Client Mapped for Job ID: " + jobs.getId());
+            } else {
+                System.out.println("⚠️ User is not a CLIENT for Job ID: " + jobs.getId());
+            }
+        } else {
+            System.out.println("⚠️ No User Associated with Job ID: " + jobs.getId());
+        }
+
+        return jobDto;
+    }
+
 
     public Jobs MapToJob(JobDto jobDto){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
@@ -34,14 +66,7 @@ public class JobMapper {
         jobs = new ModelMapper().map(jobDto,Jobs.class);
         return jobs;
     }
-//    public JobDtoForCard MapToJobDtoforCard(Jobs jobs){
-//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-//        JobDtoForCard jobDtoForCard = new JobDtoForCard();
-//        User user = jobs.getUser();
-//        jobDtoForCard.setLocation(user.getProfile().getLocation());
-//        jobDtoForCard = new ModelMapper().map(jobs,JobDtoForCard.class);
-//        return jobDtoForCard;
-//    }
+
 
     public JobDtoForCard MapToJobDtoforCard(Jobs jobs) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);

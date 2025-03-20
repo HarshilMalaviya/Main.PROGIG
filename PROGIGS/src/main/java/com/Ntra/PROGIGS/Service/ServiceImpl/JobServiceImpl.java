@@ -45,7 +45,7 @@ public class JobServiceImpl implements JobService {
     public JobDto getJobBYID(int id){
 
         Jobs jobs =this.jobRepo.findById(id);
-        return this.jobMapper.MapToDto(jobs);
+        return this.jobMapper.MapToDto1(jobs);
     }
 
     public List<JobDto> getJobByskillRequired(String skills){
