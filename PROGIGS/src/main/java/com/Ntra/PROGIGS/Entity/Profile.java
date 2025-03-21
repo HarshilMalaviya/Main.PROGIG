@@ -32,8 +32,8 @@ public class Profile {
     private String CompanyName;
     private String Location;
     @Enumerated(value = EnumType.STRING)
-    private Profile_Status status;
-    private boolean isVerified = false;
+
+    private Profile_Status status = Profile_Status.PENDING;
     //    Add ON Info
     private String hourlyRate;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)

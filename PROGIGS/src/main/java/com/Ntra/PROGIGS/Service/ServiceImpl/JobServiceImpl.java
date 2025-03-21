@@ -42,7 +42,8 @@ public class JobServiceImpl implements JobService {
         return jobRepo.save(job);
     }
 
-    public List<JobDtoForCard> getAllJobs() {
+    public List<JobDtoForCard> getAllJobs (){
+
         List<Jobs> jobs = jobRepo.findAll();
         return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }

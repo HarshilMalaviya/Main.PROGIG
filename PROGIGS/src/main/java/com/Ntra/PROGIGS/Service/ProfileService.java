@@ -20,4 +20,6 @@ public interface ProfileService {
     List<ProfileDtoForGet> getUsersByCountry(String country);
 
     ProfileDtoForViewCard getProfileById(int id);
+
+    String getProfileImage();
 }
