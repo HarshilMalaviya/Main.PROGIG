@@ -42,6 +42,26 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobDto));
         }
     }
+    @GetMapping("/appliedJobs")
+    public ResponseEntity<List<JobDto>> findAppliedJobs() {
+        List<JobDto> jobs=jobService.appliedJobsForFreelancer();
+        if(jobs==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        else {
+            return ResponseEntity.of(Optional.of(jobs));
+        }
+    }
+    /*@GetMapping("/hiredJobs")
+    public ResponseEntity<List<JobDto>> hiredJobs() {
+        List<JobDto> jobs=jobService.HiredJobsForFreelancer();
+        if(jobs==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        else {
+            return ResponseEntity.of(Optional.of(jobs));
+        }
+    }*/
     @GetMapping("/jobbyskill/{skill}")
     public ResponseEntity<List<JobDto>> findJobbySkills(@PathVariable String skill) {
         List<JobDto> jobs=jobService.getJobByskillRequired(skill);
