@@ -17,4 +17,7 @@ public interface JobService {
     public JobDto editeJob(JobDto jobs,int id);
 
     public void deletebyid(int id);
+
+    public List<JobDto> appliedJobsForFreelancer();
+//    public List<JobDto> HiredJobsForFreelancer();
 }

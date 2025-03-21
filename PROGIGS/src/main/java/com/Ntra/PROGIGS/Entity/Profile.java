@@ -16,7 +16,7 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String firstName;
     private String lastName;
@@ -32,6 +32,7 @@ public class Profile {
     private String CompanyName;
     private String Location;
     @Enumerated(value = EnumType.STRING)
+
     private Profile_Status status = Profile_Status.PENDING;
     //    Add ON Info
     private String hourlyRate;
