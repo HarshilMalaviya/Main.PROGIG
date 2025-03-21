@@ -26,7 +26,7 @@ public class Proposals {
     private Long bid;
     private Date finishingTime;
     @Enumerated(value=EnumType.STRING)
-    private PropsalStatus status;
+    private PropsalStatus status = null;
 
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)

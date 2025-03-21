@@ -116,6 +116,10 @@ public class JobServiceImpl implements JobService {
 
         return jobDtos;
     }
+
+
+
+
 }
 /*    @Override
     public List<JobDto> HiredJobsForFreelancer() {

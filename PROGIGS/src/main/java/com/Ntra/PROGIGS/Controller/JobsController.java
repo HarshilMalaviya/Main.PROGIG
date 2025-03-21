@@ -36,7 +36,7 @@ public class JobsController {
     public ResponseEntity<JobDto> findbyJobId(@PathVariable int id) {
         JobDto jobDto=jobService.getJobBYID(id);
         if(jobDto==null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         else {
             return ResponseEntity.of(Optional.of(jobDto));
