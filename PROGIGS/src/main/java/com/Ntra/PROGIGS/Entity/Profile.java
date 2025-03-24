@@ -35,6 +35,7 @@ public class Profile {
     private Profile_Status status = Profile_Status.PENDING;
     //    Add ON Info
     private String hourlyRate;
+    private boolean isVerified = false;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Education> education;
@@ -58,6 +59,8 @@ public class Profile {
 
     //    this come from admin side Don't show in user site
     private String whyRejected;
+
+
 
 
 
