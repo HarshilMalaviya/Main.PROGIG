@@ -35,9 +35,9 @@ public class ProfileController {
         ProfileDto profile1 = this.profileService.editeProfile(profile);
         return profile1;
     }
-    @GetMapping("/success-rate")
-    public ResponseEntity<LocalVariable> getUserSuccessRate() {
-        LocalVariable successData = profileService.updateUserSuccessRate();
+    @GetMapping("/success-rate/{id}")
+    public ResponseEntity<LocalVariable> getUserSuccessRate(@PathVariable int id) {
+        LocalVariable successData = profileService.updateUserSuccessRate(id);
         return ResponseEntity.ok(successData);
     }
 

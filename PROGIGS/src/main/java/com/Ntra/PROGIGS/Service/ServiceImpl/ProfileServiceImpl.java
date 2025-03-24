@@ -86,8 +86,8 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    public LocalVariable updateUserSuccessRate() {
-        User user = getAuthenticatedUser.getAuthenticatedUser();
+    public LocalVariable updateUserSuccessRate(int id) {
+        User user = repo.findById(id).get().getUser();
 
         int totalJobs = user.getJobs().size();
         long completedJobs = user.getJobs().stream()
