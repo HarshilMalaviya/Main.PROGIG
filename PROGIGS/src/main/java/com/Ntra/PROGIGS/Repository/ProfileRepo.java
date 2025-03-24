@@ -17,4 +17,5 @@ public interface ProfileRepo extends JpaRepository<Profile, Integer> {
     @Query("SELECT p FROM Profile p WHERE LOWER(p.Location) LIKE LOWER(CONCAT('%', :country, '%'))")
     List<Profile> findByCountry(String country);
 
+    Profile findByEmail(String email);
 }

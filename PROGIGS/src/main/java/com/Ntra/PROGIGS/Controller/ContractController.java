@@ -1,12 +1,15 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ContractDto;
+import com.Ntra.PROGIGS.DTOs.JobDto;
 import com.Ntra.PROGIGS.Entity.Contract;
 import com.Ntra.PROGIGS.Service.ContractService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/contract")
@@ -25,6 +28,10 @@ public class ContractController {
     @PutMapping("/{contractid}")
     public ResponseEntity<Contract> editeContractStatus(@RequestBody ContractDto contract,@PathVariable int contractid){
         return ResponseEntity.ok(contractService.editeContractStatus(contract,contractid));
+    }
+    @GetMapping("/activeJobs")
+    public ResponseEntity<List<JobDto>> activeJobsByContract(){
+        return ResponseEntity.ok(contractService.activeContract());
     }
 
 }

@@ -2,9 +2,13 @@ package com.Ntra.PROGIGS.DTOs;
 
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Entity.Proposals;
+import com.Ntra.PROGIGS.Entity.PropsalStatus;
 import com.Ntra.PROGIGS.Entity.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
@@ -22,9 +26,11 @@ public class ProposalsDto {
     private String description;
     private Long bid;
     private Date finishingTime;
-    private String status;
+    @Enumerated(value = EnumType.STRING)
+    private PropsalStatus status=null;
 
-
+    @JsonIgnore
     private User user;
+    @JsonIgnore
     private Jobs jobs;
 }
