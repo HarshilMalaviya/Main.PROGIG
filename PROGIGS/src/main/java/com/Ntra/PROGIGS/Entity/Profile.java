@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.List;
 
 @Entity
 @Data
+@ToString
 @Table(name = "Profile")
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ Ignores unknown fields
 @JsonInclude(JsonInclude.Include.NON_NULL)

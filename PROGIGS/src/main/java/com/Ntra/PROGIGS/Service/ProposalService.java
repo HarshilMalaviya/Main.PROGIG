@@ -11,4 +11,5 @@ public interface ProposalService {
     public List<Proposals> getProposalFromJob(int jobid);
 
 
+
 }
