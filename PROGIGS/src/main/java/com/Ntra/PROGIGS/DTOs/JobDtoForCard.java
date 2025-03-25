@@ -9,6 +9,7 @@ import java.util.List;
 public class JobDtoForCard {
 
     private int id;
+    private String clientName;
     private String title;
     private String description;
     private String Location;

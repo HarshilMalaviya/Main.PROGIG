@@ -13,4 +13,5 @@ public interface ContractService {
 
     public List<JobDto> activeContract();
 
+
 }

@@ -25,4 +25,9 @@ public class ProposalsController {
     public ResponseEntity<List<Proposals>> getAllProposalFromJob(@PathVariable int jobid) {
         return ResponseEntity.ok(proposalService.getProposalFromJob(jobid));
     }
+    @PutMapping("/{proposalid}")
+    public ResponseEntity<String> changeStatus(@PathVariable int proposalid,@RequestBody ProposalsDto proposals) {
+        proposalService.changeStatus(proposalid,proposals);
+        return ResponseEntity.ok("Status Succesfully Updated");
+    }
 }

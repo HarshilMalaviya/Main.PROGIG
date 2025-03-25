@@ -9,6 +9,7 @@ import java.util.List;
 public interface ProposalService {
     public Proposals saveProposal(ProposalsDto proposals,int jobid);
     public List<Proposals> getProposalFromJob(int jobid);
+    public void changeStatus(int proposalid, ProposalsDto proposals);
 
 
 
