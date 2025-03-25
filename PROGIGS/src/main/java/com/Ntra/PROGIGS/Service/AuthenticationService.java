@@ -99,7 +99,7 @@ public class AuthenticationService {
         User user=userRepo.findByProfile(profile);
 
         if(profile==null){
-            throw new RuntimeException("Profile not found for email: " + email); 
+            throw new RuntimeException("Profile not found for email: " + email);
         } else if (profile.isVerified()) {
             throw new RuntimeException("Profile already verified for email: " + email);
         } else if (user.getOtp().equals(otp)) {
