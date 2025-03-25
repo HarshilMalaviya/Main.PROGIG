@@ -58,6 +58,7 @@ public class ProposalServiceImpl implements ProposalService {
         return proposalsRepo.findAllProposalsByJobs(jobid);
     }
 
+
     @Override
     public void changeStatus(int proposalid, ProposalsDto proposals) {
         Proposals proposals1 = proposalsRepo.findById(proposalid).get();

@@ -69,6 +69,15 @@ public class JobMapper {
         return jobs;
     }
 
+//    public JobDtoForCard MapToJobDtoforCard(Jobs jobs){
+//        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+//        JobDtoForCard jobDtoForCard = new JobDtoForCard();
+//        User user = jobs.getUser();
+//        jobDtoForCard.setLocation(user.getProfile().getLocation());
+//        jobDtoForCard = new ModelMapper().map(jobs,JobDtoForCard.class);
+//        return jobDtoForCard;
+//    }
+
 
     public JobDtoForCard MapToJobDtoforCard(Jobs jobs) {
         if (jobs == null) {
@@ -104,9 +113,6 @@ public class JobMapper {
 
         return jobDtoForCard;
     }
-
-
-
 
 
 

@@ -2,6 +2,8 @@ package com.Ntra.PROGIGS.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
@@ -14,6 +16,8 @@ public class BankDetails {
     private Integer id;
     private String bankName;
     private String accountHolderName;
+    @Pattern(regexp = "\\d{12}", message = "Account number must be exactly 12 digits.")
+    @Size(min = 12, max = 12, message = "Account number must be exactly 12 digits.")
     private String accountNumber;
     private String ifscCode;
     private String branch;
@@ -21,13 +25,6 @@ public class BankDetails {
     @JsonIgnore
     private Profile profile;
 
-    public void setAccountNumber(String accountNumber) {
-        if (accountNumber != null && accountNumber.matches("\\d{12}")) { // Ensures exactly 12 digits
-            this.accountNumber = accountNumber;
-        } else {
-            throw new IllegalArgumentException("Account number must be exactly 12 digits.");
-        }
-    }
 
     // Getter to return the masked account number in API responses
     public String getAccountNumber() {

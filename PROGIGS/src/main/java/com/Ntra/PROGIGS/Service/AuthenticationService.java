@@ -41,10 +41,11 @@ public class AuthenticationService {
         User user=userRepo.findByUsername(request.getUsername());
 
         String token = jwtService.generateToken(user);
+
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse register(UserDtoAuth request) throws UserAlreadyExistsException {
+    public String register(UserDtoAuth request) throws UserAlreadyExistsException {
         User existingUser = userRepo.findByUsername(request.getUsername());
         if(existingUser!=null){
             throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
@@ -79,7 +80,8 @@ public class AuthenticationService {
 
         user = userRepo.save(user);
         String token = jwtService.generateToken(user);
-        return new AuthenticationResponse(token);
+
+        return "Register Successful";
     }
     public String generateOTP() {
         Random random = new Random();
@@ -97,7 +99,7 @@ public class AuthenticationService {
         User user=userRepo.findByProfile(profile);
 
         if(profile==null){
-            throw new RuntimeException("Profile not found for email: " + email); 
+            throw new RuntimeException("Profile not found for email: " + email);
         } else if (profile.isVerified()) {
             throw new RuntimeException("Profile already verified for email: " + email);
         } else if (user.getOtp().equals(otp)) {

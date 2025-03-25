@@ -20,4 +20,10 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllFreelancer());
     }
+
+    @GetMapping("/bySkill/{skill}")
+    public ResponseEntity<List<UserDto>> getAllUsersBySkill(@PathVariable String skill){
+        return ResponseEntity.ok(userService.getAllFreelancerBySkill(skill));
+    }
+
 }

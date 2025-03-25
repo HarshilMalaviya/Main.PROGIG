@@ -4,7 +4,6 @@ import com.Ntra.PROGIGS.DTOs.LoginDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +16,6 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString
 @Table(name = "User")
 public class User extends LoginDTO implements UserDetails {
 
@@ -31,6 +29,7 @@ public class User extends LoginDTO implements UserDetails {
     private String password;
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
+
     private String otp;
 
 
@@ -56,6 +55,7 @@ public class User extends LoginDTO implements UserDetails {
     @OrderBy("id DESC") // Newest reviews first
     @JsonIgnore
     private List<Review> reviews;
+
 
 
 

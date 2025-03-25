@@ -14,12 +14,13 @@ public class EducationController {
     private EducationService educationService;
 
     @PostMapping
-    public void addEducation(@RequestBody EducationDto education) {
+    public EducationDto addEducation(@RequestBody EducationDto education) {
         educationService.addEducation(education);
+        return education;
     }
 
-    @PutMapping("/{id}")
-    public void editEducation(@RequestBody EducationDto education,@PathVariable int id){
-        educationService.editEducation(education,id);
+    @DeleteMapping("/{id}")
+    public void editEducation(@PathVariable int id){
+        educationService.deleteEducation(id);
     }
 }

@@ -13,11 +13,13 @@ import java.util.Map;
 public interface ProfileService {
     public Map uploadImage(MultipartFile file);
     public ProfileDto editeProfile(ProfileDto profile);
-    public LocalVariable updateUserSuccessRate();
+    public LocalVariable updateUserSuccessRate(int id);
 
     public ProfileDtoForGet getProfile();
 
     List<ProfileDtoForGet> getUsersByCountry(String country);
 
     ProfileDtoForViewCard getProfileById(int id);
+
+    String getProfileImage();
 }

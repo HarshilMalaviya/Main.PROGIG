@@ -92,4 +92,9 @@ public class JobsController {
         jobService.deletebyid(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("myJobs")
+    public ResponseEntity<List<JobDto>> getMyJobs(){
+        return ResponseEntity.of(Optional.of(jobService.myJobs()));
+    }
 }
