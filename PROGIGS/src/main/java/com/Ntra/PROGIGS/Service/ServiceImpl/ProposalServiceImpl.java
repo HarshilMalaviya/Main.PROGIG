@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ProposalsDto;
+import com.Ntra.PROGIGS.DTOs.ProposalsDtoForGet;
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.Proposals;
@@ -53,9 +54,19 @@ public class ProposalServiceImpl implements ProposalService {
     }
 
     @Override
-    public List<Proposals> getProposalFromJob(int jobid) {
-        return proposalsRepo.findAllProposalsByJobs(jobid);
+    public List<ProposalsDtoForGet> getProposalFromJob(int jobid) {
+       List<Proposals> proposals= proposalsRepo.findAllProposalsByJobs(jobid);
+       List<ProposalsDtoForGet> proposalsDtos= proposals.stream().map(proposalsMapper::MapptoProposalDto).toList();
+        return proposalsDtos;
     }
+
+    @Override
+    public void changeStatus(int proposalid, ProposalsDto proposals) {
+        Proposals proposals1 = proposalsRepo.findById(proposalid).get();
+        proposals1.setStatus(proposals.getStatus());
+        proposalsRepo.save(proposals1);
+    }
+
     private User getAuthenticatedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {

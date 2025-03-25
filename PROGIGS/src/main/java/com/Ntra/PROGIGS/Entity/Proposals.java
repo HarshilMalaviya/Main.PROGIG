@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,7 +27,8 @@ public class Proposals {
     private Long bid;
     private Date finishingTime;
     @Enumerated(value=EnumType.STRING)
-    private PropsalStatus status = null;
+    @Nullable
+    private PropsalStatus status ;
 
     @ManyToOne
     @JoinColumn(name = "job_id", nullable = false)

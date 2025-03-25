@@ -18,16 +18,17 @@ public class ContractController {
     @Autowired
     private ContractService contractService;
     @PostMapping("/{jobid}")
-    public ResponseEntity<Contract> saveContract(@RequestBody ContractDto contract, @PathVariable int jobid){
+    public ResponseEntity<ContractDto> saveContract(@RequestBody ContractDto contract, @PathVariable int jobid){
         return ResponseEntity.ok(contractService.saveContract(contract,jobid));
     }
     @GetMapping("/{contractid}")
-    public ResponseEntity<Contract> getContractById(@PathVariable int contractid){
+    public ResponseEntity<ContractDto> getContractById(@PathVariable int contractid){
         return ResponseEntity.ok(contractService.getContractById(contractid));
     }
     @PutMapping("/{contractid}")
-    public ResponseEntity<Contract> editeContractStatus(@RequestBody ContractDto contract,@PathVariable int contractid){
-        return ResponseEntity.ok(contractService.editeContractStatus(contract,contractid));
+    public ResponseEntity<String> editeContractStatus(@PathVariable int contractid){
+        contractService.editeContractStatus(contractid);
+        return ResponseEntity.ok("Contract Closed Successfully");
     }
     @GetMapping("/activeJobs")
     public ResponseEntity<List<JobDto>> activeJobsByContract(){

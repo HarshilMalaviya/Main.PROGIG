@@ -5,9 +5,11 @@ import com.Ntra.PROGIGS.DTOs.JobDto;
 
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Jobs;
+import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.User;
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -69,28 +71,41 @@ public class JobMapper {
 
 
     public JobDtoForCard MapToJobDtoforCard(Jobs jobs) {
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-
-        modelMapper.typeMap(Jobs.class, JobDtoForCard.class).addMappings(mapper -> {
-            mapper.skip(JobDtoForCard::setProposalsCount);
-        });
-
-
-        // Map Jobs to JobDtoForCard using the configured ModelMapper
-        JobDtoForCard jobDtoForCard = modelMapper.map(jobs, JobDtoForCard.class);
-
-        // Set the location manually after mapping
-        User user = jobs.getUser();
-        if (user != null && user.getProfile() != null) {
-            jobDtoForCard.setLocation(user.getProfile().getLocation());
+        if (jobs == null) {
+            return null; // Handle null case safely
         }
 
-        // Explicitly set the proposal count to avoid mapping issues
-        int proposalCount = (jobs.getProposals() != null) ? jobs.getProposals().size() : 0;
-        jobDtoForCard.setProposalsCount(proposalCount);
+        JobDtoForCard jobDtoForCard = new JobDtoForCard();
+
+        // Map simple fields directly
+        jobDtoForCard.setId(jobs.getId());
+        jobDtoForCard.setTitle(jobs.getTitle());
+        jobDtoForCard.setDescription(jobs.getDescription());
+        jobDtoForCard.setAmount(jobs.getAmount());
+        jobDtoForCard.setSkillsRequired(jobs.getSkillsRequired());
+
+        // Handle User and Profile mapping
+        User user = jobs.getUser();
+        if (user != null) {
+            Profile profile = user.getProfile();
+            if (profile != null) {
+                // Set location from Profile entity
+                jobDtoForCard.setLocation(profile.getLocation());
+
+                // Set client name as "FirstName LastName"
+                String firstName = profile.getFirstName() != null ? profile.getFirstName() : "";
+                String lastName = profile.getLastName() != null ? profile.getLastName() : "";
+                jobDtoForCard.setClientName(firstName + " " + lastName);
+            }
+        }
+
+        // Set proposal count
+        jobDtoForCard.setProposalsCount(jobs.getProposals() != null ? jobs.getProposals().size() : 0);
 
         return jobDtoForCard;
     }
+
+
 
 
 

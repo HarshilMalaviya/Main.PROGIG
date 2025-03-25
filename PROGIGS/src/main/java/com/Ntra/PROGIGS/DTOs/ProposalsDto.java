@@ -7,6 +7,7 @@ import com.Ntra.PROGIGS.Entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
@@ -27,7 +28,8 @@ public class ProposalsDto {
     private Long bid;
     private Date finishingTime;
     @Enumerated(value = EnumType.STRING)
-    private PropsalStatus status=null;
+    @Nullable
+    private PropsalStatus status;
 
     @JsonIgnore
     private User user;
