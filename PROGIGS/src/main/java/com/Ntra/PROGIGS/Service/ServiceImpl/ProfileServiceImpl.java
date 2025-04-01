@@ -86,7 +86,8 @@ public class ProfileServiceImpl implements ProfileService {
         }
     }
 
-    public LocalVariable updateUserSuccessRate(int id) {
+    @Override
+    public LocalVariable updateUserSuccessRateById(int id) {
         User user = repo.findById(id).get().getUser();
 
         int totalJobs = user.getJobs().size();
@@ -114,6 +115,37 @@ public class ProfileServiceImpl implements ProfileService {
 
         return localVariable;
     }
+
+    @Override
+    public LocalVariable updateUserSuccessRate() {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+
+        int totalJobs = user.getJobs().size();
+        long completedJobs = user.getJobs().stream()
+                .filter(job -> "COMPLETED".equalsIgnoreCase(job.getStatus().name())) // Use .name() for enums
+                .count();
+
+        List<Review> reviews = reviewRepo.findByUser(user);
+
+        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+        int totalReviews = reviews.size();
+
+        LocalVariable localVariable = new LocalVariable();
+        if (reviews.isEmpty()) {
+            totalRating = 0.0;
+            totalReviews = 0;
+        }
+
+
+        // Ensure floating-point division
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+        localVariable.setCompletedProject((int) completedJobs);
+        localVariable.setReviewCount(totalReviews);
+        localVariable.setRating((totalRating / totalReviews ));
+
+        return localVariable;
+    }
+
     @Override
     public ProfileDtoForGet getProfile() {
         User user = getAuthenticatedUser.getAuthenticatedUser();

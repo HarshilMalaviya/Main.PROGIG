@@ -9,7 +9,7 @@ public interface BankDetailService {
 
     BankDetailsDTO saveBankDetail(BankDetailsDTO bankDetailsDTO);
 
-    BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails);
+    BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails, int id);
 
     void deleteBankDetail(int id);
 }

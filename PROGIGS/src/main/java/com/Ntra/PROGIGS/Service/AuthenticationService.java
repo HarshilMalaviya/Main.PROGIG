@@ -48,7 +48,7 @@ public class AuthenticationService {
     public String register(UserDtoAuth request) throws UserAlreadyExistsException {
         User existingUser = userRepo.findByUsername(request.getUsername());
         if(existingUser!=null){
-            throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
+            throw new UserAlreadyExistsException("User already exists with username: " + request.getUsername());
         }
         User user=new User();
         user.setUsername(request.getUsername());

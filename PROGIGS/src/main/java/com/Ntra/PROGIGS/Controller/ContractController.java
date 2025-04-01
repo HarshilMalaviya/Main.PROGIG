@@ -33,5 +33,9 @@ public class ContractController {
     public ResponseEntity<List<JobDto>> activeJobsByContract(){
         return ResponseEntity.ok(contractService.activeContract());
     }
+    @GetMapping("/myContract")
+    public ResponseEntity<List<ContractDto>> getContract(){
+        return ResponseEntity.ok(contractService.getContract());
+    }
 
 }
