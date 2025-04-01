@@ -16,8 +16,8 @@ public class BankDetails {
     private Integer id;
     private String bankName;
     private String accountHolderName;
-    @Pattern(regexp = "\\d{12}", message = "Account number must be exactly 12 digits.")
-    @Size(min = 12, max = 12, message = "Account number must be exactly 12 digits.")
+    @Pattern(regexp = "\\d{11}", message = "Account number must be exactly 12 digits.")
+    @Size(min = 11, max = 11, message = "Account number must be exactly 12 digits.")
     private String accountNumber;
     private String ifscCode;
     private String branch;
@@ -28,7 +28,7 @@ public class BankDetails {
 
     // Getter to return the masked account number in API responses
     public String getAccountNumber() {
-        if (this.accountNumber != null && this.accountNumber.length() == 12) {
+        if (this.accountNumber != null && this.accountNumber.length() == 11) {
             return "********" + this.accountNumber.substring(8);
         }
         return null;
