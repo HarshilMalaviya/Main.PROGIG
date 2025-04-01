@@ -10,10 +10,8 @@ import com.Ntra.PROGIGS.Repository.JobRepo;
 import com.Ntra.PROGIGS.Repository.ProposalsRepo;
 import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.JobService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -42,7 +40,8 @@ public class JobServiceImpl implements JobService {
         return jobRepo.save(job);
     }
 
-    public List<JobDtoForCard> getAllJobs() {
+    public List<JobDtoForCard> getAllJobs (){
+
         List<Jobs> jobs = jobRepo.findAll();
         return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }
@@ -115,6 +114,12 @@ public class JobServiceImpl implements JobService {
         }
 
         return jobDtos;
+    }
+    @Override
+    public List<JobDto> myJobs() {
+        User user = getAuthenticatedUser();
+        List<Jobs> jobs = jobRepo.findByUser(user);
+        return jobs.stream().map(jobMapper::MapToDto).toList();
     }
 
 

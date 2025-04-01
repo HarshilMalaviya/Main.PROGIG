@@ -21,6 +21,8 @@ public class BankDetailsMapper {
         return bankDetailsDTO;
     }
 
+
+
     public BankDetails DTOToBankDetails(BankDetailsDTO bankDetailsDTO){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         BankDetails bankDetails = new BankDetails();

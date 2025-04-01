@@ -12,8 +12,7 @@ import java.util.List;
 @Data
 public class ProfileDtoForViewCard {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String fullName;
     private String description;
     private String email;
     @Column(nullable = true)
@@ -34,4 +33,5 @@ public class ProfileDtoForViewCard {
     private List<Certificates> Certification;
     private List<Portfolio> portfolio;
     private User user;
+    private List<Review> review;
 }

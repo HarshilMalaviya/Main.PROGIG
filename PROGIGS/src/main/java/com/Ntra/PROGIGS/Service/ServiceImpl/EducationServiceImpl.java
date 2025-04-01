@@ -24,19 +24,15 @@ public class EducationServiceImpl implements EducationService {
 
 
     @Override
-    public void addEducation(EducationDto education) {
+    public EducationDto addEducation(EducationDto education) {
         User user = getAuthenticatedUser.getAuthenticatedUser();
         education.setProfile(user.getProfile());
         educationRepo.save(educationMapper.MapToEducation(education));
-
+        return education;
     }
 
     @Override
-    public void editEducation(EducationDto education, int id) {
-        Education education1 = educationRepo.findById(id).get();
-        education1.setCourse(education.getCourse());
-        education1.setInstitute(education.getInstitute());
-        education1.setYear(education.getYear());
-        educationRepo.save(education1);
+    public void deleteEducation(int id) {
+        educationRepo.deleteById(id);
     }
 }

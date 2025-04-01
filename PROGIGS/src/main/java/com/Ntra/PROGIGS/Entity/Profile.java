@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
@@ -14,13 +13,12 @@ import java.util.List;
 
 @Entity
 @Data
-@ToString
 @Table(name = "Profile")
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ Ignores unknown fields
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Profile {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String lastName;
@@ -39,10 +37,10 @@ public class Profile {
     private String CompanyName;
     private String Location;
     @Enumerated(value = EnumType.STRING)
-    private Profile_Status status;
-    private boolean isVerified = false;
+    private Profile_Status status = Profile_Status.PENDING;
     //    Add ON Info
     private String hourlyRate;
+    private boolean isVerified = false;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Education> education;
@@ -66,6 +64,8 @@ public class Profile {
 
     //    this come from admin side Don't show in user site
     private String whyRejected;
+
+
 
 
 

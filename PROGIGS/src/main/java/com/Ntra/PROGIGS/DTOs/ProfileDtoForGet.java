@@ -32,6 +32,7 @@ public class ProfileDtoForGet {
     private BankDetails bank;
     private List<Portfolio> portfolio;
     private User user;
+    private List<Review> review;
 
 
 }

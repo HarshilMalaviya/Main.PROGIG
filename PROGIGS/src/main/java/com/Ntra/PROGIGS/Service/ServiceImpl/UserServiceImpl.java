@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.UserDto;
 import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Entity.UserRole;
 import com.Ntra.PROGIGS.Exception.NoContentException;
 import com.Ntra.PROGIGS.Mapper.UserMapper;
 import com.Ntra.PROGIGS.Repository.UserRepo;
@@ -32,4 +33,15 @@ private UserMapper userMapper;
             throw new NoContentException("No_Content");
         }
     }
+    @Override
+    public List<UserDto> getAllFreelancerBySkill(String skill){
+
+        try {
+            List<UserDto> userDtos = repo.findBySkillOrFieldOfWork(skill, FREELANCER).stream().map(userMapper::mapToUserDtoCard).toList();
+            return userDtos;
+        }catch (NoContentException e){
+            throw new NoContentException("Freelancer not found By Skill: "+skill);
+        }
+    }
+
 }
