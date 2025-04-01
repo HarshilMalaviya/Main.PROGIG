@@ -24,8 +24,8 @@ public class ContractServiceImpl implements ContractService {
     private ContractRepo contractRepo;
     @Autowired
     private JobRepo jobRepo;
-    @Autowired
-    private WebSocketNotificationServiceImpl webSocketNotificationService;
+//    @Autowired
+//    private WebSocketNotificationServiceImpl webSocketNotificationService;
     @Autowired
     private JobMapper jobMapper;
 
@@ -60,7 +60,7 @@ public class ContractServiceImpl implements ContractService {
     public void editeContractStatus(int contractid) {
         Contract contract1 = contractRepo.findById(contractid).orElseThrow(()->new RuntimeException("Contract not found"));
         contract1.setStatus(ContractStatus.CLOSED);
-        webSocketNotificationService.sendContractClosedNotification(contract1.getFreelancer().getId(), contract1.getJobs().getId());
+//        webSocketNotificationService.sendContractClosedNotification(contract1.getFreelancer().getId(), contract1.getJobs().getId());
         contractRepo.save(contract1);
 
     }

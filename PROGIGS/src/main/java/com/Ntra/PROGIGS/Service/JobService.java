@@ -18,7 +18,7 @@ public interface JobService {
 
     public void deletebyid(int id);
 
-    public List<JobDto> appliedJobsForFreelancer();
+    public List<JobDtoForCard> appliedJobsForFreelancer();
 
     List<JobDto> myJobs();
 //    public List<JobDto> HiredJobsForFreelancer();

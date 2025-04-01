@@ -93,7 +93,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
 
-    public List<JobDto> appliedJobsForFreelancer() {
+    public List<JobDtoForCard> appliedJobsForFreelancer() {
         String freelancer = getAuthenticatedUser().getUsername();
 
         if (!"FREELANCER".equalsIgnoreCase(String.valueOf(userRepo.findByUsername(freelancer).getRole()))) {
@@ -102,14 +102,14 @@ public class JobServiceImpl implements JobService {
 
         List<Proposals> proposals = proposalsRepo.findAllProposalsByFreelancerName(freelancer);
         Set<Integer> jobIds = new HashSet<>();  // Tracks unique job IDs
-        List<JobDto> jobDtos = new ArrayList<>();
+        List<JobDtoForCard> jobDtos = new ArrayList<>();
 
         for (Proposals proposal : proposals) {
             Jobs job = jobRepo.findByProposals(proposal);
             Integer jobId = job.getId();
 
             if (jobIds.add(jobId)) { // Add only if it's a new job ID
-                jobDtos.add(jobMapper.MapToDto(job));
+                jobDtos.add(jobMapper.MapToJobDtoforCard(job));
             }
         }
 

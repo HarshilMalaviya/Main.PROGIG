@@ -43,8 +43,8 @@ public class JobsController {
         }
     }
     @GetMapping("/appliedJobs")
-    public ResponseEntity<List<JobDto>> findAppliedJobs() {
-        List<JobDto> jobs=jobService.appliedJobsForFreelancer();
+    public ResponseEntity<List<JobDtoForCard>> findAppliedJobs() {
+        List<JobDtoForCard> jobs=jobService.appliedJobsForFreelancer();
         if(jobs==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
