@@ -20,9 +20,9 @@ public class BankDetailController {
         return bankDetailService.saveBankDetail(bankDetailsDTO);
     }
 
-    @PutMapping
-    public BankDetailsDTO editeBankDetail(@RequestBody BankDetailsDTO bankDetailsDTO) {
-        return bankDetailService.editBankDetail(bankDetailsDTO);
+    @PutMapping("/{id}")
+    public BankDetailsDTO editeBankDetail(@RequestBody BankDetailsDTO bankDetailsDTO,@PathVariable int id) {
+        return bankDetailService.editBankDetail(bankDetailsDTO,id);
     }
 
     @DeleteMapping

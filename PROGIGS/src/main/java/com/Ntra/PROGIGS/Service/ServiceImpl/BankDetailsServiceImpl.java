@@ -33,9 +33,8 @@ public class BankDetailsServiceImpl implements BankDetailService {
 
 
     @Override
-    public BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails) {
-        User user = getAuthenticatedUser.getAuthenticatedUser();
-        int id = user.getProfile().getBank().getId();
+    public BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails,int id) {
+        Profile profile = getAuthenticatedUser.getAuthenticatedUser().getProfile();
         BankDetails bankDetails1= bankDetailsRepo.findById(id).get();
         BankDetailsDTO bankDetailsDTO=bankDetailsMapper.bankDetailsToDTO(bankDetails1);
         bankDetailsDTO.setBankName(bankDetails.getBankName());
@@ -43,10 +42,25 @@ public class BankDetailsServiceImpl implements BankDetailService {
         bankDetailsDTO.setAccountNumber(bankDetails.getAccountNumber());
         bankDetailsDTO.setIfscCode(bankDetails.getIfscCode());
         bankDetailsDTO.setBranch(bankDetails.getBranch());
+        bankDetailsDTO.setProfile(profile);
         bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
         return bankDetailsDTO;
 
     }
+
+//    @Override
+//    public BankDetailsDTO editBankDetail(BankDetailsDTO bankDetails,int id) {;
+//        BankDetails bankDetails1= bankDetailsRepo.findById(id).get();
+//        BankDetailsDTO bankDetailsDTO=bankDetailsMapper.bankDetailsToDTO(bankDetails1);
+//        bankDetailsDTO.setBankName(bankDetails.getBankName());
+//        bankDetailsDTO.setAccountHolderName(bankDetails.getAccountHolderName());
+//        bankDetailsDTO.setAccountNumber(bankDetails.getAccountNumber());
+//        bankDetailsDTO.setIfscCode(bankDetails.getIfscCode());
+//        bankDetailsDTO.setBranch(bankDetails.getBranch());
+//        bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+//        return bankDetailsDTO;
+//
+//    }
     @Override
     public void deleteBankDetail(int id) {
         bankDetailsRepo.deleteById(id);

@@ -93,7 +93,7 @@ public class JobsController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping("myJobs")
+    @GetMapping("/myJobs")
     public ResponseEntity<List<JobDto>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }

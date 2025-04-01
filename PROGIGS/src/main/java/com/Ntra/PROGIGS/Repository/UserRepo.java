@@ -18,8 +18,9 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query(value = "SELECT DISTINCT u.* FROM user u " +
             "JOIN profile p ON u.profile_id = p.id " +
             "LEFT JOIN profile_skills ps ON p.id = ps.profile_id " +
-            "WHERE LOWER(ps.skills) LIKE LOWER(CONCAT('%', :input, '%')) " +
-            "OR LOWER(p.field_of_work) LIKE LOWER(CONCAT('%', :input, '%'))",
+            "WHERE (LOWER(ps.skills) LIKE LOWER(CONCAT('%', :input, '%')) " +
+            "OR LOWER(p.field_of_work) LIKE LOWER(CONCAT('%', :input, '%'))) " +
+            "AND u.role = :role",  // Add filtering for user role
             nativeQuery = true)
     List<User> findBySkillOrFieldOfWork(@Param("input") String input,UserRole role);
 

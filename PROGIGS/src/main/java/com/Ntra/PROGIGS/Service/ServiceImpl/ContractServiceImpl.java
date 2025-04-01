@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +83,24 @@ public class ContractServiceImpl implements ContractService {
             activeJobs.add(jobMapper.MapToDto(job));
         }
         return activeJobs;
+    }
+
+    @Override
+    public List<ContractDto> getContract() {
+        User user = getAuthenticatedUser.getAuthenticatedUser();
+        List<Contract> contracts = new ArrayList<>();
+        if ("CLIENT".equals(user.getRole().toString())) {
+            contracts = contractRepo.findAllByClient(user);
+        } else if ("FREELANCER".equals(user.getRole().toString())) {
+            contracts = contractRepo.findAllByFreelancer(user);
+        } else {
+            throw new RuntimeException("You are not a client or freelancer");
+        }
+        List<ContractDto> contractDtos = new ArrayList<>();
+        for (Contract contract : contracts) {
+            contractDtos.add(contractMapper.MapToDto(contract));
+        }
+        return contractDtos;
     }
 
 

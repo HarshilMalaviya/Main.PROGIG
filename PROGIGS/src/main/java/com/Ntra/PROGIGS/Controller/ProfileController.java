@@ -4,7 +4,6 @@ import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.Entity.LocalVariable;
-import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,13 @@ public class ProfileController {
     }
     @GetMapping("/success-rate/{id}")
     public ResponseEntity<LocalVariable> getUserSuccessRate(@PathVariable int id) {
-        LocalVariable successData = profileService.updateUserSuccessRate(id);
+        LocalVariable successData = profileService.updateUserSuccessRateById(id);
+        return ResponseEntity.ok(successData);
+    }
+
+    @GetMapping("/success-rate")
+    public ResponseEntity<LocalVariable> getUserSuccessRate() {
+        LocalVariable successData = profileService.updateUserSuccessRate();
         return ResponseEntity.ok(successData);
     }
 
