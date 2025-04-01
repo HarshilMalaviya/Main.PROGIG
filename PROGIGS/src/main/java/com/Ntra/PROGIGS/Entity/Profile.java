@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,6 +23,9 @@ public class Profile {
     private String firstName;
     private String lastName;
     private String description;
+    @Column(nullable = false, unique = true)
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE)
     private String email;
     private String fieldOfWork;
     @Column(nullable = true)

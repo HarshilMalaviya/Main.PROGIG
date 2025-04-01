@@ -26,6 +26,8 @@ public class ContractServiceImpl implements ContractService {
     @Autowired
     private JobRepo jobRepo;
     @Autowired
+    private WebSocketNotificationServiceImpl webSocketNotificationService;
+    @Autowired
     private JobMapper jobMapper;
 
     @Autowired
@@ -38,26 +40,30 @@ public class ContractServiceImpl implements ContractService {
     private GetAuthenticatedUser getAuthenticatedUser;
 
     @Override
-    public Contract saveContract(ContractDto contract,int jobid) {
+    public ContractDto saveContract(ContractDto contract,int jobid) {
         User user = getAuthenticatedUser.getAuthenticatedUser();
         contract.setClient(user);
         Jobs jobs=jobRepo.findById(jobid);
         contract.setJobs(jobs);
+        contract.setStatus(ContractStatus.ACTIVE);
         Optional<Proposals> proposals=proposalsRepo.findHiredProposalByJobId(jobid);
         contract.setFreelancer(proposals.get().getUser());
-        return contractRepo.save(contractMapper.MapToContract(contract));
+        contractRepo.save(contractMapper.MapToContract(contract));
+        return contract;
     }
 
     @Override
-    public Contract getContractById(int contractid) {
-        return contractRepo.findById(contractid).orElseThrow(()->new RuntimeException("Contract not found"));
+    public ContractDto getContractById(int contractid) {
+        return contractMapper.MapToDto(contractRepo.findById(contractid).orElseThrow(()->new RuntimeException("Contract not found")));
     }
 
     @Override
-    public Contract editeContractStatus(ContractDto contract, int contractid) {
+    public void editeContractStatus(int contractid) {
         Contract contract1 = contractRepo.findById(contractid).orElseThrow(()->new RuntimeException("Contract not found"));
-        contract1.setStatus(contract.getStatus());
-        return contractRepo.save(contract1);
+        contract1.setStatus(ContractStatus.CLOSED);
+        webSocketNotificationService.sendContractClosedNotification(contract1.getFreelancer().getId(), contract1.getJobs().getId());
+        contractRepo.save(contract1);
+
     }
 
     @Override

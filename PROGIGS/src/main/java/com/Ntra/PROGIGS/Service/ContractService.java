@@ -7,9 +7,10 @@ import com.Ntra.PROGIGS.Entity.Contract;
 import java.util.List;
 
 public interface ContractService {
-    public Contract saveContract(ContractDto contract,int jobid);
-    public Contract getContractById(int contractid);
-    public Contract editeContractStatus(ContractDto contract,int contractid);
+    public ContractDto saveContract(ContractDto contract,int jobid);
+    public ContractDto getContractById(int contractid);
+
+    void editeContractStatus(int contractid);
 
     public List<JobDto> activeContract();
 

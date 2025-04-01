@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ProposalsDto;
+import com.Ntra.PROGIGS.DTOs.ProposalsDtoForGet;
 import com.Ntra.PROGIGS.Entity.Proposals;
 import com.Ntra.PROGIGS.Service.ProposalService;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +23,14 @@ public class ProposalsController {
         return ResponseEntity.ok(proposalService.saveProposal(proposals,jobid));
     }
     @GetMapping("/{jobid}")
-    public ResponseEntity<List<Proposals>> getAllProposalFromJob(@PathVariable int jobid) {
-        return ResponseEntity.ok(proposalService.getProposalFromJob(jobid));
+    public ResponseEntity<List<ProposalsDtoForGet>> getAllProposalFromJob(@PathVariable int jobid) {
+
+        return ResponseEntity.ok( proposalService.getProposalFromJob(jobid));
+    }
+    @PutMapping("/{proposalid}")
+    public ResponseEntity<String> changeStatus(@PathVariable int proposalid,@RequestBody ProposalsDto proposals) {
+        proposalService.changeStatus(proposalid,proposals);
+        return ResponseEntity.ok("Status Succesfully Updated");
     }
     @PutMapping("/{proposalid}")
     public ResponseEntity<String> changeStatus(@PathVariable int proposalid,@RequestBody ProposalsDto proposals) {

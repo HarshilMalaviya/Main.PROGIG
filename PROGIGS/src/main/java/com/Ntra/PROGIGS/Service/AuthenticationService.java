@@ -50,6 +50,9 @@ public class AuthenticationService {
         if(existingUser!=null){
             throw new UserAlreadyExistsException("StakHolder already exists with username: " + request.getUsername());
         }
+        if (profileRepo.existsByEmail(request.getProfile().getEmail())) {
+            throw new UserAlreadyExistsException("Email is already registered!");
+        }
         User user=new User();
         user.setUsername(request.getUsername());
 //        user.setProfile(request.getProfile());
