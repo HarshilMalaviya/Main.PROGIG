@@ -20,4 +20,6 @@ public interface ProfileRepo extends JpaRepository<Profile, Integer> {
     Profile findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+//    List<Profile> findAllByLocation(String location);
 }

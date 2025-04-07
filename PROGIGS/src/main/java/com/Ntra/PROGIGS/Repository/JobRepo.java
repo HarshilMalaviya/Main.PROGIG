@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Repository;
 
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Entity.Proposals;
 import com.Ntra.PROGIGS.Entity.User;

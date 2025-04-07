@@ -43,8 +43,8 @@ public class JobsController {
         }
     }
     @GetMapping("/appliedJobs")
-    public ResponseEntity<List<JobDto>> findAppliedJobs() {
-        List<JobDto> jobs=jobService.appliedJobsForFreelancer();
+    public ResponseEntity<List<JobDtoForCard>> findAppliedJobs() {
+        List<JobDtoForCard> jobs=jobService.appliedJobsForFreelancer();
         if(jobs==null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -83,7 +83,7 @@ public class JobsController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<JobDto> updateJobs(@RequestBody JobDto jobs,@PathVariable int id){
+    public ResponseEntity<JobDto> updateJobsStatus(@RequestBody JobDto jobs,@PathVariable int id){
     return ResponseEntity.of(Optional.of(jobService.editeJob(jobs,id)));
     }
 
@@ -92,9 +92,12 @@ public class JobsController {
         jobService.deletebyid(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-    @GetMapping("/myJobs")
-    public ResponseEntity<List<JobDto>> getMyJobs(){
+//    @GetMapping("/jobs_by_location/{location}")
+//    public ResponseEntity<List<JobDtoForCard>> getJobsByLocation(@PathVariable String location){
+//        return ResponseEntity.of(Optional.of(jobService.jobsByLocation(location)));
+//    }
+    @GetMapping("/manage-jobs")
+    public ResponseEntity<List<JobDtoForCard>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }
 }

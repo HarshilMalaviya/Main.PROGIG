@@ -31,7 +31,7 @@ public class ProposalMapper {
 
     public ProposalsDtoForGet MapptoProposalDto(Proposals proposals) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        ProposalsDtoForGet profileDto = new ProposalsDtoForGet();
+        ProposalsDtoForGet proposalsDtoForGet = new ProposalsDtoForGet();
         User user = proposals.getUser();
         int totalJobs = user.getJobs().size();
         long completedJobs = user.getJobs().stream()
@@ -46,20 +46,20 @@ public class ProposalMapper {
             totalRating=0.0;
             totalReviews= 0;
         }
-
-        profileDto.setName(user.getProfile().getFirstName() + " " + user.getProfile().getLastName());
-        profileDto.setUsername(user.getUsername());
-        profileDto.setRating((totalRating / totalReviews));
-        profileDto.setReviews(totalReviews);
-        profileDto.setStatus(proposals.getStatus());
-        profileDto.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
-        profileDto.setExpertise(user.getProfile().getSkills());
-        profileDto.setDescription(proposals.getDescription());
-        profileDto.setCountry(user.getProfile().getLocation());
-        profileDto.setBid(proposals.getBid());
-        profileDto.setFinishingTime(proposals.getFinishingTime());
-        profileDto.setImage(user.getProfile().getImageUrl());
-        return profileDto;
+        proposalsDtoForGet.setId(proposals.getId());
+        proposalsDtoForGet.setName(user.getProfile().getFirstName() + " " + user.getProfile().getLastName());
+        proposalsDtoForGet.setUsername(user.getUsername());
+        proposalsDtoForGet.setRating((totalRating / totalReviews));
+        proposalsDtoForGet.setReviews(totalReviews);
+        proposalsDtoForGet.setStatus(proposals.getStatus());
+        proposalsDtoForGet.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+        proposalsDtoForGet.setExpertise(user.getProfile().getSkills());
+        proposalsDtoForGet.setDescription(proposals.getDescription());
+        proposalsDtoForGet.setCountry(user.getProfile().getLocation());
+        proposalsDtoForGet.setBid(proposals.getBid());
+        proposalsDtoForGet.setFinishingTime(proposals.getFinishingTime());
+        proposalsDtoForGet.setImage(user.getProfile().getImageUrl());
+        return proposalsDtoForGet;
     }
 
     public Proposals MapToProposal(ProposalsDto proposalsDto){
