@@ -14,12 +14,13 @@ public interface JobService {
 
     List<JobDto> getJobByskillRequired(String skill);
 
-    public JobDto editeJob(JobDto jobs,int id);
+    public JobDto editeJob(JobDto jobs, int id);
 
     public void deletebyid(int id);
 
-    public List<JobDto> appliedJobsForFreelancer();
+    public List<JobDtoForCard> appliedJobsForFreelancer();
 
-    List<JobDto> myJobs();
+    List<JobDtoForCard> myJobs();
+//    List<JobDtoForCard> jobsByLocation(String location);
 //    public List<JobDto> HiredJobsForFreelancer();
 }

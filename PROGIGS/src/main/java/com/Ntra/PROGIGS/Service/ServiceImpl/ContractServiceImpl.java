@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ContractDto;
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.*;
 import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.ContractMapper;
@@ -24,8 +25,8 @@ public class ContractServiceImpl implements ContractService {
     private ContractRepo contractRepo;
     @Autowired
     private JobRepo jobRepo;
-    @Autowired
-    private WebSocketNotificationServiceImpl webSocketNotificationService;
+//    @Autowired
+//    private WebSocketNotificationServiceImpl webSocketNotificationService;
     @Autowired
     private JobMapper jobMapper;
 
@@ -39,13 +40,16 @@ public class ContractServiceImpl implements ContractService {
     private GetAuthenticatedUser getAuthenticatedUser;
 
     @Override
-    public ContractDto saveContract(ContractDto contract,int jobid) {
+    public ContractDto saveContract(ContractDto contract,int proposalid) {
+        Optional<Proposals> proposals=proposalsRepo.findById(proposalid);
+
         User user = getAuthenticatedUser.getAuthenticatedUser();
         contract.setClient(user);
-        Jobs jobs=jobRepo.findById(jobid);
+        Jobs jobs=jobRepo.findById(proposals.get().getJobs().getId());
         contract.setJobs(jobs);
         contract.setStatus(ContractStatus.ACTIVE);
-        Optional<Proposals> proposals=proposalsRepo.findHiredProposalByJobId(jobid);
+        proposals.get().setStatus(PropsalStatus.HIRED);
+        proposalsRepo.save(proposals.get());
         contract.setFreelancer(proposals.get().getUser());
         contractRepo.save(contractMapper.MapToContract(contract));
         return contract;
@@ -66,7 +70,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<JobDto> activeContract() {
+    public List<JobDtoForCard> activeContract() {
         User user = getAuthenticatedUser.getAuthenticatedUser();
         List<Contract> activeContract = new ArrayList<>();
         if ("CLIENT".equals(user.getRole().toString())) {
@@ -77,11 +81,12 @@ public class ContractServiceImpl implements ContractService {
             throw new RuntimeException("You are not a client or freelancer");
         }
 
-        List<JobDto> activeJobs = new java.util.ArrayList<>();
+        List<JobDtoForCard> activeJobs = new java.util.ArrayList<>();
         for (Contract contract : activeContract) {
             Jobs job = contract.getJobs();
-            activeJobs.add(jobMapper.MapToDto(job));
+            activeJobs.add(jobMapper.MapToJobDtoforCard(job));
         }
+        
         return activeJobs;
     }
 

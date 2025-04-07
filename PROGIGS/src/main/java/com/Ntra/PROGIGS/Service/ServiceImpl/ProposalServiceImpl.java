@@ -34,6 +34,9 @@ public class ProposalServiceImpl implements ProposalService {
     @Override
     public Proposals saveProposal(ProposalsDto proposals,int jobid) {
         User user = getAuthenticatedUser();
+        if(!"FREELANCER".equalsIgnoreCase(user.getRole().toString())){
+            throw new RuntimeException("You are not a freelancer");
+        }
         Profile profile=user.getProfile();
         proposals.setUser(user);
         proposals.setFreelancerName(user.getUsername());
@@ -60,12 +63,7 @@ public class ProposalServiceImpl implements ProposalService {
         return proposalsDtos;
     }
 
-    @Override
-    public void changeStatus(int proposalid, ProposalsDto proposals) {
-        Proposals proposals1 = proposalsRepo.findById(proposalid).get();
-        proposals1.setStatus(proposals.getStatus());
-        proposalsRepo.save(proposals1);
-    }
+
 
     private User getAuthenticatedUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

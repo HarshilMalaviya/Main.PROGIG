@@ -24,7 +24,7 @@ public class Jobs {
     private int amount;
     private Pay0ut_Methods payout_methods;
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status;// job status for biding
 
     @OneToMany( cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id",referencedColumnName = "Job_ID")
