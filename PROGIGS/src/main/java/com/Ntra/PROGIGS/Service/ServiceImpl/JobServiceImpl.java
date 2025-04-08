@@ -37,11 +37,13 @@ public class JobServiceImpl implements JobService {
 
 
     @Override
-    public Jobs saveJob(JobDto jobs) {
+    public JobDto saveJob(JobDto jobs) {
         User user = getAuthenticatedUser();
         Jobs job = jobMapper.MapToJob(jobs);
         job.setUser(user);
-        return jobRepo.save(job);
+        jobRepo.save(job);
+        JobDto jobDto = jobMapper.MapToDto(job);
+        return jobDto;
     }
 
     public List<JobDtoForCard> getAllJobs (){

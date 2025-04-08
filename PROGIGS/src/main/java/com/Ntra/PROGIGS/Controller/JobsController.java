@@ -19,7 +19,7 @@ public class JobsController {
     private final JobService jobService;
 
     @PostMapping
-    public Jobs addjobs(@RequestBody JobDto jobs){
+    public JobDto addjobs(@RequestBody JobDto jobs){
         return   jobService.saveJob(jobs);
     }
     @GetMapping
