@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.ContractDto;
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Contract;
 import com.Ntra.PROGIGS.Service.ContractService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ import java.util.List;
 public class ContractController {
     @Autowired
     private ContractService contractService;
-    @PostMapping("/{jobid}")
-    public ResponseEntity<ContractDto> saveContract(@RequestBody ContractDto contract, @PathVariable int jobid){
-        return ResponseEntity.ok(contractService.saveContract(contract,jobid));
+    @PostMapping("/{proposalid}")
+    public ResponseEntity<ContractDto> saveContract(@RequestBody ContractDto contract, @PathVariable int proposalid){
+        return ResponseEntity.ok(contractService.saveContract(contract,proposalid));
     }
     @GetMapping("/{contractid}")
     public ResponseEntity<ContractDto> getContractById(@PathVariable int contractid){
@@ -31,7 +32,7 @@ public class ContractController {
         return ResponseEntity.ok("Contract Closed Successfully");
     }
     @GetMapping("/activeJobs")
-    public ResponseEntity<List<JobDto>> activeJobsByContract(){
+    public ResponseEntity<List<JobDtoForCard>> activeJobsByContract(){
         return ResponseEntity.ok(contractService.activeContract());
     }
     @GetMapping("/myContract")

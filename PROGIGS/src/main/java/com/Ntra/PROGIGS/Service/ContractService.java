@@ -2,6 +2,7 @@ package com.Ntra.PROGIGS.Service;
 
 import com.Ntra.PROGIGS.DTOs.ContractDto;
 import com.Ntra.PROGIGS.DTOs.JobDto;
+import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.Contract;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface ContractService {
 
     void editeContractStatus(int contractid);
 
-    public List<JobDto> activeContract();
+    public List<JobDtoForCard> activeContract();
 
 
     List<ContractDto> getContract();

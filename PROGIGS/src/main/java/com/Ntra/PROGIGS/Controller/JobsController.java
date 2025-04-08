@@ -19,7 +19,7 @@ public class JobsController {
     private final JobService jobService;
 
     @PostMapping
-    public Jobs addjobs(@RequestBody JobDto jobs){
+    public JobDto addjobs(@RequestBody JobDto jobs){
         return   jobService.saveJob(jobs);
     }
     @GetMapping
@@ -83,7 +83,7 @@ public class JobsController {
         }
     }
     @PutMapping("/{id}")
-    public ResponseEntity<JobDto> updateJobs(@RequestBody JobDto jobs,@PathVariable int id){
+    public ResponseEntity<JobDto> updateJobsStatus(@RequestBody JobDto jobs,@PathVariable int id){
     return ResponseEntity.of(Optional.of(jobService.editeJob(jobs,id)));
     }
 
@@ -92,9 +92,12 @@ public class JobsController {
         jobService.deletebyid(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-    @GetMapping("/myJobs")
-    public ResponseEntity<List<JobDto>> getMyJobs(){
+//    @GetMapping("/jobs_by_location/{location}")
+//    public ResponseEntity<List<JobDtoForCard>> getJobsByLocation(@PathVariable String location){
+//        return ResponseEntity.of(Optional.of(jobService.jobsByLocation(location)));
+//    }
+    @GetMapping("/manage-jobs")
+    public ResponseEntity<List<JobDtoForCard>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }
 }

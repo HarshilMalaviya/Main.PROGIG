@@ -18,6 +18,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ Ignores unknown fields
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProposalsDtoForGet {
+    private int id;
     private String description;
     private Long bid;//price
 

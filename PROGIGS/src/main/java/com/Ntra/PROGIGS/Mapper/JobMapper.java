@@ -83,6 +83,7 @@ public class JobMapper {
         jobDtoForCard.setDescription(jobs.getDescription());
         jobDtoForCard.setAmount(jobs.getAmount());
         jobDtoForCard.setSkillsRequired(jobs.getSkillsRequired());
+        jobDtoForCard.setStatus(jobs.getStatus());
 
         // Handle User and Profile mapping
         User user = jobs.getUser();
