@@ -26,4 +26,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllFreelancerBySkill(skill));
     }
 
+    @GetMapping("/byCountry/{country}")
+    public ResponseEntity<List<UserDto>> getAllUsersByLocation(@PathVariable String country){
+        return ResponseEntity.ok(userService.getAllFreelancerByLocation(country));
+    }
+
 }
