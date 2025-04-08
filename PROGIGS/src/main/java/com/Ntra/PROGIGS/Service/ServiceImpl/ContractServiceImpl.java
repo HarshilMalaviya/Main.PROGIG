@@ -103,7 +103,7 @@ public class ContractServiceImpl implements ContractService {
         }
         List<ContractDto> contractDtos = new ArrayList<>();
         for (Contract contract : contracts) {
-            contractDtos.add(contractMapper.MapToDto(contract));
+            contractDtos.add(contractMapper.MapToDto1(contract));
         }
         return contractDtos;
     }

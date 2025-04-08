@@ -19,6 +19,12 @@ public class ContractDto {
     private Date endDate;
     private long amount;
     private ContractStatus status;
+    private String jobsTitle;
+    private String jobsDescription;
+
+    private String freelancerName;
+
+    private String clientName;
     @JsonIgnore
     private Jobs jobs;
     @JsonIgnore

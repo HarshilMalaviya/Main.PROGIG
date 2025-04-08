@@ -7,7 +7,7 @@ import com.Ntra.PROGIGS.Entity.Jobs;
 import java.util.List;
 
 public interface JobService {
-    public Jobs saveJob(JobDto jobs);
+    public JobDto saveJob(JobDto jobs);
     public List<JobDtoForCard> getAllJobs ();
     public JobDto getJobBYID(int id);
     List<JobDto> getJobBySkillsRequired(List<String> skill);
