@@ -109,6 +109,7 @@ public class JobServiceImpl implements JobService {
 
         List<Proposals> proposals = proposalsRepo.findAllProposalsByFreelancerName(freelancer);
         Set<Integer> jobIds = new HashSet<>();  // Tracks unique job IDs
+
         List<JobDtoForCard> jobDtoForCards = new ArrayList<>();
 
         for (Proposals proposal : proposals) {
@@ -116,6 +117,7 @@ public class JobServiceImpl implements JobService {
             Integer jobId = job.getId();
 
             if (jobIds.add(jobId)) { // Add only if it's a new job ID
+
                 jobDtoForCards.add(jobMapper.MapToJobDtoforCard(job));
             }
         }

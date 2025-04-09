@@ -24,10 +24,10 @@ public interface UserRepo extends JpaRepository<User, Integer> {
             nativeQuery = true)
     List<User> findBySkillOrFieldOfWork(@Param("input") String input,UserRole role);
 
-
-
-
-
+    @Query("SELECT u FROM User u JOIN u.profile p " +
+            "WHERE LOWER(p.Location) LIKE LOWER(CONCAT('%', :country, '%')) " +
+            "AND u.role = :role")
+    List<User> findByCountry(@Param("country") String country, UserRole role);
 
     User findByProfile(Profile profile);
 }

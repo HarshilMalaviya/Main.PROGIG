@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 public class ReviewMapper {
     @Autowired
     private ModelMapper modelMapper;
-    private ReviewDto MapptoReviewDto(Review review) {
+    public ReviewDto MapptoReviewDto(Review review) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ReviewDto reviewDto = new ReviewDto();
         reviewDto = new ModelMapper().map(review, ReviewDto.class);
         return reviewDto;
     }
-    private Review MapptoReview(ReviewDto reviewDto) {
+    public Review MapptoReview(ReviewDto reviewDto) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         Review review = new Review();
         review = new ModelMapper().map(reviewDto, Review.class);
