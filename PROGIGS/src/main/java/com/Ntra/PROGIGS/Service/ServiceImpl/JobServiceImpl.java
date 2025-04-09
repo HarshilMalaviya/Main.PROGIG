@@ -61,7 +61,7 @@ public class JobServiceImpl implements JobService {
 
     public List<JobDto> getJobByskillRequired(String skills) {
         List<Jobs> jobs = this.jobRepo.findBySkillsRequired(skills);
-        return jobs.stream().map(jobMapper::MapToDto).toList();
+        return jobs.stream().map(jobMapper::MapToDto1).toList();
     }
 
     public List<JobDto> getJobBySkillsRequired(List<String> skills) {
