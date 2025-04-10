@@ -1,7 +1,6 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.ContractDto;
-import com.Ntra.PROGIGS.DTOs.JobDto;
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
 import com.Ntra.PROGIGS.Entity.*;
 import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
@@ -106,6 +105,14 @@ public class ContractServiceImpl implements ContractService {
             contractDtos.add(contractMapper.MapToDto1(contract));
         }
         return contractDtos;
+    }
+
+    @Override
+    public ContractDto closeContract(int contractId) {
+        Contract contract = contractRepo.findById(contractId).orElseThrow(()->new RuntimeException("Contract not found"));
+        contract.setStatus(ContractStatus.CLOSED);
+        contractRepo.save(contract);
+        return contractMapper.MapToDto1(contract);
     }
 
 

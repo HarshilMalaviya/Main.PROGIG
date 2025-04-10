@@ -97,7 +97,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         List<Review> reviews = reviewRepo.findByUser(user);
 
-        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+        double totalRating = reviews.stream().mapToDouble(Review::getRating).sum();
         int totalReviews = reviews.size();
 
         LocalVariable localVariable = new LocalVariable();
@@ -127,7 +127,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         List<Review> reviews = reviewRepo.findByUser(user);
 
-        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+        double totalRating = reviews.stream().mapToDouble(Review::getRating).sum();
         int totalReviews = reviews.size();
 
         LocalVariable localVariable = new LocalVariable();

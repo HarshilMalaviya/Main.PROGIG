@@ -22,7 +22,11 @@ public class ReviewMapper {
     public Review MapptoReview(ReviewDto reviewDto) {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         Review review = new Review();
-        review = new ModelMapper().map(reviewDto, Review.class);
+        review.setReviewerName(reviewDto.getReviewerName());
+        review.setReview(reviewDto.getReview());
+        review.setRating(reviewDto.getRating());
+        review.setUser(reviewDto.getUser());
+        review.setJobs(reviewDto.getJobs());
         return review;
     }
 }

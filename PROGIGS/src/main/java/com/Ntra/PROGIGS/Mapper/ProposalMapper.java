@@ -39,7 +39,7 @@ public class ProposalMapper {
                 .count();
 
         List<Review> reviews = reviewRepo.findByUser(user);
-        double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+        double totalRating = reviews.stream().mapToDouble(Review::getRating).sum();
         int totalReviews = reviews.size();
 
         if (reviews.isEmpty()) {
