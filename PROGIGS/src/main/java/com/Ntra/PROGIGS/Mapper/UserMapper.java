@@ -69,7 +69,7 @@ public class UserMapper {
 
         if (user.getProfile() != null) {
             List<Review> reviews = reviewRepo.findByUser(user);
-            double totalRating = reviews.stream().mapToDouble(Review::getReview).sum();
+            double totalRating = reviews.stream().mapToDouble(Review::getRating).sum();
             int totalReviews = reviews.size();
 
             LocalVariable localVariable = new LocalVariable();

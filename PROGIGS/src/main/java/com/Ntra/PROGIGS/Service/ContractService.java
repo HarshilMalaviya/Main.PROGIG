@@ -17,4 +17,6 @@ public interface ContractService {
 
 
     List<ContractDto> getContract();
+
+    ContractDto closeContract(int contractId);
 }

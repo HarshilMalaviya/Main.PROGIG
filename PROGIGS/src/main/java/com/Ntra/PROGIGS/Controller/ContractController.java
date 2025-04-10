@@ -44,11 +44,12 @@ public class ContractController {
         return ResponseEntity.ok(contractService.getContract());
     }
 
-    @PostMapping("/{contractId}/close")
-    public String closeContract(@PathVariable Integer contractId, @RequestParam Integer freelancerId) {
+    @PutMapping("/close/{contractId}")
+    public ContractDto closeContract(@PathVariable Integer contractId) {
         // Your DB logic to close contract here...
-        notificationService.notifyFreelancer(freelancerId, contractId);
-        return "Contract closed, notification sent.";
+        ContractDto contractDto = contractService.closeContract(contractId);
+        notificationService.notifyFreelancer(contractId);
+        return contractDto;
     }
 
 }

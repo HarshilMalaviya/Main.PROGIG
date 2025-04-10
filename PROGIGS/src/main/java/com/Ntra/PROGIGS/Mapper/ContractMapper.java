@@ -28,6 +28,7 @@ public class ContractMapper {
         contractDto.setId(contract.getId());
         contractDto.setAmount(contract.getAmount());
         contractDto.setStartDate(contract.getStartDate());
+        contractDto.setFreelancerId(contract.getFreelancer().getId());
         contractDto.setEndDate(contract.getEndDate());
         contractDto.setJobsDescription(contract.getJobs().getDescription());
         contractDto.setJobsTitle(contract.getJobs().getTitle());

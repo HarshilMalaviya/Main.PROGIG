@@ -29,9 +29,9 @@ public class ReviewServiceImpl implements ReviewService {
 
 
     @Override
-    public void saveReview(ReviewDto reviewDto, int contractId) {
+    public void saveReview(ReviewDto reviewDto) {
         User user = getAuthenticatedUser.getAuthenticatedUser();
-        Contract contract = contractRepo.findById(contractId).orElseThrow(()->new RuntimeException("Contract not found"));
+        Contract contract = contractRepo.findById(reviewDto.getContractId()).orElseThrow(()->new RuntimeException("Contract not found"));
         Review review = reviewMapper.MapptoReview(reviewDto);
         review.setJobs(contract.getJobs());
         if(user.getRole().toString().equals("CLIENT")) {
@@ -40,8 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
             review.setUser(contract.getClient());
 
         }
-        contract.setStatus(ContractStatus.CLOSED);
-        contractRepo.save(contract);
+        review.setReviewerName(user.getUsername());
         reviewRepo.save(review);
     }
 }

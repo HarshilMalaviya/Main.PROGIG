@@ -21,7 +21,7 @@ public class ContractDto {
     private ContractStatus status;
     private String jobsTitle;
     private String jobsDescription;
-
+    private int freelancerId;
     private String freelancerName;
 
     private String clientName;

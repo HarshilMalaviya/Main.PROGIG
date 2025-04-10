@@ -17,8 +17,8 @@ public class Review {
     private int reviewId;
 
     private String reviewerName;
-    private String description;
-    private double review;
+    private String review;
+    private double rating;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "job_id")

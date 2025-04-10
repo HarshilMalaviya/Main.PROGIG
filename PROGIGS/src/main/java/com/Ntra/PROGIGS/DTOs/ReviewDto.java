@@ -9,10 +9,11 @@ import lombok.Data;
 @Data
 public class ReviewDto {
 
-    private int reviewId;
+    private int contractId;
+    @JsonIgnore
     private String reviewerName;
-    private String description;
-    private double review;
+    private String review;
+    private double rating;
     @JsonIgnore
     private Jobs jobs;
     @JsonIgnore
