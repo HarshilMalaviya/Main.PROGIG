@@ -39,9 +39,10 @@ public class Jobs {
     @JsonIgnore  // Prevents circular reference
     private List<Proposals> proposals;
 
-//    @OneToOne(mappedBy = "jobs")
+//    @OneToMany(mappedBy ="jobs" ,cascade = CascadeType.ALL)
+//    @OrderBy("id DESC") // Newest jobs first
 //    @JsonIgnore
-//    private Review reviews;
+//    private List<Review> reviews;
 //
 //    @OneToOne(mappedBy = "jobs")
 //    @JsonIgnore

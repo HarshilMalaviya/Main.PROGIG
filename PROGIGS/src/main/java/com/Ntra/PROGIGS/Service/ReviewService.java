@@ -4,5 +4,5 @@ import com.Ntra.PROGIGS.DTOs.ReviewDto;
 import com.Ntra.PROGIGS.Entity.Review;
 
 public interface ReviewService {
-    public void saveReview(ReviewDto review);
+    public ReviewDto saveReview(ReviewDto review);
 }

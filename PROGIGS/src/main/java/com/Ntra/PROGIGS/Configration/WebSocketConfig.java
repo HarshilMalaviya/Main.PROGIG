@@ -11,6 +11,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new CustomWebSocketHandler(), "/ws").setAllowedOrigins("http://192.168.0.168:5173");
+        registry.addHandler(new CustomWebSocketHandler(), "/ws").setAllowedOrigins("*");
     }
 }
