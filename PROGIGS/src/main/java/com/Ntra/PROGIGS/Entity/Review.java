@@ -20,8 +20,8 @@ public class Review {
     private String review;
     private double rating;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "job_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     @JsonIgnore // Prevents infinite recursion
     private Jobs jobs;
 

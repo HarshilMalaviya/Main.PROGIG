@@ -1,10 +1,13 @@
 package com.Ntra.PROGIGS.Service.ServiceImpl;
 
+import com.Ntra.PROGIGS.DTOs.NotificationDto;
 import com.Ntra.PROGIGS.Entity.Contract;
 import com.Ntra.PROGIGS.Exception.CustomWebSocketHandler;
 import com.Ntra.PROGIGS.Repository.ContractRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class NotificationServiceImpl {
@@ -13,8 +16,13 @@ public class NotificationServiceImpl {
     public void notifyFreelancer(Integer contractId) {
         Contract contract = contractRepo.findById(contractId).orElse(null);
         Integer freelancerId = contract.getFreelancer().getId();
-        String reviewLink = "http://192.168.0.168:5173/review?contractId=" + contractId;
-        String message = "📢 Contract #" + contractId + " closed. Leave your review:\n" + reviewLink;
+        NotificationDto message = new NotificationDto();
+        message.setSenderId(contract.getClient().getId());
+        message.setSenderName(contract.getClient().getUsername());
+        message.setTitle("Contract Closed");
+        message.setMessage("Your contract has been closed. Submit Your Review");
+        message.setLink("http://localhost:5173/employer/contracts");
+        message.setTimestamp(LocalDateTime.now());
         CustomWebSocketHandler.sendToFreelancer(freelancerId, message);
     }
 }

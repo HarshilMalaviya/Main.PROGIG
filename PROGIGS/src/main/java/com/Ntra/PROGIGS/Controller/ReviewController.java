@@ -15,8 +15,7 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public String saveReview(@RequestBody ReviewDto review) {
-        reviewService.saveReview(review);
-        return "Review saved";
+    public ReviewDto saveReview(@RequestBody ReviewDto review) {
+        return reviewService.saveReview(review);
     }
 }
