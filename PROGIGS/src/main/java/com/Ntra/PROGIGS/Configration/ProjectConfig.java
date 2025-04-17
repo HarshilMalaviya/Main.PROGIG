@@ -17,9 +17,10 @@ public class ProjectConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-
-                        .allowedOrigins("http://172.20.10.4:5173") // Change IP only here
+                        .allowedOrigins("http://192.168.0.107:5174")
+                        .allowedOrigins("http://192.168.0.107:5173") // Change IP only here
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+
             }
         };
     }

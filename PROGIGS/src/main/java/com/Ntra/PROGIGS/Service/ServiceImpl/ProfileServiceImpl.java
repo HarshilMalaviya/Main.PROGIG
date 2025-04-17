@@ -64,11 +64,8 @@ public class ProfileServiceImpl implements ProfileService {
 
             Profile existingProfile = this.repo.findById(id).get();
 
-            if (profileDto.getFullName() != null && !profileDto.getFullName().trim().isEmpty()) {
-                String[] nameParts = profileDto.getFullName().trim().split("\\s+", 2);
-                existingProfile.setFirstName(nameParts[0]);
-                existingProfile.setLastName(nameParts.length > 1 ? nameParts[1] : "");
-            }
+            existingProfile.setFirstName(profileDto.getFirstName());
+            existingProfile.setLastName(profileDto.getLastName());
             existingProfile.setDescription(profileDto.getDescription());
             existingProfile.setEmail(profileDto.getEmail());
             existingProfile.setPhone(profileDto.getPhone());
@@ -108,7 +105,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 
         // Ensure floating-point division
-        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+//        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : Math.round(((double) completedJobs / totalJobs) * 100 * 100.0) / 100.0);
+
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
         localVariable.setRating((totalRating / totalReviews ));
@@ -138,7 +137,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 
         // Ensure floating-point division
-        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+
+       /* localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);*/
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : Math.round(((double) completedJobs / totalJobs) * 100 * 100.0) / 100.0);
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
         localVariable.setRating((totalRating / totalReviews ));

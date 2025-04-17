@@ -14,6 +14,8 @@ import com.Ntra.PROGIGS.Repository.UserRepo;
 import com.Ntra.PROGIGS.Service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,13 @@ public class JobServiceImpl implements JobService {
     public List<JobDtoForCard> getAllJobs (){
 
         List<Jobs> jobs = jobRepo.findAll();
+        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+    }
+
+    @Override
+    public List<JobDtoForCard> getFiveJobs() {
+        PageRequest pageRequest = PageRequest.of(0, 4, Sort.by(Sort.Direction.DESC, "id"));
+        List<Jobs> jobs = jobRepo.findAll(pageRequest).getContent();
         return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }
 

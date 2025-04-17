@@ -9,6 +9,7 @@ import java.util.List;
 public interface JobService {
     public JobDto saveJob(JobDto jobs);
     public List<JobDtoForCard> getAllJobs ();
+    public List<JobDtoForCard> getFiveJobs ();
     public JobDto getJobBYID(int id);
     List<JobDto> getJobBySkillsRequired(List<String> skill);
 

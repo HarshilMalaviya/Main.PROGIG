@@ -22,6 +22,7 @@ public class ProfileMapper {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         ProfileDto profileDto = new ProfileDto();
         profileDto = new ModelMapper().map(profile, ProfileDto.class);
+        profileDto.setFullName(profile.getFirstName() + " " + profile.getLastName());
         return profileDto;
     }
 
