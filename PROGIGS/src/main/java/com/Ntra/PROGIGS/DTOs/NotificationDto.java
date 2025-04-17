@@ -11,5 +11,5 @@ public class NotificationDto {
     private String title;
     private String message;
     private String Link;
-    private LocalDateTime timestamp;
+    private String timestamp;
 }
