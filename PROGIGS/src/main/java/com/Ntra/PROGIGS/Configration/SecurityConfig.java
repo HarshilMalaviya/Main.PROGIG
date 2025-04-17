@@ -42,7 +42,12 @@ public class SecurityConfig {
         this.userDetailsImp = userDetailsImp;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
+    private static final String[] Client_URL= {"/user/**","/jobs/addjobs/**", "jobs/manage-jobs/**",
+    };
 
+    private static final String[] Frelancer_URL= {"jobs/alljobs/**","jobs/jobbyskill/{skill}/**",
+            "jobs/jobbyskills/**", "jobs/appliedJobs/**"
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -52,8 +57,10 @@ public class SecurityConfig {
                         Req->Req.requestMatchers("/login/**","/register/**","/v3/api-docs",
                                         "/v2/api-docs","/swagger-resources/**", "/swagger-ui/**",
 
-                                        "/webjars/**","/api-docs/**","/verify-otp","/portfol/**","/ws/**")
+                                        "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**")
                                 .permitAll()
+                                .requestMatchers(Client_URL).hasAuthority("CLIENT")
+                                .requestMatchers(Frelancer_URL).hasAuthority("FREELANCER")
                                 .anyRequest()
                                 .authenticated())
                 .userDetailsService(userDetailsImp)

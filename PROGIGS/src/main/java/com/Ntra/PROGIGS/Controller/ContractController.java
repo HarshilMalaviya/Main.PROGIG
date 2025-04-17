@@ -45,7 +45,7 @@ public class ContractController {
     }
 
     @PutMapping("/close/{contractId}")
-    public ContractDto closeContract(@PathVariable Integer contractId) {
+    public ContractDto closeContract(@PathVariable int contractId) {
         // Your DB logic to close contract here...
         ContractDto contractDto = contractService.closeContract(contractId);
         notificationService.notifyFreelancer(contractId);

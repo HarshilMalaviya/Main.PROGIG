@@ -13,16 +13,25 @@ import java.time.LocalDateTime;
 public class NotificationServiceImpl {
     @Autowired
     private ContractRepo contractRepo;
-    public void notifyFreelancer(Integer contractId) {
+    public void notifyFreelancer(int contractId) {
         Contract contract = contractRepo.findById(contractId).orElse(null);
-        Integer freelancerId = contract.getFreelancer().getId();
+
+        if (contract == null) {
+            System.err.println("❌ Contract not found for ID: " + contractId);
+            return;
+        }
+
+        int freelancerId = contract.getFreelancer().getId();
+        System.out.println("📍 Freelancer ID for contract " + contractId + ": " + freelancerId);
+
         NotificationDto message = new NotificationDto();
         message.setSenderId(contract.getClient().getId());
         message.setSenderName(contract.getClient().getUsername());
         message.setTitle("Contract Closed");
         message.setMessage("Your contract has been closed. Submit Your Review");
-        message.setLink("http://localhost:5173/employer/contracts");
-        message.setTimestamp(LocalDateTime.now());
+        message.setLink("http://localhost:5174/freelancer/contracts");
+        message.setTimestamp(LocalDateTime.now().toString());
+
         CustomWebSocketHandler.sendToFreelancer(freelancerId, message);
     }
 }

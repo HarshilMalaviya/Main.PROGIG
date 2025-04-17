@@ -17,12 +17,16 @@ import java.util.Optional;
 @RequestMapping("/jobs")
 public class JobsController {
     private final JobService jobService;
+    @GetMapping("/five-jobs")
+    public List<JobDtoForCard> getfiveJobs(){
+        return jobService.getFiveJobs();
+    }
 
-    @PostMapping
+    @PostMapping("/addjobs")
     public JobDto addjobs(@RequestBody JobDto jobs){
         return   jobService.saveJob(jobs);
     }
-    @GetMapping
+    @GetMapping("/alljobs")
     public ResponseEntity<List<JobDtoForCard>> getAllJobs()
     {   List<JobDtoForCard> list = jobService.getAllJobs();
         if(list.isEmpty()){

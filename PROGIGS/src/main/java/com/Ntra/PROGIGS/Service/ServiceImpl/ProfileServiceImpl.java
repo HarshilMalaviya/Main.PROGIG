@@ -108,7 +108,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 
         // Ensure floating-point division
-        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+//        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : Math.round(((double) completedJobs / totalJobs) * 100 * 100.0) / 100.0);
+
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
         localVariable.setRating((totalRating / totalReviews ));
@@ -138,7 +140,9 @@ public class ProfileServiceImpl implements ProfileService {
 
 
         // Ensure floating-point division
-        localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);
+
+       /* localVariable.setSuccessRate((totalJobs == 0) ? 0 : ((double) completedJobs / totalJobs) * 100);*/
+        localVariable.setSuccessRate((totalJobs == 0) ? 0 : Math.round(((double) completedJobs / totalJobs) * 100 * 100.0) / 100.0);
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
         localVariable.setRating((totalRating / totalReviews ));
