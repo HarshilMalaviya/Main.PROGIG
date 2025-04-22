@@ -11,6 +11,8 @@ import java.util.List;
 public class ProfileDtoForGet {
     private int id;
     private String fullName;
+    private String firstName;
+    private String lastName;
     private String description;
     private String email;
     @Column(nullable = true)
