@@ -46,7 +46,7 @@ public class SecurityConfig {
     };
 
     private static final String[] Frelancer_URL= {"jobs/alljobs/**","jobs/jobbyskill/{skill}/**",
-            "jobs/jobbyskills/**", "jobs/appliedJobs/**"
+            "jobs/jobbyskills/**", "jobs/appliedJobs/**","/jobs-by-catogory/{catogory}/**"
     };
 
     @Bean

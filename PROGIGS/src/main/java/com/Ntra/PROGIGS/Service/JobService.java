@@ -19,6 +19,8 @@ public interface JobService {
 
     public void deletebyid(int id);
 
+    public List<JobDtoForCard> findByCatogory(String catogory);
+
     public List<JobDtoForCard> appliedJobsForFreelancer();
 
     List<JobDtoForCard> myJobs();
