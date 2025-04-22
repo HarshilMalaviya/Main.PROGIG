@@ -1,6 +1,7 @@
 package com.Ntra.PROGIGS.Entity;
 
 import com.Ntra.PROGIGS.DTOs.LoginDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -9,10 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
@@ -40,8 +38,8 @@ public class User extends LoginDTO implements UserDetails {
     @JsonIgnore
     private Profile profile;
 
-    @OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL)
 
+    @OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL)
     @OrderBy("id DESC") // Newest proposals first
     @JsonIgnore
     private List<Proposals> proposals;

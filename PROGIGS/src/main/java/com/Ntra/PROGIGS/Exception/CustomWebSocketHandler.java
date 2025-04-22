@@ -1,11 +1,13 @@
 package com.Ntra.PROGIGS.Exception;
 
 import com.Ntra.PROGIGS.DTOs.NotificationDto;
+import com.Ntra.PROGIGS.Entity.Notification;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class CustomWebSocketHandler extends TextWebSocketHandler {
