@@ -19,6 +19,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Autowired
     private ContractRepo contractRepo;
 
+
     @Autowired
     private NotificationRepo notificationRepository;
 
@@ -30,6 +31,7 @@ public class NotificationServiceImpl implements NotificationService {
         if (contract == null) return;
 
         Integer freelancerId = contract.getFreelancer().getId();
+
 
         NotificationDto message = new NotificationDto();
         message.setSenderName(contract.getClient().getUsername());
@@ -48,7 +50,7 @@ public class NotificationServiceImpl implements NotificationService {
         notif.setTimestamp(message.getTimestamp());
         notificationRepository.save(notif);
 
-        // Send via WebSocket
+
         CustomWebSocketHandler.sendToFreelancer(freelancerId, message);
     }
     @Override
