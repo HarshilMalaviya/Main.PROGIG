@@ -12,21 +12,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class BankDetailsMapper {
     @Autowired
-    public ModelMapper modelMapper;
+    private ModelMapper modelMapper;
 
     public BankDetailsDTO bankDetailsToDTO(BankDetails bankDetails){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        BankDetailsDTO bankDetailsDTO = new BankDetailsDTO();
-        bankDetailsDTO = new ModelMapper().map(bankDetails,BankDetailsDTO.class);
-        return bankDetailsDTO;
+        return modelMapper.map(bankDetails, BankDetailsDTO.class);
     }
-
-
 
     public BankDetails DTOToBankDetails(BankDetailsDTO bankDetailsDTO){
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        BankDetails bankDetails = new BankDetails();
-        bankDetails = new ModelMapper().map(bankDetailsDTO,BankDetails.class);
-        return bankDetails;
+        return modelMapper.map(bankDetailsDTO, BankDetails.class);
     }
 }
