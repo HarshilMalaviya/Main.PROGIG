@@ -22,6 +22,7 @@ public class Jobs {
 
     private String duration;
     private int amount;
+    @Enumerated(EnumType.STRING)
     private Pay0ut_Methods payout_methods;
     @Enumerated(EnumType.STRING)
     private Status status;// job status for biding
