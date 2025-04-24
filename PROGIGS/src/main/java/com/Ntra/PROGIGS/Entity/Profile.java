@@ -16,7 +16,8 @@ import java.util.List;
 @Table(name = "Profile")
 @JsonIgnoreProperties(ignoreUnknown = true)  // ✅ Ignores unknown fields
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Profile {
+public class
+Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
