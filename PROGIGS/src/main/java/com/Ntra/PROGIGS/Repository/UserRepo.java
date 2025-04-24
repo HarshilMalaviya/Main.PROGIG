@@ -15,14 +15,16 @@ import java.util.Optional;
 public interface UserRepo extends JpaRepository<User, Integer> {
     User findByUsername(String username);
     List<User> findAllByRole(UserRole role);
-    @Query(value = "SELECT DISTINCT u.* FROM user u " +
-            "JOIN profile p ON u.profile_id = p.id " +
-            "LEFT JOIN profile_skills ps ON p.id = ps.profile_id " +
-            "WHERE (LOWER(ps.skills) LIKE LOWER(CONCAT('%', :input, '%')) " +
-            "OR LOWER(p.field_of_work) LIKE LOWER(CONCAT('%', :input, '%'))) " +
-            "AND u.role = :role",  // Add filtering for user role
+    @Query(value = "SELECT DISTINCT u.* " +
+            "FROM user u " +
+            "JOIN demo1.profile p ON u.profile_id = p.id " +
+            "LEFT JOIN demo1.profile_skills ps ON p.id = ps.profile_id " +
+            "WHERE u.role = :role " +
+            "AND ( (ps.skills IS NOT NULL AND LOWER(ps.skills) LIKE LOWER(CONCAT('%', :input, '%'))) " +
+            "      OR LOWER(p.field_of_work) LIKE LOWER(CONCAT('%', :input, '%')) )",
             nativeQuery = true)
-    List<User> findBySkillOrFieldOfWork(@Param("input") String input,UserRole role);
+    List<User> findBySkillOrFieldOfWork(@Param("input") String input, @Param("role") String role);
+
 
     @Query("SELECT u FROM User u JOIN u.profile p " +
             "WHERE LOWER(p.Location) LIKE LOWER(CONCAT('%', :country, '%')) " +

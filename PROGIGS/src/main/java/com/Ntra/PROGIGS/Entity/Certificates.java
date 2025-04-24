@@ -17,7 +17,7 @@ public class Certificates {
 
 
     @ManyToOne
-    @JoinColumn(name = "certificate_id")
+    @JoinColumn(name = "profile_id")
     @JsonIgnore
     private Profile profile;
 }

@@ -36,7 +36,7 @@ private UserMapper userMapper;
     public List<UserDto> getAllFreelancerBySkill(String skill){
 
         try {
-            List<UserDto> userDtos = repo.findBySkillOrFieldOfWork(skill, FREELANCER).stream().map(userMapper::mapToUserDtoCard).toList();
+            List<UserDto> userDtos = repo.findBySkillOrFieldOfWork(skill, String.valueOf(FREELANCER)).stream().map(userMapper::mapToUserDtoCard).toList();
             return userDtos;
         }catch (NoContentException e){
             throw new NoContentException("Freelancer not found By Skill: "+skill);
