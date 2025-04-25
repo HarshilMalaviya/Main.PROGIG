@@ -153,12 +153,7 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileDtoForGet profile = profileMapper.MapptoProfileDtoForGet(user.getProfile());
         return profile;
     }
-    @Override
-    public List<ProfileDtoForGet> getUsersByCountry(String country) {
-        List<Profile> profiles = repo.findByCountry(country);
-        List<ProfileDtoForGet> profileDtoForGets = profiles.stream().map(profileMapper::MapptoProfileDtoForGet).toList();
-        return profileDtoForGets;
-    }
+
     @Override
     public ProfileDtoForViewCard getProfileById(int id) {
         Profile profile = repo.findById(id).get();

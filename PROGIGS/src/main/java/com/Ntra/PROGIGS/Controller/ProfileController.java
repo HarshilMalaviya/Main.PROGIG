@@ -51,10 +51,7 @@ public class ProfileController {
         return profileService.getProfile();
     }
 
-    @GetMapping("/by-country/{country}")
-    public List<ProfileDtoForGet> getUsersByCountry(@PathVariable String country) {
-        return profileService.getUsersByCountry(country);
-    }
+
 
     @GetMapping("/by-id/{id}")
     public ProfileDtoForViewCard getProfileById(@PathVariable int id) {
