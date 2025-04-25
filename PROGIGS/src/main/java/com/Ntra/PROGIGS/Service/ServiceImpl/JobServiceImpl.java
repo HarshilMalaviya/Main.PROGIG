@@ -2,10 +2,8 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
-import com.Ntra.PROGIGS.Entity.Jobs;
-import com.Ntra.PROGIGS.Entity.Profile;
-import com.Ntra.PROGIGS.Entity.Proposals;
-import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Entity.*;
+import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.JobMapper;
 import com.Ntra.PROGIGS.Repository.JobRepo;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
@@ -22,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static com.Ntra.PROGIGS.Entity.UserRole.CLIENT;
+
 @Service
 @RequiredArgsConstructor
 public class JobServiceImpl implements JobService {
@@ -33,14 +33,15 @@ public class JobServiceImpl implements JobService {
     private JobRepo jobRepo;
     @Autowired
     private JobMapper jobMapper;
-
+@Autowired
+    private GetAuthenticatedUser getAuthenticatedUser;
     @Autowired
     private ProposalsRepo proposalsRepo;
 
 
     @Override
     public JobDto saveJob(JobDto jobs) {
-        User user = getAuthenticatedUser();
+        User user = getAuthenticatedUser.getAuthenticatedUser();
         Jobs job = jobMapper.MapToJob(jobs);
         job.setUser(user);
         jobRepo.save(job);
@@ -73,6 +74,17 @@ public class JobServiceImpl implements JobService {
         return jobs.stream().map(jobMapper::MapToDto1).toList();
     }
 
+    @Override
+    public List<JobDtoForCard> findJobByLocation(String country) {
+//        List<User> user=userRepo.findByCountry(country, CLIENT);
+//        List<Jobs> jobs = new ArrayList<>();
+//        for (User u : user) {
+//            jobs.addAll(u.getJobs());
+//        }
+        List<Jobs> jobs = jobRepo.findByLocation(country);
+        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+    }
+
     public List<JobDto> getJobBySkillsRequired(List<String> skills) {
         List<Jobs> jobs = this.jobRepo.findBySkillsRequiredIn(skills);
         List<JobDto> jobDtos = jobs.stream().map(jobMapper::MapToDto).toList();
@@ -97,47 +109,78 @@ public class JobServiceImpl implements JobService {
         jobRepo.deleteById(id);
     }
 
-    private User getAuthenticatedUser() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            String username = ((UserDetails) principal).getUsername();
-            return userRepo.findByUsername(username);
-        }
-        throw new RuntimeException("User is not authenticated");
-    }
-
-
     @Override
-
-    public List<JobDtoForCard> appliedJobsForFreelancer() {
-        String freelancer = getAuthenticatedUser().getUsername();
-
-        if (!"FREELANCER".equalsIgnoreCase(String.valueOf(userRepo.findByUsername(freelancer).getRole()))) {
-            throw new RuntimeException("You are not a freelancer");
-        }
-
-        List<Proposals> proposals = proposalsRepo.findAllProposalsByFreelancerName(freelancer);
-        Set<Integer> jobIds = new HashSet<>();  // Tracks unique job IDs
-
-        List<JobDtoForCard> jobDtoForCards = new ArrayList<>();
-
-        for (Proposals proposal : proposals) {
-            Jobs job = jobRepo.findByProposals(proposal);
-            Integer jobId = job.getId();
-
-            if (jobIds.add(jobId)) { // Add only if it's a new job ID
-
-                jobDtoForCards.add(jobMapper.MapToJobDtoforCard(job));
+    public List<JobDtoForCard> findByCatogory(String catogory) {
+        if (catogory.equals("Website jobs") || catogory.equals("Software Development jobs") || catogory.equals("SEO jobs"))
+            {
+                List<String> skills = Arrays.asList("HTML", "CSS", "JavaScript", "React", "Angular", "Vue", "Java", "Python", "C++", "C#", "PHP", "Spring", "Laravel", "Django", "Flask","Three.js");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
             }
-        }
+            else if (catogory.equals("Gaphic Design jobs")) {
+                List<String> skills = Arrays.asList("Photoshop", "Illustrator", "InDesign",
+                        "Premiere Pro", "After Effects");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            }
+            else if (catogory.equals("Mobile App development ")) {
+                List<String> skills = Arrays.asList("Swift", "Objective-C", "Java", "Kotlin", "Flutter");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            } else if (catogory.equals("Data Entry jobs") || catogory.equals("Writing jobs")) {
+                List<String> skills = Arrays.asList("Excel", "Word", "PowerPoint", "Access");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            } else if (catogory.equals("Internet Marketing jobs")) {
+                List<String> skills = Arrays.asList("SEO", "PPC", "Social Media", "Email Marketing");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            } else if (catogory.equals("Legal jobs")) {
+                List<String> skills = Arrays.asList("Legal", "Contracts", "Litigation");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            } else if (catogory.equals("Finance jobs")) {
+                List<String> skills = Arrays.asList("Accounting", "Finance", "Taxation");
+                List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
+                return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+            } else {
+                throw new RuntimeException("Invalid catogory");
+            }
 
-        return jobDtoForCards;
+
     }
-    @Override
-    public List<JobDtoForCard> myJobs() {
-        User user = getAuthenticatedUser();
-        List<Jobs> jobs = jobRepo.findByUser(user);
-        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+
+        @Override
+        public List<JobDtoForCard> appliedJobsForFreelancer () {
+            String freelancer = getAuthenticatedUser.getAuthenticatedUser().getUsername();
+
+            if (!"FREELANCER".equalsIgnoreCase(String.valueOf(userRepo.findByUsername(freelancer).getRole()))) {
+                throw new RuntimeException("You are not a freelancer");
+            }
+
+            List<Proposals> proposals = proposalsRepo.findAllProposalsByFreelancerName(freelancer);
+            Set<Integer> jobIds = new HashSet<>();  // Tracks unique job IDs
+
+            List<JobDtoForCard> jobDtoForCards = new ArrayList<>();
+
+            for (Proposals proposal : proposals) {
+                Jobs job = jobRepo.findByProposals(proposal);
+                Integer jobId = job.getId();
+
+                if (jobIds.add(jobId)) { // Add only if it's a new job ID
+
+                    jobDtoForCards.add(jobMapper.MapToJobDtoforCard(job));
+                }
+            }
+
+            return jobDtoForCards;
+        }
+        @Override
+        public List<JobDtoForCard> myJobs () {
+            User user = getAuthenticatedUser.getAuthenticatedUser();
+            List<Jobs> jobs = jobRepo.findByUser(user);
+            return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+        }
     }
 /*
     @Override
@@ -152,7 +195,7 @@ public class JobServiceImpl implements JobService {
     }*/
 
 
-}
+
 /*    @Override
     public List<JobDto> HiredJobsForFreelancer() {
         String freelancer = getAuthenticatedUser().getUsername();

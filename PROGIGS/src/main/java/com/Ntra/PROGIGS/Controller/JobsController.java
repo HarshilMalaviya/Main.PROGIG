@@ -46,6 +46,12 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobDto));
         }
     }
+
+    @GetMapping("/jobs-by-catogory/{catogory}")
+    public ResponseEntity<List<JobDtoForCard>> findJobsByCatogory(@PathVariable String catogory) {
+        List<JobDtoForCard> jobs=jobService.findByCatogory(catogory);
+        return ResponseEntity.of(Optional.of(jobs));
+    }
     @GetMapping("/appliedJobs")
     public ResponseEntity<List<JobDtoForCard>> findAppliedJobs() {
         List<JobDtoForCard> jobs=jobService.appliedJobsForFreelancer();
@@ -56,16 +62,7 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobs));
         }
     }
-    /*@GetMapping("/hiredJobs")
-    public ResponseEntity<List<JobDto>> hiredJobs() {
-        List<JobDto> jobs=jobService.HiredJobsForFreelancer();
-        if(jobs==null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        else {
-            return ResponseEntity.of(Optional.of(jobs));
-        }
-    }*/
+
     @GetMapping("/jobbyskill/{skill}")
     public ResponseEntity<List<JobDto>> findJobbySkills(@PathVariable String skill) {
         List<JobDto> jobs=jobService.getJobByskillRequired(skill);
@@ -96,12 +93,25 @@ public class JobsController {
         jobService.deletebyid(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-//    @GetMapping("/jobs_by_location/{location}")
-//    public ResponseEntity<List<JobDtoForCard>> getJobsByLocation(@PathVariable String location){
-//        return ResponseEntity.of(Optional.of(jobService.jobsByLocation(location)));
-//    }
+
     @GetMapping("/manage-jobs")
     public ResponseEntity<List<JobDtoForCard>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }
+    @GetMapping("/jobs_by_location/{location}")
+    public List<JobDtoForCard> getJobsByLocation(@PathVariable String location){
+        return jobService.findJobByLocation(location);
+    }
 }
+/*@GetMapping("/hiredJobs")
+    public ResponseEntity<List<JobDto>> hiredJobs() {
+        List<JobDto> jobs=jobService.HiredJobsForFreelancer();
+        if(jobs==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        else {
+            return ResponseEntity.of(Optional.of(jobs));
+        }
+    }*/
+
+

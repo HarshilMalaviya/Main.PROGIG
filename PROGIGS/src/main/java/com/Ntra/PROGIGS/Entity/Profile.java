@@ -35,7 +35,7 @@ Profile {
     @ElementCollection
     private List<String> skills;
     //  Client detail
-    private String CompanyName;
+    private String companyName;
     private String Location;
     @Enumerated(value = EnumType.STRING)
     private Profile_Status status = Profile_Status.PENDING;

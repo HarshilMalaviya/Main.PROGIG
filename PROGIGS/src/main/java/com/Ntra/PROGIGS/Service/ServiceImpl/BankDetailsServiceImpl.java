@@ -26,13 +26,8 @@ public class BankDetailsServiceImpl implements BankDetailService {
     public BankDetailsDTO saveBankDetail(BankDetailsDTO bankDetailsDTO) {
         User user = getAuthenticatedUser.getAuthenticatedUser();
         Profile profile = user.getProfile();
-
-        BankDetails bankDetails = bankDetailsMapper.DTOToBankDetails(bankDetailsDTO);
-        bankDetails.setProfile(profile); // optional if needed
-        profile.setBank(bankDetails);    // set in both directions if bidirectional
-
-//        bankDetailsRepo.save(bankDetails); // only one instance is used
-
+        bankDetailsRepo.save(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
+        profile.setBank(bankDetailsMapper.DTOToBankDetails(bankDetailsDTO));
         return bankDetailsDTO;
     }
 

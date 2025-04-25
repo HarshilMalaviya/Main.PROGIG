@@ -15,9 +15,13 @@ public interface JobService {
 
     List<JobDto> getJobByskillRequired(String skill);
 
+    public List<JobDtoForCard> findJobByLocation (String country);
+
     public JobDto editeJob(JobDto jobs, int id);
 
     public void deletebyid(int id);
+
+    public List<JobDtoForCard> findByCatogory(String catogory);
 
     public List<JobDtoForCard> appliedJobsForFreelancer();
 
