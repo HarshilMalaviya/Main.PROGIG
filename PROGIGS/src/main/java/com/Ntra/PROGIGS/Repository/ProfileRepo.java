@@ -3,8 +3,10 @@ package com.Ntra.PROGIGS.Repository;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
 import com.Ntra.PROGIGS.Entity.Profile;
 import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Entity.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public interface ProfileRepo extends JpaRepository<Profile, Integer> {
     Profile findByEmail(String email);
 
     boolean existsByEmail(String email);
+
+
+
 
 //    List<Profile> findAllByLocation(String location);
 }
