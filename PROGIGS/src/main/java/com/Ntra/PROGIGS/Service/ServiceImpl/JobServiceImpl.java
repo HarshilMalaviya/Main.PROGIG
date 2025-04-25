@@ -2,10 +2,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
-import com.Ntra.PROGIGS.Entity.Jobs;
-import com.Ntra.PROGIGS.Entity.Profile;
-import com.Ntra.PROGIGS.Entity.Proposals;
-import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Entity.*;
 import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.JobMapper;
 import com.Ntra.PROGIGS.Repository.JobRepo;
@@ -22,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+
+import static com.Ntra.PROGIGS.Entity.UserRole.CLIENT;
 
 @Service
 @RequiredArgsConstructor
@@ -73,6 +72,17 @@ public class JobServiceImpl implements JobService {
     public List<JobDto> getJobByskillRequired(String skills) {
         List<Jobs> jobs = this.jobRepo.findBySkillsRequired(skills);
         return jobs.stream().map(jobMapper::MapToDto1).toList();
+    }
+
+    @Override
+    public List<JobDtoForCard> findJobByLocation(String country) {
+//        List<User> user=userRepo.findByCountry(country, CLIENT);
+//        List<Jobs> jobs = new ArrayList<>();
+//        for (User u : user) {
+//            jobs.addAll(u.getJobs());
+//        }
+        List<Jobs> jobs = jobRepo.findByLocation(country);
+        return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
     }
 
     public List<JobDto> getJobBySkillsRequired(List<String> skills) {

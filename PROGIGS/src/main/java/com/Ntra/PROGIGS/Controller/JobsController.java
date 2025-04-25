@@ -46,6 +46,7 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobDto));
         }
     }
+
     @GetMapping("/jobs-by-catogory/{catogory}")
     public ResponseEntity<List<JobDtoForCard>> findJobsByCatogory(@PathVariable String catogory) {
         List<JobDtoForCard> jobs=jobService.findByCatogory(catogory);
@@ -97,6 +98,10 @@ public class JobsController {
     public ResponseEntity<List<JobDtoForCard>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }
+    @GetMapping("/jobs_by_location/{location}")
+    public List<JobDtoForCard> getJobsByLocation(@PathVariable String location){
+        return jobService.findJobByLocation(location);
+    }
 }
 /*@GetMapping("/hiredJobs")
     public ResponseEntity<List<JobDto>> hiredJobs() {
@@ -108,8 +113,5 @@ public class JobsController {
             return ResponseEntity.of(Optional.of(jobs));
         }
     }*/
-/*
-    @GetMapping("/jobs_by_location/{location}")
-    public ResponseEntity<List<JobDtoForCard>> getJobsByLocation(@PathVariable String location){
-        return ResponseEntity.of(Optional.of(jobService.jobsByLocation(location)));
-    }*/
+
+
