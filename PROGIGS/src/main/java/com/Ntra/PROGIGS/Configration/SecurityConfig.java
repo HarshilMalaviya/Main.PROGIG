@@ -57,7 +57,7 @@ public class SecurityConfig {
                         Req->Req.requestMatchers("/login/**","/register/**","/v3/api-docs",
                                         "/v2/api-docs","/swagger-resources/**", "/swagger-ui/**",
 
-                                        "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**")
+                                        "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**","/user/Top-Freelancer")
                                 .permitAll()
                                 .requestMatchers(Client_URL).hasAuthority("CLIENT")
                                 .requestMatchers(Frelancer_URL).hasAuthority("FREELANCER")

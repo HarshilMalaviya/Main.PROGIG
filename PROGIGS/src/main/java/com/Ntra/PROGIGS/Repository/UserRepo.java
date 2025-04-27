@@ -30,6 +30,60 @@ public interface UserRepo extends JpaRepository<User, Integer> {
             "         OR LOWER(ps.skills) LIKE '%figma%' " +
             "         OR LOWER(p.field_of_work) LIKE '%graphic designer%' " +
             "   )) " +
+            "   OR ( :input = 'Development & IT' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%development%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%it%' " +
+            "         OR LOWER(ps.skills) LIKE '%java%' " +
+            "         OR LOWER(ps.skills) LIKE '%python%' " +
+            "         OR LOWER(ps.skills) LIKE '%c++%' " +
+            "         OR LOWER(ps.skills) LIKE '%networking%' " +
+            "   )) " +
+            "   OR ( :input = 'Design & Creative' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%design%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%creative%' " +
+            "         OR LOWER(ps.skills) LIKE '%graphic design%' " +
+            "         OR LOWER(ps.skills) LIKE '%photoshop%' " +
+            "         OR LOWER(ps.skills) LIKE '%illustrator%' " +
+            "         OR LOWER(ps.skills) LIKE '%ui/ux%' " +
+            "   )) " +
+            "   OR ( :input = 'Digital Marketing' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%marketing%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%digital%' " +
+            "         OR LOWER(ps.skills) LIKE '%seo%' " +
+            "         OR LOWER(ps.skills) LIKE '%google ads%' " +
+            "         OR LOWER(ps.skills) LIKE '%social media%' " +
+            "         OR LOWER(ps.skills) LIKE '%email marketing%' " +
+            "   )) " +
+            "   OR ( :input = 'Writing & Translation' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%writing%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%translation%' " +
+            "         OR LOWER(ps.skills) LIKE '%content writing%' " +
+            "         OR LOWER(ps.skills) LIKE '%proofreading%' " +
+            "         OR LOWER(ps.skills) LIKE '%blogging%' " +
+            "         OR LOWER(ps.skills) LIKE '%copywriting%' " +
+            "   )) " +
+            "   OR ( :input = 'Music & Audio' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%music%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%audio%' " +
+            "         OR LOWER(ps.skills) LIKE '%audio editing%' " +
+            "         OR LOWER(ps.skills) LIKE '%music production%' " +
+            "         OR LOWER(ps.skills) LIKE '%sound engineering%' " +
+            "   )) " +
+            "   OR ( :input = 'Video & Animation' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%video%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%animation%' " +
+            "         OR LOWER(ps.skills) LIKE '%video editing%' " +
+            "         OR LOWER(ps.skills) LIKE '%after effects%' " +
+            "         OR LOWER(ps.skills) LIKE '%motion graphics%' " +
+            "   )) " +
+            "   OR ( :input = 'Programming & Tech' AND ( " +
+            "         LOWER(p.field_of_work) LIKE '%programming%' " +
+            "         OR LOWER(p.field_of_work) LIKE '%tech%' " +
+            "         OR LOWER(ps.skills) LIKE '%java%' " +
+            "         OR LOWER(ps.skills) LIKE '%python%' " +
+            "         OR LOWER(ps.skills) LIKE '%nodejs%' " +
+            "         OR LOWER(ps.skills) LIKE '%react%' " +
+            "   )) " +
             "   OR ( :input = 'Software developers' AND ( " +
             "         LOWER(ps.skills) LIKE '%java%' " +
             "         OR LOWER(ps.skills) LIKE '%spring boot%' " +
@@ -112,6 +166,7 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     List<User> findByCountry(@Param("country") String country, UserRole role);
 
     User findByProfile(Profile profile);
+
 
 
 

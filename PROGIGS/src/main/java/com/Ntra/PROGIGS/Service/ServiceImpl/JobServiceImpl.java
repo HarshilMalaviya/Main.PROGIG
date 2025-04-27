@@ -111,7 +111,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<JobDtoForCard> findByCatogory(String catogory) {
-        if (catogory.equals("Website jobs") || catogory.equals("Software Development jobs") || catogory.equals("SEO jobs"))
+            if (catogory.equals("Website jobs") || catogory.equals("Software Development jobs") || catogory.equals("SEO jobs"))
             {
                 List<String> skills = Arrays.asList("HTML", "CSS", "JavaScript", "React", "Angular", "Vue", "Java", "Python", "C++", "C#", "PHP", "Spring", "Laravel", "Django", "Flask","Three.js");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
@@ -131,7 +131,7 @@ public class JobServiceImpl implements JobService {
                 List<String> skills = Arrays.asList("Excel", "Word", "PowerPoint", "Access");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
                 return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
-            } else if (catogory.equals("Internet Marketing jobs")) {
+            } else if (catogory.equals("Internet marketing jobs")) {
                 List<String> skills = Arrays.asList("SEO", "PPC", "Social Media", "Email Marketing");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
                 return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
