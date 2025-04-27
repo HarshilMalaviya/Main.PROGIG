@@ -56,6 +56,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         Req->Req.requestMatchers("/login/**","/register/**","/v3/api-docs",
                                         "/v2/api-docs","/swagger-resources/**", "/swagger-ui/**",
+                                        "/profile/top-six-freelancer",
 
                                         "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**")
                                 .permitAll()
