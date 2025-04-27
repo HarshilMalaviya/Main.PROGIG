@@ -15,12 +15,12 @@ import com.Ntra.PROGIGS.Service.ProfileService;
 import com.cloudinary.Cloudinary;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -153,6 +153,21 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileDtoForGet profile = profileMapper.MapptoProfileDtoForGet(user.getProfile());
         return profile;
     }
+
+    @Override
+    public List<ProfileDtoForGet> getUsersByCountry(String country) {
+        List<Profile> profiles = repo.findByCountry(country);
+        List<ProfileDtoForGet> profileDtoForGets = profiles.stream().map(profileMapper::MapptoProfileDtoForGet).toList();
+        return profileDtoForGets;
+    }
+
+    @Override
+    public List<ProfileDtoForViewCard> getInternationalClients() {
+        List<Profile> profiles = repo.findByNotCountry("India");
+        List<ProfileDtoForViewCard> profileDtoForViewCards = profiles.stream().map(profileMapper::MapptoProfileDtoForViewCard).toList();
+        return profileDtoForViewCards;
+    }
+
 
     @Override
     public ProfileDtoForViewCard getProfileById(int id) {

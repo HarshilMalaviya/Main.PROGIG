@@ -23,6 +23,9 @@ public interface ProfileRepo extends JpaRepository<Profile, Integer> {
 
     boolean existsByEmail(String email);
 
+    @Query("SELECT p FROM Profile p WHERE LOWER(p.Location) NOT LIKE LOWER(CONCAT('%', :country, '%'))")
+    List<Profile> findByNotCountry(String country);
+
 
 
 
