@@ -14,4 +14,6 @@ public interface UserService {
     List<UserDto> getAllFreelancerBySkill(String skill);
 
     List<UserDto> getAllFreelancerByLocation(String country);
+
+    List<UserDto> getTopFreelancer();
 }

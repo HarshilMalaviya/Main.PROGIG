@@ -31,4 +31,10 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllFreelancerByLocation(country));
     }
 
+    @GetMapping("/top-Freelancer")
+    public ResponseEntity<List<UserDto>> getTopFreelancer(){
+        return ResponseEntity.ok(userService.getTopFreelancer());
+    }
+
+
 }

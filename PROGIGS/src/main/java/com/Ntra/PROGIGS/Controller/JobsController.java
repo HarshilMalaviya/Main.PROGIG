@@ -98,7 +98,7 @@ public class JobsController {
     public ResponseEntity<List<JobDtoForCard>> getMyJobs(){
         return ResponseEntity.of(Optional.of(jobService.myJobs()));
     }
-    @GetMapping("/jobs_by_location/{location}")
+    @GetMapping("/jobs-by-location/{location}")
     public List<JobDtoForCard> getJobsByLocation(@PathVariable String location){
         return jobService.findJobByLocation(location);
     }

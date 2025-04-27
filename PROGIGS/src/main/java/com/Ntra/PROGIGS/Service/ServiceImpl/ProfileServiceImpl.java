@@ -153,6 +153,7 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileDtoForGet profile = profileMapper.MapptoProfileDtoForGet(user.getProfile());
         return profile;
     }
+
     @Override
     public List<ProfileDtoForGet> getUsersByCountry(String country) {
         List<Profile> profiles = repo.findByCountry(country);
