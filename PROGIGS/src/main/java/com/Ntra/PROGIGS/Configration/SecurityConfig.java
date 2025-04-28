@@ -58,7 +58,7 @@ public class SecurityConfig {
                                         "/v2/api-docs","/swagger-resources/**", "/swagger-ui/**",
                                         "/profile/top-six-freelancer",
 
-                                        "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**","/user/Top-Freelancer")
+                                        "/webjars/**","/api-docs/**","/verify-otp","jobs/five-jobs/**" ,"/ws/**","/user/top-Freelancer")
                                 .permitAll()
                                 .requestMatchers(Client_URL).hasAuthority("CLIENT")
                                 .requestMatchers(Frelancer_URL).hasAuthority("FREELANCER")

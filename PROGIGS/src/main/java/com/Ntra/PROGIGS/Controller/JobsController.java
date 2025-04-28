@@ -102,6 +102,11 @@ public class JobsController {
     public List<JobDtoForCard> getJobsByLocation(@PathVariable String location){
         return jobService.findJobByLocation(location);
     }
+
+    @GetMapping("/search-jobs/{keyWord}")
+    public List<JobDtoForCard> searchJob(@PathVariable String keyWord){
+        return jobService.searchJobs(keyWord);
+    }
 }
 /*@GetMapping("/hiredJobs")
     public ResponseEntity<List<JobDto>> hiredJobs() {
