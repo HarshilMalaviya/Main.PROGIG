@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,6 +69,20 @@ private UserMapper userMapper;
                     .collect(Collectors.toList());
             return userDtos.stream().sorted(Comparator.comparing((UserDto userDto) -> userDto.getProfileDtoForCard().getRating()).reversed()).limit(6).collect(Collectors.toList());
 
+        }
+        catch (NoContentException e){
+            throw new NoContentException("No_Content");
+        }
+
+    }
+
+    @Override
+    public List<UserDto> searchFreelancer(String keyword){
+
+        try {
+            List<User> users =repo.searchUsers(keyword, FREELANCER);
+            List<UserDto> userDtos = users.stream().map(userMapper::mapToUserDtoCard).toList();
+            return userDtos;
         }
         catch (NoContentException e){
             throw new NoContentException("No_Content");
