@@ -15,4 +15,5 @@ public class ProfileDtoForCard {
     private String hourlyRate;
     private double rating;
     private int reviewCount;
+    private double successRate;
 }

@@ -110,7 +110,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
-        localVariable.setRating((totalRating / totalReviews ));
+        localVariable.setRating((double) Math.round(((totalRating / totalReviews) * 100) /100));
 
         return localVariable;
     }
@@ -153,6 +153,7 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileDtoForGet profile = profileMapper.MapptoProfileDtoForGet(user.getProfile());
         return profile;
     }
+
     @Override
     public List<ProfileDtoForGet> getUsersByCountry(String country) {
         List<Profile> profiles = repo.findByCountry(country);

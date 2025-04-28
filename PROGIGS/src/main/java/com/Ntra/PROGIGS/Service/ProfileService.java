@@ -18,8 +18,10 @@ public interface ProfileService {
 
     public ProfileDtoForGet getProfile();
 
+
     List<ProfileDtoForGet> getUsersByCountry(String country);
     List<ProfileDtoForViewCard> getInternationalClients();
+
     ProfileDtoForViewCard getProfileById(int id);
 
     String getProfileImage();

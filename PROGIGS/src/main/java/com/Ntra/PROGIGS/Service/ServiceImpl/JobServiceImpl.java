@@ -14,13 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
-import static com.Ntra.PROGIGS.Entity.UserRole.CLIENT;
 
 @Service
 @RequiredArgsConstructor
@@ -111,7 +107,9 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<JobDtoForCard> findByCatogory(String catogory) {
+
         if (catogory.equals("Website jobs") || catogory.equals("Software Development jobs") || catogory.equals("SEO jobs") || catogory.equals("Development & IT")|| catogory.equals("Programming & Tech"))
+
             {
                 List<String> skills = Arrays.asList("HTML", "CSS", "JavaScript", "React", "Angular", "Vue", "Java", "Python", "C++", "C#", "PHP", "Spring", "Laravel", "Django", "Flask","Three.js");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
@@ -131,7 +129,9 @@ public class JobServiceImpl implements JobService {
                 List<String> skills = Arrays.asList("Excel", "Word", "PowerPoint", "Access");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
                 return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
+
             } else if (catogory.equals("Internet Marketing jobs")|| catogory.equals("Digital Marketing")) {
+
                 List<String> skills = Arrays.asList("SEO", "PPC", "Social Media", "Email Marketing");
                 List<Jobs> jobs = jobRepo.findBySkillsRequiredIn(skills);
                 return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
@@ -193,6 +193,10 @@ public class JobServiceImpl implements JobService {
             List<Jobs> jobs = jobRepo.findByUser(user);
             return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
         }
+    @Override
+    public List<JobDtoForCard> searchJobs(String keyword) {
+        return jobRepo.searchJobs(keyword).stream().map(jobMapper::MapToJobDtoforCard).toList();
+    }
     }
 /*
     @Override

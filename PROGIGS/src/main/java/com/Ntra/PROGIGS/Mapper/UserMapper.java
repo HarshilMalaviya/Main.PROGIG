@@ -77,6 +77,10 @@ public class UserMapper {
                 totalRating = 0.0;
                 totalReviews = 0;
             }
+            int totalJobs = user.getJobs().size();
+            long completedJobs = user.getJobs().stream()
+                    .filter(job -> "COMPLETED".equalsIgnoreCase(job.getStatus().name())) // Use .name() for enums
+                    .count();
             ProfileDtoForCard profileDto = new ProfileDtoForCard();
             profileDto.setId(user.getProfile().getId());
             profileDto.setFullName(user.getProfile().getFirstName() + " " + user.getProfile().getLastName());
@@ -87,6 +91,7 @@ public class UserMapper {
             profileDto.setSkills(user.getProfile().getSkills());
             profileDto.setRating(totalRating / totalReviews);
             profileDto.setReviewCount(totalReviews);
+            profileDto.setSuccessRate((totalJobs == 0) ? 0 : Math.round(((double) completedJobs / totalJobs) * 100 * 100.0) / 100.0);
             dto.setProfileDtoForCard(profileDto);
         }
 

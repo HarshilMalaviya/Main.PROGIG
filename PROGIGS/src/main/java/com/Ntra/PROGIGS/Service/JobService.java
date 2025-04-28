@@ -26,6 +26,8 @@ public interface JobService {
     public List<JobDtoForCard> appliedJobsForFreelancer();
 
     List<JobDtoForCard> myJobs();
+
+    List<JobDtoForCard> searchJobs(String keyword);
 //    List<JobDtoForCard> jobsByLocation(String location);
 //    public List<JobDto> HiredJobsForFreelancer();
 }
