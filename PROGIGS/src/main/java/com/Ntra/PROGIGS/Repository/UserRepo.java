@@ -165,6 +165,8 @@ public interface UserRepo extends JpaRepository<User, Integer> {
             "AND u.role = :role")
     List<User> findByCountry(@Param("country") String country, UserRole role);
 
+
+
     User findByProfile(Profile profile);
 
 
