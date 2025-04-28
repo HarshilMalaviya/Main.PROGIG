@@ -14,13 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
-import static com.Ntra.PROGIGS.Entity.UserRole.CLIENT;
 
 @Service
 @RequiredArgsConstructor
@@ -181,6 +177,10 @@ public class JobServiceImpl implements JobService {
             List<Jobs> jobs = jobRepo.findByUser(user);
             return jobs.stream().map(jobMapper::MapToJobDtoforCard).toList();
         }
+    @Override
+    public List<JobDtoForCard> searchJobs(String keyword) {
+        return jobRepo.searchJobs(keyword).stream().map(jobMapper::MapToJobDtoforCard).toList();
+    }
     }
 /*
     @Override

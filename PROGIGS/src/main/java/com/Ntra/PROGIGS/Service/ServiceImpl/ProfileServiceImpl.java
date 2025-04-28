@@ -110,7 +110,7 @@ public class ProfileServiceImpl implements ProfileService {
 
         localVariable.setCompletedProject((int) completedJobs);
         localVariable.setReviewCount(totalReviews);
-        localVariable.setRating((totalRating / totalReviews ));
+        localVariable.setRating((double) Math.round(((totalRating / totalReviews) * 100) /100));
 
         return localVariable;
     }
