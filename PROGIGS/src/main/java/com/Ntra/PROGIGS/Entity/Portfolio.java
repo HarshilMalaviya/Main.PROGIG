@@ -19,6 +19,7 @@ public class Portfolio implements Serializable {
     @Column(name = "PortfolioTitle")
     private String portfolioTitle;
    @Column(name = "Skills")
+   @ElementCollection
    private List<String> skills;
    @Column(name = "Description")
    private String description;

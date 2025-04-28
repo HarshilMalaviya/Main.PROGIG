@@ -3,10 +3,7 @@ package com.Ntra.PROGIGS.Service.ServiceImpl;
 import com.Ntra.PROGIGS.DTOs.ProfileDto;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForGet;
 import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
-import com.Ntra.PROGIGS.Entity.LocalVariable;
-import com.Ntra.PROGIGS.Entity.Profile;
-import com.Ntra.PROGIGS.Entity.Review;
-import com.Ntra.PROGIGS.Entity.User;
+import com.Ntra.PROGIGS.Entity.*;
 import com.Ntra.PROGIGS.Filter.GetAuthenticatedUser;
 import com.Ntra.PROGIGS.Mapper.ProfileMapper;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
@@ -163,7 +160,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public List<ProfileDtoForViewCard> getInternationalClients() {
-        List<Profile> profiles = repo.findByNotCountry("India");
+        List<Profile> profiles = repo.findByNotCountry("India", UserRole.FREELANCER);
         List<ProfileDtoForViewCard> profileDtoForViewCards = profiles.stream().map(profileMapper::MapptoProfileDtoForViewCard).toList();
         return profileDtoForViewCards;
     }
