@@ -1,5 +1,6 @@
 package com.Ntra.PROGIGS.Service;
 
+import com.Ntra.PROGIGS.DTOs.ProfileDtoForViewCard;
 import com.Ntra.PROGIGS.DTOs.UserDto;
 import com.Ntra.PROGIGS.Entity.User;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,8 @@ public interface UserService {
     List<UserDto> getAllFreelancerByLocation(String country);
 
     List<UserDto> getTopFreelancer();
+
+    List<UserDto> searchFreelancer(String keyword);
+
+    List<UserDto> getInternationalClients();
 }

@@ -1,6 +1,6 @@
 package com.Ntra.PROGIGS.Configration;
 
-import com.cloudinary.Cloudinary;
+import  com.cloudinary.Cloudinary;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -18,8 +18,8 @@ public class ProjectConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
 
-                        .allowedOrigins("http://192.168.31.177:5174")
-                        .allowedOrigins("http:// 172.20.10.4:5173") // Change IP only here
+                        .allowedOrigins("http://192.168.0.168:5174")
+                        .allowedOrigins("http:// 192.168.175.250:5173") // Change IP only here
 
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
 

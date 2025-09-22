@@ -9,10 +9,12 @@ import com.Ntra.PROGIGS.Mapper.CertificateMapper;
 import com.Ntra.PROGIGS.Repository.CertificateRepo;
 import com.Ntra.PROGIGS.Repository.ProfileRepo;
 import com.Ntra.PROGIGS.Service.CertificateService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class CertificateServiceImpl implements CertificateService {
     @Autowired
     private ProfileRepo profileRepo;

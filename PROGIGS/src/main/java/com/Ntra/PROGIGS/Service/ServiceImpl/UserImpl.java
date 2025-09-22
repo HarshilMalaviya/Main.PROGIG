@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @RequiredArgsConstructor
 @Service
 
-public class UserImpl implements UserDetailsService {
+public class  UserImpl implements UserDetailsService {
     @Autowired
     private final UserRepo userRepo;
 
