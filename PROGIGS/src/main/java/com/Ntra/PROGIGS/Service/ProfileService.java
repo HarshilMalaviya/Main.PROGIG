@@ -20,7 +20,7 @@ public interface ProfileService {
 
 
     List<ProfileDtoForGet> getUsersByCountry(String country);
-    List<ProfileDtoForViewCard> getInternationalClients();
+
 
     ProfileDtoForViewCard getProfileById(int id);
 

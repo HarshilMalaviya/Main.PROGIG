@@ -158,12 +158,7 @@ public class ProfileServiceImpl implements ProfileService {
         return profileDtoForGets;
     }
 
-    @Override
-    public List<ProfileDtoForViewCard> getInternationalClients() {
-        List<Profile> profiles = repo.findByNotCountry("India", UserRole.FREELANCER);
-        List<ProfileDtoForViewCard> profileDtoForViewCards = profiles.stream().map(profileMapper::MapptoProfileDtoForViewCard).toList();
-        return profileDtoForViewCards;
-    }
+
 
 
     @Override

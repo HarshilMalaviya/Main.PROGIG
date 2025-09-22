@@ -39,10 +39,7 @@ public class ProfileController {
         LocalVariable successData = profileService.updateUserSuccessRateById(id);
         return ResponseEntity.ok(successData);
     }
-    @GetMapping("/get-international-freelancer")
-    public List<ProfileDtoForViewCard> getInternationalClients() {
-        return profileService.getInternationalClients();
-    }
+
     @GetMapping("/success-rate")
     public ResponseEntity<LocalVariable> getUserSuccessRate() {
         LocalVariable successData = profileService.updateUserSuccessRate();

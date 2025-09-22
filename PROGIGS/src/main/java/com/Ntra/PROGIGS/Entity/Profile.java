@@ -3,6 +3,7 @@ package com.Ntra.PROGIGS.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+//import jakarta.persistence.*;
 import jakarta.persistence.*;
 import lombok.Data;
 

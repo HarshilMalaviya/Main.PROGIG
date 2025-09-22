@@ -41,4 +41,9 @@ public class UserController {
         return ResponseEntity.ok(userService.searchFreelancer(keyword));
     }
 
+    @GetMapping("/get-international-freelancer")
+    public List<UserDto> getInternationalClients() {
+        return userService.getInternationalClients();
+    }
+
 }
