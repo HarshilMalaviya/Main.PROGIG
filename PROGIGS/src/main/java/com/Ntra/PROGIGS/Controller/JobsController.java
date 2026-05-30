@@ -2,7 +2,6 @@ package com.Ntra.PROGIGS.Controller;
 
 import com.Ntra.PROGIGS.DTOs.JobDto;
 import com.Ntra.PROGIGS.DTOs.JobDtoForCard;
-import com.Ntra.PROGIGS.Entity.Jobs;
 import com.Ntra.PROGIGS.Service.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,11 +18,13 @@ public class JobsController {
     private final JobService jobService;
     @GetMapping("/five-jobs")
     public List<JobDtoForCard> getfiveJobs(){
+
         return jobService.getFiveJobs();
     }
 
     @PostMapping("/addjobs")
     public JobDto addjobs(@RequestBody JobDto jobs){
+
         return   jobService.saveJob(jobs);
     }
     @GetMapping("/alljobs")
@@ -103,9 +104,9 @@ public class JobsController {
         return jobService.findJobByLocation(location);
     }
 
-    @GetMapping("/search-jobs/{keyWord}")
-    public List<JobDtoForCard> searchJob(@PathVariable String keyWord){
-        return jobService.searchJobs(keyWord);
+    @GetMapping("/search-jobs")
+    public List<JobDtoForCard> searchJob(@RequestParam("keyword") String keyword){
+        return jobService.searchJobs(keyword);
     }
 }
 /*@GetMapping("/hiredJobs")

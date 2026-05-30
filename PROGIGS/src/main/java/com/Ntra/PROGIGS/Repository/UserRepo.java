@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer> {
@@ -164,6 +163,25 @@ public interface UserRepo extends JpaRepository<User, Integer> {
             "WHERE LOWER(p.Location) LIKE LOWER(CONCAT('%', :country, '%')) " +
             "AND u.role = :role")
     List<User> findByCountry(@Param("country") String country, UserRole role);
+
+    @Query("SELECT DISTINCT u FROM User u " +
+            "JOIN u.profile p " +
+            "LEFT JOIN p.skills ps " +
+            "WHERE LOWER(u.username) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(p.Location) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(ps) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(p.fieldOfWork) LIKE LOWER(CONCAT('%', :keyword, '%')) "+
+            "OR LOWER(p.firstName) LIKE LOWER(CONCAT('%', :keyword, '%')) "+
+            "OR LOWER(p.lastName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "  OR LOWER(CONCAT(p.firstName, ' ', p.lastName)) LIKE LOWER(CONCAT('%', :keyword, '%'))"+
+            "AND u.role = :role")
+    List<User> searchUsers(@Param("keyword") String keyword,@Param("role") UserRole role);
+
+    @Query("SELECT DISTINCT u FROM User u " +
+            "JOIN u.profile p "+
+            " WHERE LOWER(p.Location) NOT LIKE LOWER(CONCAT('%', :country, '%'))"+
+            "AND u.role = :role")
+    List<User> findByNotCountry(@Param("country") String country,@Param("role") UserRole role);
 
     User findByProfile(Profile profile);
 
